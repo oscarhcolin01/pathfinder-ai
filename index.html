@@ -186,8 +186,12 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .hp-vmap-bubble .bsal{font-size:10px;opacity:0.85;font-weight:500}
 .hp-vmap-bubble .btip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1E293B;color:#CBD5E1;font-size:10px;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:20;border:1px solid rgba(255,255,255,0.08)}
 .hp-vmap-bubble:hover .btip{opacity:1}
-.hp-vmap-empty{display:flex;align-items:center;justify-content:center;height:100%;color:#64748B;font-size:15px;font-weight:500;text-align:center;padding:0 40px;line-height:1.5}
-@media(max-width:768px){.hp-vmap-bubble{padding:5px 8px;max-width:110px;border-radius:8px}.hp-vmap-bubble .bname{font-size:10px}.hp-vmap-bubble .bsal{font-size:9px}.hp-vmap-empty{font-size:13px;padding:0 24px}}
+.hp-vmap-empty{display:flex;align-items:center;justify-content:center;height:100%;text-align:center;padding:0 32px}
+.hp-vmap-inline{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:16px;color:#94A3B8;line-height:1.6}
+.hp-vmap-inline select{background:transparent;border:none;border-bottom:2px solid rgba(0,212,255,0.3);color:#00D4FF;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;padding:3px 2px;outline:none;cursor:pointer;transition:border-color 0.2s;-webkit-appearance:none;appearance:none}
+.hp-vmap-inline select:hover,.hp-vmap-inline select:focus{border-color:#00D4FF}
+.hp-vmap-inline select option{background:#0F1629;color:#F0F2F5;font-size:14px}
+@media(max-width:768px){.hp-vmap-bubble{padding:5px 8px;max-width:110px;border-radius:8px}.hp-vmap-bubble .bname{font-size:10px}.hp-vmap-bubble .bsal{font-size:9px}.hp-vmap-inline{font-size:14px;gap:6px}.hp-vmap-inline select{font-size:14px}}
 .hp-act3-big{font-size:22px;font-weight:600;color:#F0F2F5;margin-bottom:16px;line-height:1.3}
 @media(max-width:768px){.hp-act3-big{font-size:17px}}
 .hp-act3-sub{font-size:16px;color:#94A3B8;line-height:1.6}
@@ -430,7 +434,7 @@ function ScrollAnim({ children, className, delay }) {
   return <div ref={ref} className={"hp-anim" + (delay ? " hp-anim-delay-" + delay : "") + (className ? " " + className : "")}>{children}</div>;
 }
 
-function ValueMap({ country, subject }) {
+function ValueMap({ country, subject, onCountryChange, onSubjectChange }) {
   const vmRef = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -443,11 +447,25 @@ function ValueMap({ country, subject }) {
     return () => obs.disconnect();
   }, []);
 
-  // Empty state — no selection yet
+  // Empty / partial state — show inline selectors
   if (!country || !subject) {
     return (
       <div className="hp-vmap" ref={vmRef}>
-        <div className="hp-vmap-empty">Select your country and subject above<br/>to see how programmes compare</div>
+        <div className="hp-vmap-empty">
+          <div className="hp-vmap-inline">
+            <span>I'm from</span>
+            <select value={country} onChange={e => onCountryChange(e.target.value)}>
+              <option value="" disabled>your country</option>
+              {HP_COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <span>and I want to study</span>
+            <select value={subject} onChange={e => onSubjectChange(e.target.value)}>
+              <option value="" disabled>a subject</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Business">Business</option>
+            </select>
+          </div>
+        </div>
       </div>
     );
   }
@@ -634,7 +652,7 @@ function Homepage({ onStart }) {
           <div className="hp-act3-head">But not all universities deliver<br/>the same outcome.</div>
           {bothSelected && <div className="hp-act3-subtitle">{'Showing ' + hpSubject + ' programmes for students from ' + hpCountry}</div>}
         </ScrollAnim>
-        <ValueMap country={hpCountry} subject={hpSubject} />
+        <ValueMap country={hpCountry} subject={hpSubject} onCountryChange={setHpCountry} onSubjectChange={setHpSubject} />
         <ScrollAnim>
           <div className="hp-act3-big">The difference between the right choice and the wrong one? Up to £50,000 and a career.</div>
         </ScrollAnim>
