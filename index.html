@@ -165,8 +165,11 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 @media(max-width:768px){.hp-act3{padding:64px 20px;min-height:auto}}
 .hp-act3-head{font-size:36px;font-weight:700;color:#F0F2F5;margin-bottom:12px;letter-spacing:-0.5px;line-height:1.15}
 @media(max-width:768px){.hp-act3-head{font-size:24px}}
-.hp-act3-subtitle{font-size:15px;color:#00D4FF;margin-bottom:48px;font-weight:500;letter-spacing:0.2px}
-@media(max-width:768px){.hp-act3-subtitle{font-size:13px;margin-bottom:32px}}
+.hp-act3-sel{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:17px;color:#94A3B8;margin-bottom:36px;line-height:1.6}
+.hp-act3-sel select{background:transparent;border:none;border-bottom:2px solid rgba(0,212,255,0.3);color:#00D4FF;font-family:'Sora',sans-serif;font-size:17px;font-weight:600;padding:3px 2px;outline:none;cursor:pointer;transition:border-color 0.2s;-webkit-appearance:none;appearance:none}
+.hp-act3-sel select:hover,.hp-act3-sel select:focus{border-color:#00D4FF}
+.hp-act3-sel select option{background:#0A0F1C;color:#F0F2F5;font-size:14px}
+@media(max-width:768px){.hp-act3-sel{font-size:15px;margin-bottom:24px}.hp-act3-sel select{font-size:15px}}
 .hp-vmap{position:relative;width:100%;max-width:800px;height:420px;margin:0 auto 48px;border-radius:20px;background:#0F1629;border:1px solid rgba(255,255,255,0.06);overflow:hidden}
 .hp-vmap::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(52,211,153,0.04) 0%,transparent 50%,rgba(248,113,113,0.03) 100%);pointer-events:none}
 .hp-vmap-axis{position:absolute;top:8%;left:8%;width:84%;height:84%;border-left:1px dashed rgba(255,255,255,0.06);border-bottom:1px dashed rgba(255,255,255,0.06);pointer-events:none}
@@ -176,22 +179,17 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .hp-vmap-label{position:absolute;font-size:11px;color:#64748B;font-weight:500;letter-spacing:0.5px}
 .hp-vmap-label.tl{top:16px;left:20px}.hp-vmap-label.br{bottom:16px;right:20px}
 .hp-vmap-zone{position:absolute;top:10%;left:5%;width:45%;height:45%;background:radial-gradient(ellipse,rgba(52,211,153,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
-.hp-vmap-bubble{position:absolute;padding:6px 10px;border-radius:10px;font-size:11px;font-weight:600;text-align:center;line-height:1.3;max-width:140px;opacity:0;transform:scale(0.75) translateY(8px);transition:opacity 0.5s ease-out,transform 0.5s ease-out;cursor:default}
+.hp-vmap-bubble{position:absolute;padding:7px 11px;border-radius:10px;text-align:center;line-height:1.3;max-width:150px;opacity:0;transform:scale(0.75) translateY(8px);transition:opacity 0.5s ease-out,transform 0.5s ease-out;cursor:default}
 .hp-vmap-bubble.hp-bv{opacity:1;transform:scale(1) translateY(0)}
 .hp-vmap-bubble.hp-bv:hover{transform:scale(1.06);z-index:10}
 .hp-vmap-bubble.good{background:rgba(52,211,153,0.18);color:#34D399;border:1px solid rgba(52,211,153,0.3);box-shadow:0 0 20px rgba(52,211,153,0.08)}
 .hp-vmap-bubble.avg{background:rgba(255,181,71,0.14);color:#FFB547;border:1px solid rgba(255,181,71,0.25);box-shadow:0 0 20px rgba(255,181,71,0.06)}
 .hp-vmap-bubble.poor{background:rgba(248,113,113,0.14);color:#F87171;border:1px solid rgba(248,113,113,0.25);box-shadow:0 0 20px rgba(248,113,113,0.06)}
-.hp-vmap-bubble .bname{font-size:11px;font-weight:700}
-.hp-vmap-bubble .bsal{font-size:10px;opacity:0.85;font-weight:500}
-.hp-vmap-bubble .btip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1E293B;color:#CBD5E1;font-size:10px;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:20;border:1px solid rgba(255,255,255,0.08)}
-.hp-vmap-bubble:hover .btip{opacity:1}
-.hp-vmap-empty{display:flex;align-items:center;justify-content:center;height:100%;text-align:center;padding:0 32px}
-.hp-vmap-inline{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:16px;color:#94A3B8;line-height:1.6}
-.hp-vmap-inline select{background:transparent;border:none;border-bottom:2px solid rgba(0,212,255,0.3);color:#00D4FF;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;padding:3px 2px;outline:none;cursor:pointer;transition:border-color 0.2s;-webkit-appearance:none;appearance:none}
-.hp-vmap-inline select:hover,.hp-vmap-inline select:focus{border-color:#00D4FF}
-.hp-vmap-inline select option{background:#0F1629;color:#F0F2F5;font-size:14px}
-@media(max-width:768px){.hp-vmap-bubble{padding:5px 8px;max-width:110px;border-radius:8px}.hp-vmap-bubble .bname{font-size:10px}.hp-vmap-bubble .bsal{font-size:9px}.hp-vmap-inline{font-size:14px;gap:6px}.hp-vmap-inline select{font-size:14px}}
+.hp-vmap-bubble .bname{font-size:13px;font-weight:700}
+.hp-vmap-bubble .broi{font-size:11px;opacity:0.75;font-weight:500;margin-top:1px;white-space:nowrap}
+.hp-vmap-empty{display:flex;align-items:center;justify-content:center;height:100%;color:#475569;font-size:15px;text-align:center;padding:0 32px}
+.hp-vmap-note{font-size:11px;color:#475569;text-align:center;max-width:800px;margin:0 auto;line-height:1.5;padding:0 20px}
+@media(max-width:768px){.hp-vmap-bubble{padding:5px 8px;max-width:120px;border-radius:8px}.hp-vmap-bubble .bname{font-size:11px}.hp-vmap-bubble .broi{font-size:9px}}
 .hp-act3-big{font-size:22px;font-weight:600;color:#F0F2F5;margin-bottom:16px;line-height:1.3}
 @media(max-width:768px){.hp-act3-big{font-size:17px}}
 .hp-act3-sub{font-size:16px;color:#94A3B8;line-height:1.6}
@@ -434,7 +432,7 @@ function ScrollAnim({ children, className, delay }) {
   return <div ref={ref} className={"hp-anim" + (delay ? " hp-anim-delay-" + delay : "") + (className ? " " + className : "")}>{children}</div>;
 }
 
-function ValueMap({ country, subject, onCountryChange, onSubjectChange }) {
+function ValueMap({ country, subject }) {
   const vmRef = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -447,88 +445,57 @@ function ValueMap({ country, subject, onCountryChange, onSubjectChange }) {
     return () => obs.disconnect();
   }, []);
 
-  // Empty / partial state — show inline selectors
-  if (!country || !subject) {
-    return (
-      <div className="hp-vmap" ref={vmRef}>
-        <div className="hp-vmap-empty">
-          <div className="hp-vmap-inline">
-            <span>I'm from</span>
-            <select value={country} onChange={e => onCountryChange(e.target.value)}>
-              <option value="" disabled>your country</option>
-              {HP_COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <span>and I want to study</span>
-            <select value={subject} onChange={e => onSubjectChange(e.target.value)}>
-              <option value="" disabled>a subject</option>
-              <option value="Computer Science">Computer Science</option>
-              <option value="Business">Business</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const ready = country && subject;
 
-  // Map homepage subject to PROGRAMMES subject field
-  const progSubject = subject === 'Computer Science' ? 'Computing' : subject;
-  // Filter: only non-foundation programmes (avoid duplicates per uni)
-  const filtered = PROGRAMMES.filter(p => p.subject === progSubject && !p.foundation);
+  // Build bubble data only when both selected
+  let positioned = [];
+  if (ready) {
+    const progSubject = subject === 'Computer Science' ? 'Computing' : subject;
+    const filtered = PROGRAMMES.filter(p => p.subject === progSubject && !p.foundation);
+    const shortName = (n) => n.replace('University of ','').replace(' University','').replace('De Montfort','DMU');
 
-  // Short uni names
-  const shortName = (name) => name.replace('University of ','').replace(' University','').replace('De Montfort','DMU');
+    const bubbles = filtered.map(p => {
+      const tc = getTotalCost(p, country);
+      const costK = Math.round(tc.total / 1000);
+      const salK = p.salary / 1000;
+      const valueScore = p.salary / tc.total;
+      return { id: p.id, uni: shortName(p.uni), totalCost: tc.total, costK, salary: p.salary, salK, valueScore };
+    });
 
-  // Compute total cost and build bubble data
-  const bubbles = filtered.map(p => {
-    const tc = getTotalCost(p, country);
-    const salK = p.salary / 1000;
-    const costK = Math.round(tc.total / 1000);
-    const valueScore = p.salary / tc.total;
-    return { id: p.id, uni: shortName(p.uni), totalCost: tc.total, costK, salary: p.salary, salK, valueScore };
-  });
+    const costs = bubbles.map(b => b.totalCost);
+    const salaries = bubbles.map(b => b.salary);
+    const minCost = Math.min(...costs), maxCost = Math.max(...costs);
+    const minSal = Math.min(...salaries), maxSal = Math.max(...salaries);
+    const costRange = maxCost - minCost || 1;
+    const salRange = maxSal - minSal || 1;
 
-  if (bubbles.length === 0) return null;
+    const sorted = [...bubbles].sort((a, b) => b.valueScore - a.valueScore);
+    const tierMap = {};
+    sorted.forEach((b, i) => {
+      const pct = i / sorted.length;
+      tierMap[b.id] = pct < 0.34 ? 'good' : pct < 0.67 ? 'avg' : 'poor';
+    });
 
-  // Calculate ranges for positioning
-  const costs = bubbles.map(b => b.totalCost);
-  const salaries = bubbles.map(b => b.salary);
-  const minCost = Math.min(...costs); const maxCost = Math.max(...costs);
-  const minSal = Math.min(...salaries); const maxSal = Math.max(...salaries);
-  const costRange = maxCost - minCost || 1;
-  const salRange = maxSal - minSal || 1;
+    positioned = bubbles.map(b => {
+      const xPct = 12 + ((b.totalCost - minCost) / costRange) * 70;
+      const yPct = 10 + ((maxSal - b.salary) / salRange) * 62;
+      return { ...b, xPct, yPct, tier: tierMap[b.id] };
+    });
 
-  // Assign value tiers — top third green, middle amber, bottom third red
-  const sorted = [...bubbles].sort((a, b) => b.valueScore - a.valueScore);
-  const tierMap = {};
-  sorted.forEach((b, i) => {
-    const pct = i / sorted.length;
-    tierMap[b.id] = pct < 0.34 ? 'good' : pct < 0.67 ? 'avg' : 'poor';
-  });
-
-  // Position: x = cost (12% to 82%), y = salary inverted (high=top 10%, low=bottom 72%)
-  // Inset from edges to prevent clipping
-  const positioned = bubbles.map(b => {
-    const xPct = 12 + ((b.totalCost - minCost) / costRange) * 70;
-    const yPct = 10 + ((maxSal - b.salary) / salRange) * 62;
-    return { ...b, xPct, yPct, tier: tierMap[b.id] };
-  });
-
-  // Collision detection — nudge overlapping bubbles apart
-  // Approximate bubble size: ~120px wide (~15% of 800), ~36px tall (~8.5% of 420)
-  const bw = 15, bh = 9;
-  for (let pass = 0; pass < 4; pass++) {
-    for (let i = 0; i < positioned.length; i++) {
-      for (let j = i + 1; j < positioned.length; j++) {
-        const a = positioned[i], b = positioned[j];
-        const dx = Math.abs(a.xPct - b.xPct), dy = Math.abs(a.yPct - b.yPct);
-        if (dx < bw && dy < bh) {
-          // Nudge apart vertically
-          const nudge = (bh - dy) / 2 + 1.5;
-          if (a.yPct <= b.yPct) { a.yPct -= nudge; b.yPct += nudge; }
-          else { a.yPct += nudge; b.yPct -= nudge; }
-          // Clamp to safe zone
-          a.yPct = Math.max(4, Math.min(78, a.yPct));
-          b.yPct = Math.max(4, Math.min(78, b.yPct));
+    // Collision detection — nudge overlapping bubbles
+    const bw = 16, bh = 10;
+    for (let pass = 0; pass < 5; pass++) {
+      for (let i = 0; i < positioned.length; i++) {
+        for (let j = i + 1; j < positioned.length; j++) {
+          const a = positioned[i], b = positioned[j];
+          const dx = Math.abs(a.xPct - b.xPct), dy = Math.abs(a.yPct - b.yPct);
+          if (dx < bw && dy < bh) {
+            const nudge = (bh - dy) / 2 + 1.5;
+            if (a.yPct <= b.yPct) { a.yPct -= nudge; b.yPct += nudge; }
+            else { a.yPct += nudge; b.yPct -= nudge; }
+            a.yPct = Math.max(4, Math.min(78, a.yPct));
+            b.yPct = Math.max(4, Math.min(78, b.yPct));
+          }
         }
       }
     }
@@ -536,21 +503,26 @@ function ValueMap({ country, subject, onCountryChange, onSubjectChange }) {
 
   return (
     <div className="hp-vmap" ref={vmRef}>
-      <div className="hp-vmap-label tl">✦ Best value</div>
-      <div className="hp-vmap-label br">Worst value ✦</div>
-      <div className="hp-vmap-zone"></div>
-      <div className="hp-vmap-axis"></div>
-      <div className="hp-vmap-axis-x">Total cost →</div>
-      <div className="hp-vmap-axis-y">Graduate salary →</div>
-      {positioned.map((b, i) => (
-        <div key={b.id}
-          className={"hp-vmap-bubble " + b.tier + (visible ? " hp-bv" : "")}
-          style={{ top: b.yPct.toFixed(1) + '%', left: b.xPct.toFixed(1) + '%', transitionDelay: visible ? (i * 0.06) + 's' : '0s' }}>
-          <div className="bname">{b.uni}</div>
-          <div className="bsal">{'£' + b.salK + 'k salary'}</div>
-          <div className="btip">{'£' + b.costK + 'k total cost'}</div>
-        </div>
-      ))}
+      {ready ? (
+        <>
+          <div className="hp-vmap-label tl">✦ Best value</div>
+          <div className="hp-vmap-label br">Worst value ✦</div>
+          <div className="hp-vmap-zone"></div>
+          <div className="hp-vmap-axis"></div>
+          <div className="hp-vmap-axis-x">Total cost →</div>
+          <div className="hp-vmap-axis-y">Graduate salary →</div>
+          {positioned.map((b, i) => (
+            <div key={b.id}
+              className={"hp-vmap-bubble " + b.tier + (visible ? " hp-bv" : "")}
+              style={{ top: b.yPct.toFixed(1) + '%', left: b.xPct.toFixed(1) + '%', transitionDelay: visible ? (i * 0.06) + 's' : '0s' }}>
+              <div className="bname">{b.uni}</div>
+              <div className="broi">{'£' + b.costK + 'k → £' + b.salK + 'k'}</div>
+            </div>
+          ))}
+        </>
+      ) : (
+        <div className="hp-vmap-empty">Select a country and subject to see the value map</div>
+      )}
     </div>
   );
 }
@@ -650,9 +622,24 @@ function Homepage({ onStart }) {
       <div className="hp-act3">
         <ScrollAnim>
           <div className="hp-act3-head">But not all universities deliver<br/>the same outcome.</div>
-          {bothSelected && <div className="hp-act3-subtitle">{'Showing ' + hpSubject + ' programmes for students from ' + hpCountry}</div>}
         </ScrollAnim>
-        <ValueMap country={hpCountry} subject={hpSubject} onCountryChange={setHpCountry} onSubjectChange={setHpSubject} />
+        <ScrollAnim>
+          <div className="hp-act3-sel">
+            <span>I'm from</span>
+            <select value={hpCountry} onChange={e => setHpCountry(e.target.value)}>
+              <option value="" disabled>your country</option>
+              {HP_COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <span>and I want to study</span>
+            <select value={hpSubject} onChange={e => setHpSubject(e.target.value)}>
+              <option value="" disabled>a subject</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Business">Business</option>
+            </select>
+          </div>
+        </ScrollAnim>
+        <ValueMap country={hpCountry} subject={hpSubject} />
+        <div className="hp-vmap-note">Salary data reflects 15 months post-graduation (HESA Graduate Outcomes). Total cost includes tuition, living, visa, and health surcharge.</div>
         <ScrollAnim>
           <div className="hp-act3-big">The difference between the right choice and the wrong one? Up to £50,000 and a career.</div>
         </ScrollAnim>
