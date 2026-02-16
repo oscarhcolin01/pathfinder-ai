@@ -128,6 +128,10 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .hp-snav-links{display:flex;align-items:center;gap:20px}
 .hp-snav-link{font-size:13px;color:#94A3B8;background:none;border:none;font-family:'Sora',sans-serif;cursor:pointer;transition:color 0.2s}
 .hp-snav-link:hover{color:#00D4FF}
+.hp-snav-profile{display:flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15);border-radius:20px;cursor:pointer;transition:all 0.2s}
+.hp-snav-profile:hover{background:rgba(0,212,255,0.12);border-color:rgba(0,212,255,0.3)}
+.hp-snav-flag{font-size:14px}
+.hp-snav-name{font-size:12px;color:#00D4FF;font-weight:600}
 
 /* Act 1: The Hook */
 .hp-act1{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 32px;background:linear-gradient(170deg,#0A0F1C 0%,#0B1A2E 40%,#0F1629 100%);position:relative;overflow:hidden}
@@ -864,7 +868,8 @@ function ValueMap({ country, subject }) {
   );
 }
 
-function Homepage({ onStart }) {
+function Homepage({ onStart, profile, onNavigate }) {
+  const hasProfile = !!(profile && profile.country);
   const [hpCountry, setHpCountry] = useState('');
   const [hpSubject, setHpSubject] = useState('');
   const [showNav, setShowNav] = useState(false);
@@ -894,7 +899,17 @@ function Homepage({ onStart }) {
             <div className="hp-snav-t">Pathfinder<span className="hi">AI</span></div>
           </div>
           <div className="hp-snav-links">
-            <button className="hp-snav-link" onClick={onStart}>Get started</button>
+            {hasProfile ? (<>
+              <button className="hp-snav-link" onClick={() => onNavigate('dashboard')}>Dashboard</button>
+              <button className="hp-snav-link" onClick={() => onNavigate('apply')}>Apply</button>
+              <button className="hp-snav-link" onClick={() => onNavigate('chat')}>Chat</button>
+              <div className="hp-snav-profile" onClick={() => onNavigate('dashboard')}>
+                <span className="hp-snav-flag">{COUNTRY_EMOJIS[profile.country] || '🌍'}</span>
+                <span className="hp-snav-name">{profile.country}</span>
+              </div>
+            </>) : (
+              <button className="hp-snav-link" onClick={onStart}>Get started</button>
+            )}
           </div>
         </div>
       </div>
@@ -915,7 +930,7 @@ function Homepage({ onStart }) {
             <option value="Business">Business</option>
           </select>
         </div>
-        <button className={"hp-go" + (bothSelected ? " hp-go-show" : "")} onClick={onStart}>Show me &#8594;</button>
+        <button className={"hp-go" + (bothSelected ? " hp-go-show" : "")} onClick={hasProfile ? () => onNavigate('dashboard') : onStart}>Show me &#8594;</button>
         <div className="hp-powered">Powered by data from 230,000 student journeys</div>
       </div>
 
@@ -1091,7 +1106,7 @@ function Homepage({ onStart }) {
           <div className="hp-act6-head">See your predicted future</div>
         </ScrollAnim>
         <ScrollAnim>
-          <button className="hp-act6-btn" onClick={onStart}>Start now — it takes 5 minutes</button>
+          <button className="hp-act6-btn" onClick={hasProfile ? () => onNavigate('dashboard') : onStart}>{hasProfile ? 'Go to your dashboard' : 'Start now — it takes 5 minutes'}</button>
         </ScrollAnim>
         <ScrollAnim>
           <div className="hp-act6-muted">Free. No account needed to explore.</div>
@@ -1752,7 +1767,7 @@ function Dashboard({ profile, onChat, onBack, onEditProfile, onApply }) {
           </div>
           <div className="db-hdr-right">
             <button className="db-hdr-btn" onClick={onBack}>← Home</button>
-            <button className="db-hdr-edit" title="Edit profile" onClick={onEditProfile}>✎</button>
+            <button className="db-hdr-btn" onClick={onEditProfile}>✎ Edit profile</button>
           </div>
         </div>
       </div>
@@ -1782,10 +1797,19 @@ function Dashboard({ profile, onChat, onBack, onEditProfile, onApply }) {
   );
 }
 
-function ProfileBuilder({ onComplete, onBack }) {
-  const [step, setStep] = useState(1);
+function ProfileBuilder({ onComplete, onBack, initialData, onReset }) {
+  const hasInit = !!(initialData && initialData.country);
+  const [step, setStep] = useState(hasInit ? 10 : 1);
   const [slideKey, setSlideKey] = useState(0);
-  const [pb, setPb] = useState({
+  const [pb, setPb] = useState(hasInit ? {
+    country: initialData.country || '', subject: initialData.subject || '',
+    qualifications: initialData.qualifications || '', englishType: initialData.englishType || '',
+    englishScore: initialData.englishScore || '', budget: initialData.budget || '',
+    funding: initialData.funding || [], priorities: initialData.priorities || [],
+    career: initialData.career || '', living: initialData.living || '',
+    hasFriends: initialData.hasFriends != null ? initialData.hasFriends : null,
+    friendsWhere: initialData.friendsWhere || '', timeline: initialData.timeline || ''
+  } : {
     country: '', subject: '', qualifications: '', englishType: '', englishScore: '',
     budget: '', funding: [], priorities: [], career: '', living: '', hasFriends: null,
     friendsWhere: '', timeline: ''
@@ -1970,6 +1994,7 @@ function ProfileBuilder({ onComplete, onBack }) {
           <div className="pb-summary-row"><span className="pb-summary-label">Start date</span><span className="pb-summary-val">{pb.timeline}</span></div>
           <button className="pb-launch" onClick={() => onComplete(pb)}>See my predicted outcomes →</button>
           <button className="pb-edit" onClick={() => go(1)}>Edit my profile</button>
+          {onReset && <button className="pb-edit" style={{marginTop:8,color:'#F87171',borderColor:'rgba(248,113,113,0.2)'}} onClick={onReset}>🔄 Start over — clear all data</button>}
         </div>
       </div>);
 
@@ -1981,7 +2006,7 @@ function ProfileBuilder({ onComplete, onBack }) {
     <div className="pb">
       <div className="pb-bar"><div className="pb-fill" style={{width: pct + '%'}}></div></div>
       <div className="pb-top">
-        <button className="pb-back" onClick={back}>← {step > 1 ? 'Back' : 'Home'}</button>
+        <button className="pb-back" onClick={back}>← {step > 1 ? 'Back' : (hasInit ? 'Dashboard' : 'Home')}</button>
         <div className="pb-logo"><div className="pb-logo-sq">P</div><span>Pathfinder<span className="hi">AI</span></span></div>
         <div className="pb-step-count">{step} of 10</div>
       </div>
@@ -1993,8 +2018,14 @@ function ProfileBuilder({ onComplete, onBack }) {
 }
 
 function App() {
-  const [currentView, setCurrentView] = useState('home');
-  const [profile, setProfile] = useState({});
+  // Load saved profile from localStorage
+  const savedProfile = (() => {
+    try { const s = localStorage.getItem('pf_profile'); return s ? JSON.parse(s) : {}; } catch(e) { return {}; }
+  })();
+  const hasProfile = !!(savedProfile && savedProfile.country && savedProfile.subject);
+
+  const [currentView, setCurrentView] = useState(hasProfile ? 'dashboard' : 'home');
+  const [profile, setProfileRaw] = useState(hasProfile ? savedProfile : {});
   const [msgs, setMsgs] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -2003,7 +2034,23 @@ function App() {
   const endRef = useRef(null);
   useEffect(() => { if (endRef.current) endRef.current.scrollIntoView({behavior:'smooth'}); }, [msgs, loading]);
 
-  // Old form variables removed — ProfileBuilder handles onboarding now
+  // Wrapper: save to localStorage whenever profile changes
+  const setProfile = (p) => {
+    setProfileRaw(p);
+    if (p && p.country) {
+      try { localStorage.setItem('pf_profile', JSON.stringify(p)); } catch(e) {}
+    }
+  };
+
+  // Full reset — clears localStorage and returns to homepage
+  const fullReset = () => {
+    try { localStorage.removeItem('pf_profile'); } catch(e) {}
+    setProfileRaw({});
+    setMsgs([]);
+    setSelPri([]);
+    setError(null);
+    setCurrentView('home');
+  };
 
   const callAI = async (history, prof) => {
     setLoading(true); setError(null);
@@ -2041,11 +2088,18 @@ function App() {
     await callAI(nm.map(m=>({role:m.role,content:m.content})), profile);
   };
 
-  const restart = () => { setCurrentView('home'); setMsgs([]); setProfile({}); setSelPri([]); setError(null); };
+  const restart = () => { setCurrentView('home'); setMsgs([]); setSelPri([]); setError(null); };
 
   // Homepage (default landing)
   if (currentView === 'home') return (
-    <Homepage onStart={() => setCurrentView('profile')} />
+    <Homepage
+      onStart={() => setCurrentView('profile')}
+      profile={profile}
+      onNavigate={(view) => {
+        if (view === 'chat') { launch(profile); }
+        else { setCurrentView(view); }
+      }}
+    />
   );
 
   // Profile Builder (10-step wizard)
@@ -2055,7 +2109,9 @@ function App() {
         setProfile(pb);
         setCurrentView('dashboard');
       }}
-      onBack={() => setCurrentView('home')}
+      onBack={() => profile.country ? setCurrentView('dashboard') : setCurrentView('home')}
+      initialData={profile.country ? profile : null}
+      onReset={fullReset}
     />
   );
 
@@ -2075,7 +2131,7 @@ function App() {
           launch(profile);
         }
       }}
-      onBack={restart}
+      onBack={() => setCurrentView('home')}
       onEditProfile={() => setCurrentView('profile')}
       onApply={() => setCurrentView('apply')}
     />
