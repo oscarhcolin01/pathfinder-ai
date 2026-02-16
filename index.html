@@ -170,7 +170,7 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .hp-act3-sel select:hover,.hp-act3-sel select:focus{border-color:#00D4FF}
 .hp-act3-sel select option{background:#0A0F1C;color:#F0F2F5;font-size:14px}
 @media(max-width:768px){.hp-act3-sel{font-size:15px;margin-bottom:24px}.hp-act3-sel select{font-size:15px}}
-.hp-vmap{position:relative;width:100%;max-width:800px;height:420px;margin:0 auto 48px;border-radius:20px;background:#0F1629;border:1px solid rgba(255,255,255,0.06);overflow:hidden}
+.hp-vmap{position:relative;width:100%;max-width:800px;height:420px;margin:0 auto 48px;border-radius:20px;background:#0F1629;border:1px solid rgba(255,255,255,0.06)}
 .hp-vmap::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(52,211,153,0.04) 0%,transparent 50%,rgba(248,113,113,0.03) 100%);pointer-events:none}
 .hp-vmap-axis{position:absolute;top:8%;left:8%;width:84%;height:84%;border-left:1px dashed rgba(255,255,255,0.06);border-bottom:1px dashed rgba(255,255,255,0.06);pointer-events:none}
 .hp-vmap-axis-x{position:absolute;bottom:4%;left:50%;transform:translateX(-50%);font-size:10px;color:#475569;letter-spacing:1px;text-transform:uppercase}
@@ -179,17 +179,26 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .hp-vmap-label{position:absolute;font-size:11px;color:#64748B;font-weight:500;letter-spacing:0.5px}
 .hp-vmap-label.tl{top:16px;left:20px}.hp-vmap-label.br{bottom:16px;right:20px}
 .hp-vmap-zone{position:absolute;top:10%;left:5%;width:45%;height:45%;background:radial-gradient(ellipse,rgba(52,211,153,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
-.hp-vmap-bubble{position:absolute;padding:7px 11px;border-radius:10px;text-align:center;line-height:1.3;max-width:150px;opacity:0;transform:scale(0.75) translateY(8px);transition:opacity 0.5s ease-out,transform 0.5s ease-out;cursor:default}
+.hp-vmap-bubble{position:absolute;padding:6px 10px;border-radius:10px;text-align:center;line-height:1.3;opacity:0;transform:scale(0.75) translateY(8px);transition:opacity 0.5s ease-out,transform 0.5s ease-out;cursor:default}
 .hp-vmap-bubble.hp-bv{opacity:1;transform:scale(1) translateY(0)}
-.hp-vmap-bubble.hp-bv:hover{transform:scale(1.06);z-index:10}
-.hp-vmap-bubble.good{background:rgba(52,211,153,0.18);color:#34D399;border:1px solid rgba(52,211,153,0.3);box-shadow:0 0 20px rgba(52,211,153,0.08)}
-.hp-vmap-bubble.avg{background:rgba(255,181,71,0.14);color:#FFB547;border:1px solid rgba(255,181,71,0.25);box-shadow:0 0 20px rgba(255,181,71,0.06)}
-.hp-vmap-bubble.poor{background:rgba(248,113,113,0.14);color:#F87171;border:1px solid rgba(248,113,113,0.25);box-shadow:0 0 20px rgba(248,113,113,0.06)}
-.hp-vmap-bubble .bname{font-size:13px;font-weight:700}
-.hp-vmap-bubble .broi{font-size:11px;opacity:0.75;font-weight:500;margin-top:1px;white-space:nowrap}
+.hp-vmap-bubble.hp-bv:hover{transform:scale(1.06);z-index:20}
+.hp-vmap-bubble.strong{background:rgba(52,211,153,0.20);color:#34D399;border:1px solid rgba(52,211,153,0.35);box-shadow:0 0 20px rgba(52,211,153,0.10)}
+.hp-vmap-bubble.good{background:rgba(52,211,153,0.13);color:#6EE7B7;border:1px solid rgba(52,211,153,0.22);box-shadow:0 0 16px rgba(52,211,153,0.06)}
+.hp-vmap-bubble.avg{background:rgba(255,181,71,0.13);color:#FFB547;border:1px solid rgba(255,181,71,0.22);box-shadow:0 0 16px rgba(255,181,71,0.05)}
+.hp-vmap-bubble.poor{background:rgba(248,113,113,0.13);color:#F87171;border:1px solid rgba(248,113,113,0.22);box-shadow:0 0 16px rgba(248,113,113,0.05)}
+.hp-vmap-bubble .bname{font-size:12px;font-weight:700;white-space:nowrap}
+.hp-vmap-bubble .broi-tag{font-size:10px;opacity:0.8;font-weight:500;margin-top:2px}
+.hp-vmap-tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);width:240px;background:#131B2E;border:1px solid rgba(0,212,255,0.2);border-radius:12px;padding:14px 16px;text-align:left;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:30;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.hp-vmap-bubble:hover .hp-vmap-tip{opacity:1}
+.hp-vmap-tip-uni{font-size:13px;font-weight:700;color:#F0F2F5;margin-bottom:2px}
+.hp-vmap-tip-prog{font-size:11px;color:#94A3B8;margin-bottom:10px}
+.hp-vmap-tip-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-bottom:10px}
+.hp-vmap-tip-label{font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:0.5px}
+.hp-vmap-tip-val{font-size:13px;font-weight:600;color:#F0F2F5}
+.hp-vmap-tip-payback{font-size:11px;color:#00D4FF;font-weight:500;border-top:1px solid rgba(255,255,255,0.06);padding-top:8px}
 .hp-vmap-empty{display:flex;align-items:center;justify-content:center;height:100%;color:#475569;font-size:15px;text-align:center;padding:0 32px}
 .hp-vmap-note{font-size:11px;color:#475569;text-align:center;max-width:800px;margin:0 auto;line-height:1.5;padding:0 20px}
-@media(max-width:768px){.hp-vmap-bubble{padding:5px 8px;max-width:120px;border-radius:8px}.hp-vmap-bubble .bname{font-size:11px}.hp-vmap-bubble .broi{font-size:9px}}
+@media(max-width:768px){.hp-vmap-bubble{padding:5px 8px;border-radius:8px}.hp-vmap-bubble .bname{font-size:10px}.hp-vmap-bubble .broi-tag{font-size:9px}.hp-vmap-tip{width:200px;padding:10px 12px;left:0;transform:none}}
 .hp-act3-big{font-size:22px;font-weight:600;color:#F0F2F5;margin-bottom:16px;line-height:1.3}
 @media(max-width:768px){.hp-act3-big{font-size:17px}}
 .hp-act3-sub{font-size:16px;color:#94A3B8;line-height:1.6}
@@ -447,6 +456,14 @@ function ValueMap({ country, subject }) {
 
   const ready = country && subject;
 
+  // ROI tier: total cost / salary — lower = better
+  function roiTier(ratio) {
+    if (ratio < 3) return { tier: 'strong', label: 'Strong ROI' };
+    if (ratio < 4) return { tier: 'good', label: 'Good ROI' };
+    if (ratio < 5) return { tier: 'avg', label: 'Average ROI' };
+    return { tier: 'poor', label: 'Poor ROI' };
+  }
+
   // Build bubble data only when both selected
   let positioned = [];
   if (ready) {
@@ -458,8 +475,9 @@ function ValueMap({ country, subject }) {
       const tc = getTotalCost(p, country);
       const costK = Math.round(tc.total / 1000);
       const salK = p.salary / 1000;
-      const valueScore = p.salary / tc.total;
-      return { id: p.id, uni: shortName(p.uni), totalCost: tc.total, costK, salary: p.salary, salK, valueScore };
+      const ratio = tc.total / p.salary;
+      const rt = roiTier(ratio);
+      return { id: p.id, uni: shortName(p.uni), progName: p.name, totalCost: tc.total, costK, salary: p.salary, salK, empRate: p.empRate, ratio, tier: rt.tier, roiLabel: rt.label, duration: p.duration };
     });
 
     const costs = bubbles.map(b => b.totalCost);
@@ -469,21 +487,14 @@ function ValueMap({ country, subject }) {
     const costRange = maxCost - minCost || 1;
     const salRange = maxSal - minSal || 1;
 
-    const sorted = [...bubbles].sort((a, b) => b.valueScore - a.valueScore);
-    const tierMap = {};
-    sorted.forEach((b, i) => {
-      const pct = i / sorted.length;
-      tierMap[b.id] = pct < 0.34 ? 'good' : pct < 0.67 ? 'avg' : 'poor';
-    });
-
     positioned = bubbles.map(b => {
       const xPct = 12 + ((b.totalCost - minCost) / costRange) * 70;
       const yPct = 10 + ((maxSal - b.salary) / salRange) * 62;
-      return { ...b, xPct, yPct, tier: tierMap[b.id] };
+      return { ...b, xPct, yPct };
     });
 
     // Collision detection — nudge overlapping bubbles
-    const bw = 16, bh = 10;
+    const bw = 14, bh = 9;
     for (let pass = 0; pass < 5; pass++) {
       for (let i = 0; i < positioned.length; i++) {
         for (let j = i + 1; j < positioned.length; j++) {
@@ -516,7 +527,18 @@ function ValueMap({ country, subject }) {
               className={"hp-vmap-bubble " + b.tier + (visible ? " hp-bv" : "")}
               style={{ top: b.yPct.toFixed(1) + '%', left: b.xPct.toFixed(1) + '%', transitionDelay: visible ? (i * 0.06) + 's' : '0s' }}>
               <div className="bname">{b.uni}</div>
-              <div className="broi">{'£' + b.costK + 'k → £' + b.salK + 'k'}</div>
+              <div className="broi-tag">{b.roiLabel}</div>
+              <div className="hp-vmap-tip">
+                <div className="hp-vmap-tip-uni">{b.uni}</div>
+                <div className="hp-vmap-tip-prog">{b.progName}</div>
+                <div className="hp-vmap-tip-grid">
+                  <div><div className="hp-vmap-tip-label">Total cost ({b.duration}yr)</div><div className="hp-vmap-tip-val">{'£' + b.costK.toLocaleString() + 'k'}</div></div>
+                  <div><div className="hp-vmap-tip-label">Median salary</div><div className="hp-vmap-tip-val">{'£' + b.salK.toLocaleString() + 'k'}</div></div>
+                  <div><div className="hp-vmap-tip-label">Employment</div><div className="hp-vmap-tip-val">{b.empRate + '%'}</div></div>
+                  <div><div className="hp-vmap-tip-label">ROI ratio</div><div className="hp-vmap-tip-val">{b.ratio.toFixed(1) + 'x'}</div></div>
+                </div>
+                <div className="hp-vmap-tip-payback">{'Pays back in ~' + b.ratio.toFixed(1) + ' years at starting salary'}</div>
+              </div>
             </div>
           ))}
         </>
