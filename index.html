@@ -262,6 +262,80 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .hp-footer{background:#0A0F1C;border-top:1px solid rgba(255,255,255,0.06);padding:40px 32px;text-align:center}
 .hp-footer-brand{font-size:13px;color:#4A5568;margin-bottom:6px}
 .hp-footer-note{font-size:11px;color:#374151;line-height:1.5}
+
+/* Profile Builder */
+.pb{width:100%;min-height:100vh;background:#0A0F1C;color:#F0F2F5;display:flex;flex-direction:column;font-family:'Sora',sans-serif;overflow:hidden}
+.pb-bar{position:fixed;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.06);z-index:100}
+.pb-fill{height:100%;background:linear-gradient(90deg,#00D4FF,#0096B4);border-radius:0 2px 2px 0;transition:width 0.4s ease}
+.pb-top{position:fixed;top:4px;left:0;right:0;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;z-index:99;background:rgba(10,15,28,0.8);backdrop-filter:blur(12px)}
+.pb-back{background:none;border:none;color:#94A3B8;font-family:'Sora',sans-serif;font-size:14px;cursor:pointer;padding:6px 12px;border-radius:8px;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.pb-back:hover{color:#F0F2F5;background:rgba(255,255,255,0.06)}
+.pb-step-count{font-size:13px;color:#64748B;font-weight:500}
+.pb-logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:#F0F2F5;letter-spacing:-0.3px}
+.pb-logo .hi{color:#00D4FF}
+.pb-logo-sq{width:26px;height:26px;background:linear-gradient(135deg,#00D4FF,#FFB547);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:800}
+.pb-body{flex:1;display:flex;align-items:center;justify-content:center;padding:100px 32px 60px;position:relative}
+.pb-slide{width:100%;max-width:640px;margin:0 auto;animation:pbSlideIn 0.35s ease-out}
+@keyframes pbSlideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+.pb-q{font-size:32px;font-weight:700;color:#F0F2F5;margin-bottom:12px;line-height:1.2;letter-spacing:-0.5px}
+@media(max-width:768px){.pb-q{font-size:24px}}
+.pb-helper{font-size:14px;color:#94A3B8;margin-bottom:40px;line-height:1.5;max-width:520px}
+.pb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.pb-grid-3{grid-template-columns:repeat(3,1fr)}
+.pb-grid-2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:768px){.pb-grid{grid-template-columns:repeat(2,1fr)}.pb-grid-3,.pb-grid-2{grid-template-columns:1fr}}
+.pb-card{padding:20px 16px;border-radius:14px;background:#0F1629;border:1.5px solid rgba(255,255,255,0.06);cursor:pointer;text-align:center;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:6px}
+.pb-card:hover{border-color:rgba(0,212,255,0.25);background:#131B2E}
+.pb-card.on{border-color:#00D4FF;background:rgba(0,212,255,0.08);box-shadow:0 0 24px rgba(0,212,255,0.12)}
+.pb-card-emoji{font-size:28px}
+.pb-card-label{font-size:14px;font-weight:600;color:#F0F2F5}
+.pb-card-sub{font-size:11px;color:#94A3B8}
+.pb-input{width:100%;padding:16px 20px;border-radius:12px;background:#0F1629;border:1.5px solid rgba(255,255,255,0.08);color:#F0F2F5;font-family:'Sora',sans-serif;font-size:16px;outline:none;transition:border-color 0.2s}
+.pb-input:focus{border-color:#00D4FF}
+.pb-input::placeholder{color:#475569}
+.pb-chips{display:flex;flex-wrap:wrap;gap:10px}
+.pb-chip{padding:10px 18px;border-radius:24px;border:1.5px solid rgba(255,255,255,0.08);background:#0F1629;color:#94A3B8;font-family:'Sora',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.pb-chip:hover{border-color:rgba(0,212,255,0.25);color:#CBD5E1}
+.pb-chip.on{border-color:#00D4FF;background:rgba(0,212,255,0.08);color:#00D4FF}
+.pb-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pb-pill{padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,0.06);background:#0F1629;color:#94A3B8;font-family:'Sora',sans-serif;font-size:12px;cursor:pointer;transition:all 0.2s}
+.pb-pill:hover{border-color:rgba(0,212,255,0.2)}
+.pb-pill.on{border-color:#00D4FF;background:rgba(0,212,255,0.06);color:#00D4FF}
+.pb-score-row{display:flex;align-items:center;gap:12px;margin-top:16px}
+.pb-score-input{width:80px;padding:12px 16px;border-radius:10px;background:#0F1629;border:1.5px solid rgba(255,255,255,0.08);color:#F0F2F5;font-family:'Sora',sans-serif;font-size:18px;font-weight:600;text-align:center;outline:none}
+.pb-score-input:focus{border-color:#00D4FF}
+.pb-score-label{font-size:13px;color:#64748B}
+.pb-next{margin-top:40px;padding:14px 36px;border-radius:12px;border:none;background:linear-gradient(135deg,#00D4FF,#0096B4);color:#fff;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.3s;opacity:0.4;pointer-events:none}
+.pb-next.ready{opacity:1;pointer-events:all}
+.pb-next.ready:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,212,255,0.25)}
+.pb-skip{background:none;border:none;color:#64748B;font-family:'Sora',sans-serif;font-size:13px;cursor:pointer;margin-top:16px;transition:color 0.2s}
+.pb-skip:hover{color:#94A3B8}
+.pb-sub-q{font-size:15px;color:#94A3B8;margin-top:28px;margin-bottom:12px;font-weight:500}
+.pb-summary{max-width:520px;margin:0 auto;padding:32px;border-radius:20px;background:#0F1629;border:1px solid rgba(0,212,255,0.15);box-shadow:0 8px 40px rgba(0,0,0,0.3)}
+.pb-summary-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.pb-summary-row:last-child{border-bottom:none}
+.pb-summary-label{font-size:12px;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.pb-summary-val{font-size:14px;color:#F0F2F5;font-weight:500;text-align:right}
+.pb-launch{margin-top:32px;padding:16px 48px;border-radius:14px;border:none;background:linear-gradient(135deg,#00D4FF,#0096B4);color:#fff;font-family:'Sora',sans-serif;font-size:17px;font-weight:600;cursor:pointer;transition:all 0.3s;width:100%}
+.pb-launch:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(0,212,255,0.3)}
+.pb-edit{margin-top:12px;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#94A3B8;font-family:'Sora',sans-serif;font-size:14px;cursor:pointer;transition:all 0.2s;width:100%}
+.pb-edit:hover{border-color:rgba(0,212,255,0.2);color:#F0F2F5}
+.pb-bonus{margin-top:24px;padding:20px;border-radius:14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)}
+.pb-bonus-q{font-size:14px;color:#94A3B8;margin-bottom:10px}
+.pb-bonus-row{display:flex;gap:10px;align-items:center}
+.pb-bonus-btn{padding:8px 18px;border-radius:20px;border:1px solid rgba(255,255,255,0.06);background:#0F1629;color:#94A3B8;font-family:'Sora',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s}
+.pb-bonus-btn.on{border-color:#00D4FF;background:rgba(0,212,255,0.06);color:#00D4FF}
+.pb-bonus-input{flex:1;padding:8px 14px;border-radius:10px;background:#0F1629;border:1px solid rgba(255,255,255,0.06);color:#F0F2F5;font-family:'Sora',sans-serif;font-size:13px;outline:none}
+
+/* Dashboard placeholder */
+.db-placeholder{width:100%;min-height:100vh;background:#0A0F1C;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F0F2F5;font-family:'Sora',sans-serif}
+.db-inner{text-align:center;max-width:520px;padding:40px}
+.db-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:48px}
+.db-emoji{font-size:64px;margin-bottom:20px}
+.db-heading{font-size:32px;font-weight:700;margin-bottom:12px}
+.db-sub{font-size:16px;color:#94A3B8;line-height:1.6;margin-bottom:36px}
+.db-home{padding:12px 32px;border-radius:10px;border:1.5px solid rgba(0,212,255,0.3);background:transparent;color:#00D4FF;font-family:'Sora',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s}
+.db-home:hover{background:rgba(0,212,255,0.08);border-color:#00D4FF;transform:translateY(-2px)}
 </style>
 </head>
 <body>
@@ -318,7 +392,9 @@ const COUNTRY_LIST = ["Nigeria","India","China","Pakistan","Bangladesh","Ghana",
 function buildSys(p) {
   const cd = COUNTRIES_DATA[p.country];
   const progs = PROGRAMMES.map(x => ({id:x.id,uni:x.uni,name:x.name,subject:x.subject,fee:x.fee,city:x.city,qsRank:x.qsRank,ielts:x.ielts,aLevel:x.aLevel,empRate:x.empRate,highSkill:x.highSkill,salary:x.salary,satisfaction:x.satisfaction,foundation:x.foundation,duration:x.duration,scholarship:x.scholarship,scholarshipVal:x.scholarshipVal,livingCost:x.livingCost}));
-  return "You are PathfinderAI, an expert university advisor helping international students find the right UK undergraduate programme. You work for the STUDENT, not the universities. You are warm, honest, and genuinely invested.\n\nSTUDENT PROFILE:\n- Country: " + p.country + "\n- Subject: " + p.subject + "\n- Qualifications: " + p.qualifications + "\n- IELTS: " + (p.ielts || "Not yet taken") + "\n- Budget: " + p.budget + "\n- Priorities: " + p.priorities + (cd ? "\n\nCOUNTRY CONTEXT:\n- Typical quals: " + cd.quals + "\n- IELTS range: " + cd.ieltsRange + "\n- Budget sensitivity: " + cd.budgetSens + "\n- Community: " + cd.communityFactor + "\n- Flight: £" + cd.flightCost + ", Visa: £" + cd.visaCost + ", IHS/yr: £" + cd.ihsCost : "") + "\n\nPROGRAMME DATABASE:\n" + JSON.stringify(progs) + "\n\nRULES:\n1. Start by acknowledging the student and asking 1-2 clarifying questions. Do NOT recommend in your first message.\n2. When ready, include: |||PROGRAMMES|||[\"P001\",\"P013\"]|||END|||\n3. Be OUTCOME-LED. Reference employment rates, salaries, what students from their country experience.\n4. Be HONEST about trade-offs.\n5. Consider TOTAL COST: fees + living + visa + IHS + flights - scholarship.\n6. Suggest foundation year if IELTS/quals are below direct entry.\n7. Reference country context and community.\n8. Mention the 2-year Graduate Route visa.\n9. Keep under 300 words. Be conversational.\n10. Never recommend based on university payments. You work for the student.";
+  const engStr = p.englishType === 'ielts' ? 'IELTS ' + p.englishScore : p.englishType === 'toefl' ? 'TOEFL ' + p.englishScore : p.englishType === 'native' ? 'Native speaker' : p.ielts || "Not yet taken";
+  const priStr = Array.isArray(p.priorities) ? p.priorities.join(', ') : (p.priorities || '');
+  return "You are PathfinderAI, an expert university advisor helping international students find the right UK undergraduate programme. You work for the STUDENT, not the universities. You are warm, honest, and genuinely invested.\n\nSTUDENT PROFILE:\n- Country: " + p.country + "\n- Subject: " + p.subject + "\n- Qualifications: " + p.qualifications + "\n- English: " + engStr + "\n- Budget: " + p.budget + "\n- Priorities: " + priStr + (p.career ? "\n- Career goal: " + p.career : "") + (p.living ? "\n- Living preference: " + p.living : "") + (p.timeline ? "\n- Start: " + p.timeline : "") + (cd ? "\n\nCOUNTRY CONTEXT:\n- Typical quals: " + cd.quals + "\n- IELTS range: " + cd.ieltsRange + "\n- Budget sensitivity: " + cd.budgetSens + "\n- Community: " + cd.communityFactor + "\n- Flight: £" + cd.flightCost + ", Visa: £" + cd.visaCost + ", IHS/yr: £" + cd.ihsCost : "") + "\n\nPROGRAMME DATABASE:\n" + JSON.stringify(progs) + "\n\nRULES:\n1. Start by acknowledging the student and asking 1-2 clarifying questions. Do NOT recommend in your first message.\n2. When ready, include: |||PROGRAMMES|||[\"P001\",\"P013\"]|||END|||\n3. Be OUTCOME-LED. Reference employment rates, salaries, what students from their country experience.\n4. Be HONEST about trade-offs.\n5. Consider TOTAL COST: fees + living + visa + IHS + flights - scholarship.\n6. Suggest foundation year if IELTS/quals are below direct entry.\n7. Reference country context and community.\n8. Mention the 2-year Graduate Route visa.\n9. Keep under 300 words. Be conversational.\n10. Never recommend based on university payments. You work for the student.";
 }
 
 function parseMsg(text) {
@@ -792,9 +868,234 @@ function Homepage({ onStart }) {
   );
 }
 
+const QUAL_HINTS = {
+  "Nigeria":"e.g. WAEC 5 credits including Maths & English",
+  "India":"e.g. CBSE 75% in PCM or ISC 70%",
+  "China":"e.g. Gaokao 550+ or A-Levels ABB",
+  "Pakistan":"e.g. HSC/Intermediate 70%+",
+  "Bangladesh":"e.g. HSC GPA 4.5+",
+  "Ghana":"e.g. WASSCE 6 credits including Core Maths & English",
+  "Saudi Arabia":"e.g. Tawjihi 85%+",
+  "Vietnam":"e.g. High School Diploma 7.0+ GPA",
+  "Kenya":"e.g. KCSE B+ or above",
+  "Turkey":"e.g. Lise Diplomasi 75+"
+};
+
+const COUNTRY_EMOJIS = {"Nigeria":"🇳🇬","India":"🇮🇳","China":"🇨🇳","Pakistan":"🇵🇰","Bangladesh":"🇧🇩","Ghana":"🇬🇭","Saudi Arabia":"🇸🇦","Vietnam":"🇻🇳","Kenya":"🇰🇪","Turkey":"🇹🇷"};
+
+function ProfileBuilder({ onComplete, onBack }) {
+  const [step, setStep] = useState(1);
+  const [slideKey, setSlideKey] = useState(0);
+  const [pb, setPb] = useState({
+    country: '', subject: '', qualifications: '', englishType: '', englishScore: '',
+    budget: '', funding: [], priorities: [], career: '', living: '', hasFriends: null,
+    friendsWhere: '', timeline: ''
+  });
+
+  const upd = (k, v) => setPb(p => ({...p, [k]: v}));
+  const toggleArr = (k, v, max) => setPb(p => {
+    const arr = p[k]; if (arr.includes(v)) return {...p, [k]: arr.filter(x=>x!==v)};
+    if (max && arr.length >= max) return p; return {...p, [k]: [...arr, v]};
+  });
+
+  const go = (s) => { setSlideKey(k => k+1); setStep(s); window.scrollTo(0,0); };
+  const next = () => go(step + 1);
+  const back = () => step > 1 ? go(step - 1) : onBack();
+
+  const pct = ((step - 1) / 9) * 100;
+
+  // Step validity
+  const valid = {
+    1: !!pb.country, 2: !!pb.subject, 3: pb.qualifications.length > 2,
+    4: !!pb.englishType, 5: !!pb.budget, 6: pb.priorities.length > 0,
+    7: !!pb.career, 8: !!pb.living, 9: !!pb.timeline, 10: true
+  };
+
+  const renderStep = () => {
+    switch(step) {
+      case 1: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">Where's home?</div>
+        <div className="pb-helper">This shapes everything — from visa costs to which student communities you'll find.</div>
+        <div className="pb-grid">
+          {HP_COUNTRIES.map(c => (
+            <div key={c} className={"pb-card" + (pb.country===c?" on":"")} onClick={() => { upd('country',c); setTimeout(next, 200); }}>
+              <div className="pb-card-emoji">{COUNTRY_EMOJIS[c]||'🌍'}</div>
+              <div className="pb-card-label">{c}</div>
+            </div>
+          ))}
+          <div className={"pb-card" + (pb.country && !HP_COUNTRIES.includes(pb.country)?" on":"")} onClick={() => upd('country','Other')}>
+            <div className="pb-card-emoji">🌍</div>
+            <div className="pb-card-label">Other</div>
+          </div>
+        </div>
+        {pb.country === 'Other' && <div style={{marginTop:16}}><select className="pb-input" value="" onChange={e => { upd('country',e.target.value); setTimeout(next, 200); }} style={{cursor:'pointer'}}>
+          <option value="" disabled>Search your country...</option>
+          {COUNTRY_LIST.filter(c => !HP_COUNTRIES.includes(c) && c !== 'Other').map(c => <option key={c} value={c}>{c}</option>)}
+        </select></div>}
+      </div>);
+
+      case 2: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">What do you want to study?</div>
+        <div className="pb-helper">We'll match you with programmes and show career outcomes in this field.</div>
+        <div className="pb-grid pb-grid-3">
+          {[{l:'Business & Management',e:'📊'},{l:'Computer Science & IT',e:'💻'},{l:'Not sure yet',e:'🤔',s:'Help me explore'}].map(o => (
+            <div key={o.l} className={"pb-card" + (pb.subject===o.l?" on":"")} onClick={() => { upd('subject',o.l); setTimeout(next, 200); }}>
+              <div className="pb-card-emoji">{o.e}</div>
+              <div className="pb-card-label">{o.l}</div>
+              {o.s && <div className="pb-card-sub">{o.s}</div>}
+            </div>
+          ))}
+        </div>
+      </div>);
+
+      case 3: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">What qualifications have you got?</div>
+        <div className="pb-helper">We'll check which universities you can enter directly — and flag if a foundation year would open better options.</div>
+        <input className="pb-input" placeholder={QUAL_HINTS[pb.country] || "e.g. A-Levels BBB, IB 32 points"} value={pb.qualifications} onChange={e => upd('qualifications',e.target.value)} autoFocus />
+        <button className={"pb-next" + (valid[3]?" ready":"")} onClick={next}>Continue</button>
+      </div>);
+
+      case 4: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">How's your English?</div>
+        <div className="pb-helper">Most UK universities need IELTS 6.0–6.5. We'll tell you exactly where you stand for each programme.</div>
+        <div className="pb-grid pb-grid-2">
+          {[{l:'I have IELTS',v:'ielts',e:'📝'},{l:'I have TOEFL',v:'toefl',e:'📝'},{l:'Planning to take a test',v:'planning',e:'📅'},{l:'English is my first language',v:'native',e:'🗣️'}].map(o => (
+            <div key={o.v} className={"pb-card" + (pb.englishType===o.v?" on":"")} onClick={() => { upd('englishType',o.v); if (o.v==='planning'||o.v==='native') setTimeout(next, 200); }}>
+              <div className="pb-card-emoji">{o.e}</div>
+              <div className="pb-card-label">{o.l}</div>
+            </div>
+          ))}
+        </div>
+        {(pb.englishType==='ielts'||pb.englishType==='toefl') && (
+          <div className="pb-score-row">
+            <input className="pb-score-input" placeholder={pb.englishType==='ielts'?'6.5':'90'} value={pb.englishScore} onChange={e => upd('englishScore',e.target.value)} autoFocus />
+            <span className="pb-score-label">{pb.englishType==='ielts'?'Overall band score':'Total score'}</span>
+          </div>
+        )}
+        <button className={"pb-next" + (valid[4]?" ready":"")} onClick={next}>Continue</button>
+      </div>);
+
+      case 5: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">What can your family invest per year?</div>
+        <div className="pb-helper">Tuition is only about 60% of the real cost. We'll calculate the full picture.</div>
+        <div className="pb-grid pb-grid-2">
+          {[{l:'Under £20k/yr',v:'Under £20,000/yr'},{l:'£20–30k/yr',v:'£20,000-£30,000/yr'},{l:'£30–40k/yr',v:'£30,000-£40,000/yr'},{l:'£40k+/yr',v:'Over £40,000/yr'}].map(o => (
+            <div key={o.v} className={"pb-card" + (pb.budget===o.v?" on":"")} onClick={() => upd('budget',o.v)}>
+              <div className="pb-card-label">{o.l}</div>
+            </div>
+          ))}
+        </div>
+        <div className="pb-sub-q">Who's funding this?</div>
+        <div className="pb-pills">
+          {['Family savings','Need scholarship','Government sponsor','Self-funded','Mix of sources'].map(f => (
+            <button key={f} className={"pb-pill" + (pb.funding.includes(f)?" on":"")} onClick={() => toggleArr('funding',f)}>{f}</button>
+          ))}
+        </div>
+        <button className={"pb-next" + (valid[5]?" ready":"")} onClick={next}>Continue</button>
+      </div>);
+
+      case 6: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">What matters most to you?</div>
+        <div className="pb-helper">Everyone weighs things differently. Pick up to 3.</div>
+        <div className="pb-chips">
+          {['Strong career outcomes','University reputation','Lower total cost','City with strong community from my country','Scholarships available','Safety and support','Part-time work opportunities','Campus and social life'].map(p => (
+            <button key={p} className={"pb-chip" + (pb.priorities.includes(p)?" on":"")} onClick={() => toggleArr('priorities',p,3)}>{p}</button>
+          ))}
+        </div>
+        <button className={"pb-next" + (valid[6]?" ready":"")} onClick={next}>Continue</button>
+      </div>);
+
+      case 7: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">What do you want your life to look like in 5 years?</div>
+        <div className="pb-helper">This changes which universities and programmes make sense. The 2-year Graduate Route visa makes UK careers possible.</div>
+        <div className="pb-grid pb-grid-3">
+          {[{l:'Working in the UK',e:'🇬🇧'},{l:'Return home with a UK edge',e:'🏠'},{l:'Start my own business',e:'🚀'},{l:'Further study',e:'🎓',s:'Masters or PhD'},{l:'Keep options open',e:'🌐'}].map(o => (
+            <div key={o.l} className={"pb-card" + (pb.career===o.l?" on":"")} onClick={() => { upd('career',o.l); setTimeout(next, 200); }}>
+              <div className="pb-card-emoji">{o.e}</div>
+              <div className="pb-card-label">{o.l}</div>
+              {o.s && <div className="pb-card-sub">{o.s}</div>}
+            </div>
+          ))}
+        </div>
+      </div>);
+
+      case 8: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">What kind of place do you want to live?</div>
+        <div className="pb-helper">City choice affects your cost of living by up to £3,000/year — and your social experience.</div>
+        <div className="pb-grid pb-grid-3">
+          {[{l:'Big city energy',e:'🏙️'},{l:'Smaller city, bigger value',e:'🌳'},{l:'Best programme wins',e:'🎯',s:"Location doesn't matter"}].map(o => (
+            <div key={o.l} className={"pb-card" + (pb.living===o.l?" on":"")} onClick={() => upd('living',o.l)}>
+              <div className="pb-card-emoji">{o.e}</div>
+              <div className="pb-card-label">{o.l}</div>
+              {o.s && <div className="pb-card-sub">{o.s}</div>}
+            </div>
+          ))}
+        </div>
+        <div className="pb-bonus">
+          <div className="pb-bonus-q">Do you have family or friends already in the UK?</div>
+          <div className="pb-bonus-row">
+            <button className={"pb-bonus-btn" + (pb.hasFriends===true?" on":"")} onClick={() => upd('hasFriends',true)}>Yes</button>
+            <button className={"pb-bonus-btn" + (pb.hasFriends===false?" on":"")} onClick={() => upd('hasFriends',false)}>No</button>
+            {pb.hasFriends===true && <input className="pb-bonus-input" placeholder="Where in the UK?" value={pb.friendsWhere} onChange={e => upd('friendsWhere',e.target.value)} />}
+          </div>
+        </div>
+        <button className={"pb-next" + (valid[8]?" ready":"")} onClick={next}>Continue</button>
+      </div>);
+
+      case 9: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q">When do you want to start?</div>
+        <div className="pb-helper">This tells us which deadlines matter and how much preparation time you have.</div>
+        <div className="pb-grid pb-grid-2">
+          {[{l:'September 2026',e:'🍂'},{l:'January 2027',e:'❄️'},{l:'September 2027',e:'📆'},{l:'Just exploring',e:'🔍'}].map(o => (
+            <div key={o.l} className={"pb-card" + (pb.timeline===o.l?" on":"")} onClick={() => { upd('timeline',o.l); setTimeout(() => go(10), 200); }}>
+              <div className="pb-card-emoji">{o.e}</div>
+              <div className="pb-card-label">{o.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>);
+
+      case 10: return (<div className="pb-slide" key={slideKey}>
+        <div className="pb-q" style={{textAlign:'center'}}>Here's what we know.<br/>Ready to see your future?</div>
+        <div className="pb-summary">
+          <div className="pb-summary-row"><span className="pb-summary-label">Home</span><span className="pb-summary-val">{pb.country}</span></div>
+          <div className="pb-summary-row"><span className="pb-summary-label">Subject</span><span className="pb-summary-val">{pb.subject}</span></div>
+          <div className="pb-summary-row"><span className="pb-summary-label">Qualifications</span><span className="pb-summary-val">{pb.qualifications}</span></div>
+          <div className="pb-summary-row"><span className="pb-summary-label">English</span><span className="pb-summary-val">{pb.englishType==='ielts'?'IELTS '+pb.englishScore:pb.englishType==='toefl'?'TOEFL '+pb.englishScore:pb.englishType==='native'?'Native speaker':'Planning to test'}</span></div>
+          <div className="pb-summary-row"><span className="pb-summary-label">Budget</span><span className="pb-summary-val">{pb.budget}</span></div>
+          {pb.funding.length > 0 && <div className="pb-summary-row"><span className="pb-summary-label">Funding</span><span className="pb-summary-val">{pb.funding.join(', ')}</span></div>}
+          <div className="pb-summary-row"><span className="pb-summary-label">Priorities</span><span className="pb-summary-val">{pb.priorities.join(', ')}</span></div>
+          <div className="pb-summary-row"><span className="pb-summary-label">Career goal</span><span className="pb-summary-val">{pb.career}</span></div>
+          <div className="pb-summary-row"><span className="pb-summary-label">Living</span><span className="pb-summary-val">{pb.living}</span></div>
+          {pb.hasFriends && <div className="pb-summary-row"><span className="pb-summary-label">UK contacts</span><span className="pb-summary-val">{pb.friendsWhere || 'Yes'}</span></div>}
+          <div className="pb-summary-row"><span className="pb-summary-label">Start date</span><span className="pb-summary-val">{pb.timeline}</span></div>
+          <button className="pb-launch" onClick={() => onComplete(pb)}>See my predicted outcomes →</button>
+          <button className="pb-edit" onClick={() => go(1)}>Edit my profile</button>
+        </div>
+      </div>);
+
+      default: return null;
+    }
+  };
+
+  return (
+    <div className="pb">
+      <div className="pb-bar"><div className="pb-fill" style={{width: pct + '%'}}></div></div>
+      <div className="pb-top">
+        <button className="pb-back" onClick={back}>← {step > 1 ? 'Back' : 'Home'}</button>
+        <div className="pb-logo"><div className="pb-logo-sq">P</div><span>Pathfinder<span className="hi">AI</span></span></div>
+        <div className="pb-step-count">{step} of 10</div>
+      </div>
+      <div className="pb-body">
+        {renderStep()}
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [currentView, setCurrentView] = useState('home');
-  const [profile, setProfile] = useState({country:'',subject:'',qualifications:'',ielts:'',budget:'',priorities:''});
+  const [profile, setProfile] = useState({});
   const [msgs, setMsgs] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -803,10 +1104,7 @@ function App() {
   const endRef = useRef(null);
   useEffect(() => { if (endRef.current) endRef.current.scrollIntoView({behavior:'smooth'}); }, [msgs, loading]);
 
-  const budgets = [{l:"Under £20k/yr",v:"Under £20,000/yr total"},{l:"£20-30k/yr",v:"£20,000-£30,000/yr total"},{l:"£30-40k/yr",v:"£30,000-£40,000/yr total"},{l:"£40k+/yr",v:"Over £40,000/yr"}];
-  const priorities = ["University ranking","Graduate salary","Lower fees","City life","Career support","Scholarships"];
-  const togPri = (p) => setSelPri(prev => prev.includes(p) ? prev.filter(x=>x!==p) : prev.length<3 ? [...prev,p] : prev);
-  const canGo = profile.country && profile.subject && profile.qualifications && profile.budget && selPri.length > 0;
+  // Old form variables removed — ProfileBuilder handles onboarding now
 
   const callAI = async (history, prof) => {
     setLoading(true); setError(null);
@@ -821,13 +1119,14 @@ function App() {
     setLoading(false);
   };
 
-  const launch = async () => {
-    const fp = {...profile, priorities: selPri.join(', ')};
-    setProfile(fp);
-    const intro = "Hi! I'm from " + fp.country + ". I want to study " + fp.subject + " in the UK. My qualifications: " + fp.qualifications + ". " + (fp.ielts ? "IELTS: " + fp.ielts + "." : "Haven't taken IELTS yet.") + " Budget: " + fp.budget + ". Most important: " + fp.priorities + ".";
+  const launch = async (fp) => {
+    const p = fp || profile;
+    setProfile(p);
+    const engStr = p.englishType === 'ielts' ? 'IELTS ' + p.englishScore : p.englishType === 'toefl' ? 'TOEFL ' + p.englishScore : p.englishType === 'native' ? 'Native English speaker' : "Haven't taken English test yet";
+    const intro = "Hi! I'm from " + p.country + ". I want to study " + p.subject + " in the UK. My qualifications: " + p.qualifications + ". English: " + engStr + ". Budget: " + p.budget + ". Most important: " + (p.priorities || []).join(', ') + ". Career goal: " + (p.career || 'not specified') + ".";
     setMsgs([{role:'user',content:intro,parsed:{text:intro,programmes:[]}}]);
     setCurrentView('chat');
-    await callAI([{role:'user',content:intro}], fp);
+    await callAI([{role:'user',content:intro}], p);
   };
 
   const send = async () => {
@@ -843,29 +1142,35 @@ function App() {
     await callAI(nm.map(m=>({role:m.role,content:m.content})), profile);
   };
 
-  const restart = () => { setCurrentView('home'); setMsgs([]); setProfile({country:'',subject:'',qualifications:'',ielts:'',budget:'',priorities:''}); setSelPri([]); setError(null); };
+  const restart = () => { setCurrentView('home'); setMsgs([]); setProfile({}); setSelPri([]); setError(null); };
 
   // Homepage (default landing)
   if (currentView === 'home') return (
     <Homepage onStart={() => setCurrentView('profile')} />
   );
 
-  // Profile / onboarding (existing form — will be replaced by Profile Builder in v2)
+  // Profile Builder (10-step wizard)
   if (currentView === 'profile') return (
-    <div className="app"><div className="onboarding"><div className="ob-card">
-      <div className="logo-row"><div className="logo-sq">P</div><div className="logo-t">Pathfinder<span className="logo-hi">AI</span></div></div>
-      <div className="ob-badge">POWERED BY OUTCOME DATA</div>
-      <div className="ob-sub">Honest, outcome-led guidance to find the right UK programme. We show you what actually happens to students like you — real graduate data, true total costs, no hidden agendas.</div>
-      <div className="fg"><label className="fl">Where are you from?</label><select className="fs" value={profile.country} onChange={e => setProfile(p=>({...p,country:e.target.value}))}><option value="">Select your country</option>{COUNTRY_LIST.map(c => <option key={c} value={c}>{c}</option>)}</select></div>
-      <div className="fg"><label className="fl">What do you want to study?</label><select className="fs" value={profile.subject} onChange={e => setProfile(p=>({...p,subject:e.target.value}))}><option value="">Select subject area</option><option value="Business & Management">Business & Management</option><option value="Computer Science & IT">Computer Science & IT</option><option value="Not sure yet">Not sure yet</option></select></div>
-      <div className="fr">
-        <div className="fg"><label className="fl">Your qualifications</label><input className="fi" placeholder="e.g. A-Levels BBB, WAEC" value={profile.qualifications} onChange={e => setProfile(p=>({...p,qualifications:e.target.value}))} /></div>
-        <div className="fg"><label className="fl">IELTS score (if taken)</label><input className="fi" placeholder="e.g. 6.0 or not taken" value={profile.ielts} onChange={e => setProfile(p=>({...p,ielts:e.target.value}))} /></div>
+    <ProfileBuilder
+      onComplete={(pb) => {
+        setProfile(pb);
+        setCurrentView('dashboard');
+      }}
+      onBack={() => setCurrentView('home')}
+    />
+  );
+
+  // Dashboard placeholder
+  if (currentView === 'dashboard') return (
+    <div className="db-placeholder">
+      <div className="db-inner">
+        <div className="db-logo"><div className="pb-logo-sq">P</div><span style={{fontSize:'22px',fontWeight:700,color:'#fff'}}>Pathfinder<span className="hi">AI</span></span></div>
+        <div className="db-emoji">🎓</div>
+        <div className="db-heading">Dashboard coming soon</div>
+        <div className="db-sub">We've captured your profile — {profile.country}, {profile.subject}.<br/>Your personalised predicted outcomes will appear here.</div>
+        <button className="db-home" onClick={restart}>← Back to homepage</button>
       </div>
-      <div className="fg"><label className="fl">Annual budget (fees + living)</label><div className="chips">{budgets.map(b => <button key={b.l} className={"chip"+(profile.budget===b.v?' on':'')} onClick={()=>setProfile(p=>({...p,budget:b.v}))}>{b.l}</button>)}</div></div>
-      <div className="fg"><label className="fl">What matters most? (pick up to 3)</label><div className="chips">{priorities.map(p => <button key={p} className={"chip"+(selPri.includes(p)?' on':'')} onClick={()=>togPri(p)}>{p}</button>)}</div></div>
-      <button className="go-btn" disabled={!canGo} onClick={launch}>Find my programmes →</button>
-    </div></div></div>
+    </div>
   );
 
   // Chat view
@@ -877,7 +1182,7 @@ function App() {
           <div className="ch-logo">P</div>
           <div className="ch-title">Pathfinder<span className="logo-hi">AI</span></div>
         </div>
-        <div className="ch-tags"><span className="ch-trust">WORKS FOR YOU</span><span className="ch-tag">{profile.country}</span><span className="ch-tag">{profile.subject}</span></div>
+        <div className="ch-tags"><span className="ch-trust">WORKS FOR YOU</span>{profile.country && <span className="ch-tag">{profile.country}</span>}{profile.subject && <span className="ch-tag">{profile.subject}</span>}</div>
       </div>
       <div className="ch-msgs">
         {msgs.map((m, i) => (
