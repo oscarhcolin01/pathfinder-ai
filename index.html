@@ -163,8 +163,10 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 /* Act 3: The Stakes */
 .hp-act3{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 32px;background:#0A0F1C;text-align:center}
 @media(max-width:768px){.hp-act3{padding:64px 20px;min-height:auto}}
-.hp-act3-head{font-size:36px;font-weight:700;color:#F0F2F5;margin-bottom:56px;letter-spacing:-0.5px;line-height:1.15}
-@media(max-width:768px){.hp-act3-head{font-size:24px;margin-bottom:36px}}
+.hp-act3-head{font-size:36px;font-weight:700;color:#F0F2F5;margin-bottom:12px;letter-spacing:-0.5px;line-height:1.15}
+@media(max-width:768px){.hp-act3-head{font-size:24px}}
+.hp-act3-subtitle{font-size:15px;color:#00D4FF;margin-bottom:48px;font-weight:500;letter-spacing:0.2px}
+@media(max-width:768px){.hp-act3-subtitle{font-size:13px;margin-bottom:32px}}
 .hp-vmap{position:relative;width:100%;max-width:800px;height:420px;margin:0 auto 48px;border-radius:20px;background:#0F1629;border:1px solid rgba(255,255,255,0.06);overflow:hidden}
 .hp-vmap::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(52,211,153,0.04) 0%,transparent 50%,rgba(248,113,113,0.03) 100%);pointer-events:none}
 .hp-vmap-axis{position:absolute;top:8%;left:8%;width:84%;height:84%;border-left:1px dashed rgba(255,255,255,0.06);border-bottom:1px dashed rgba(255,255,255,0.06);pointer-events:none}
@@ -425,20 +427,7 @@ function ScrollAnim({ children, className, delay }) {
   return <div ref={ref} className={"hp-anim" + (delay ? " hp-anim-delay-" + delay : "") + (className ? " " + className : "")}>{children}</div>;
 }
 
-const VMAP_BUBBLES = [
-  { name:'Aston',             cost:'£54k', emp:'94%', tier:'good', top:'10%', left:'6%' },
-  { name:'Coventry',          cost:'£51k', emp:'90%', tier:'good', top:'14%', left:'24%' },
-  { name:'Nottingham Trent',  cost:'£57k', emp:'91%', tier:'good', top:'22%', left:'44%' },
-  { name:'Glasgow',           cost:'£62k', emp:'93%', tier:'good', top:'8%',  left:'60%' },
-  { name:'DMU',               cost:'£48k', emp:'84%', tier:'avg',  top:'38%', left:'16%' },
-  { name:'Sussex',            cost:'£67k', emp:'87%', tier:'avg',  top:'42%', left:'52%' },
-  { name:'Leeds',             cost:'£73k', emp:'90%', tier:'avg',  top:'35%', left:'72%' },
-  { name:'Liverpool',         cost:'£60k', emp:'82%', tier:'avg',  top:'58%', left:'38%' },
-  { name:'London Met',        cost:'£76k', emp:'72%', tier:'poor', top:'62%', left:'62%' },
-  { name:"Regent's",         cost:'£102k',emp:'68%', tier:'poor', top:'72%', left:'78%' },
-];
-
-function ValueMap() {
+function ValueMap({ country, subject }) {
   const vmRef = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -450,6 +439,44 @@ function ValueMap() {
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
+
+  // Map homepage subject to PROGRAMMES subject field
+  const progSubject = subject === 'Computer Science' ? 'Computing' : (subject || 'Computing');
+  const ctry = country || 'Nigeria';
+  const filtered = PROGRAMMES.filter(p => p.subject === progSubject);
+
+  // Compute total cost and build bubble data
+  const bubbles = filtered.map(p => {
+    const tc = getTotalCost(p, ctry);
+    const salaryK = p.salary / 1000;
+    // Value score: salary / cost — higher is better
+    const valueScore = p.salary / tc.total;
+    return { id: p.id, uni: p.uni.replace('University of ','').replace('University','Uni'), totalCost: tc.total, salary: p.salary, salaryK, valueScore };
+  });
+
+  // Calculate ranges for positioning (with padding)
+  const costs = bubbles.map(b => b.totalCost);
+  const salaries = bubbles.map(b => b.salary);
+  const minCost = Math.min(...costs); const maxCost = Math.max(...costs);
+  const minSal = Math.min(...salaries); const maxSal = Math.max(...salaries);
+  const costRange = maxCost - minCost || 1;
+  const salRange = maxSal - minSal || 1;
+
+  // Sort by value score to assign tiers — top third green, middle amber, bottom third red
+  const sorted = [...bubbles].sort((a, b) => b.valueScore - a.valueScore);
+  const tierMap = {};
+  sorted.forEach((b, i) => {
+    const pct = i / sorted.length;
+    tierMap[b.id] = pct < 0.33 ? 'good' : pct < 0.67 ? 'avg' : 'poor';
+  });
+
+  // Position: x = cost (8% to 88%), y = salary inverted (high salary = top = 8%, low salary = bottom = 78%)
+  const positioned = bubbles.map(b => {
+    const xPct = 8 + ((b.totalCost - minCost) / costRange) * 80;
+    const yPct = 8 + ((maxSal - b.salary) / salRange) * 70;
+    return { ...b, left: xPct.toFixed(1) + '%', top: yPct.toFixed(1) + '%', tier: tierMap[b.id] };
+  });
+
   return (
     <div className="hp-vmap" ref={vmRef}>
       <div className="hp-vmap-label tl">✦ Best value</div>
@@ -457,13 +484,13 @@ function ValueMap() {
       <div className="hp-vmap-zone"></div>
       <div className="hp-vmap-axis"></div>
       <div className="hp-vmap-axis-x">Total cost →</div>
-      <div className="hp-vmap-axis-y">Employment →</div>
-      {VMAP_BUBBLES.map((b, i) => (
-        <div key={i}
+      <div className="hp-vmap-axis-y">Graduate salary →</div>
+      {positioned.map((b, i) => (
+        <div key={b.id}
           className={"hp-vmap-bubble " + b.tier + (visible ? " hp-bv" : "")}
-          style={{ top: b.top, left: b.left, transitionDelay: visible ? (i * 0.08) + 's' : '0s' }}>
-          <div className="bname">{b.name}</div>
-          <div className="bdet">{b.cost} total · {b.emp} employed</div>
+          style={{ top: b.top, left: b.left, transitionDelay: visible ? (i * 0.07) + 's' : '0s' }}>
+          <div className="bname">{b.uni}</div>
+          <div className="bdet">{'£' + Math.round(b.totalCost/1000) + 'k total · £' + b.salaryK + 'k median salary'}</div>
         </div>
       ))}
     </div>
@@ -565,8 +592,9 @@ function Homepage({ onStart }) {
       <div className="hp-act3">
         <ScrollAnim>
           <div className="hp-act3-head">But not all universities deliver<br/>the same outcome.</div>
+          <div className="hp-act3-subtitle">{bothSelected ? 'Showing ' + hpSubject + ' programmes for students from ' + hpCountry : 'Showing Computer Science programmes for students from Nigeria'}</div>
         </ScrollAnim>
-        <ValueMap />
+        <ValueMap country={bothSelected ? hpCountry : 'Nigeria'} subject={bothSelected ? hpSubject : 'Computer Science'} />
         <ScrollAnim>
           <div className="hp-act3-big">The difference between the right choice and the wrong one? Up to £50,000 and a career.</div>
         </ScrollAnim>
