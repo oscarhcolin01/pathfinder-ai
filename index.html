@@ -327,15 +327,142 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .pb-bonus-btn.on{border-color:#00D4FF;background:rgba(0,212,255,0.06);color:#00D4FF}
 .pb-bonus-input{flex:1;padding:8px 14px;border-radius:10px;background:#0F1629;border:1px solid rgba(255,255,255,0.06);color:#F0F2F5;font-family:'Sora',sans-serif;font-size:13px;outline:none}
 
-/* Dashboard placeholder */
-.db-placeholder{width:100%;min-height:100vh;background:#0A0F1C;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F0F2F5;font-family:'Sora',sans-serif}
-.db-inner{text-align:center;max-width:520px;padding:40px}
-.db-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:48px}
-.db-emoji{font-size:64px;margin-bottom:20px}
-.db-heading{font-size:32px;font-weight:700;margin-bottom:12px}
-.db-sub{font-size:16px;color:#94A3B8;line-height:1.6;margin-bottom:36px}
-.db-home{padding:12px 32px;border-radius:10px;border:1.5px solid rgba(0,212,255,0.3);background:transparent;color:#00D4FF;font-family:'Sora',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s}
-.db-home:hover{background:rgba(0,212,255,0.08);border-color:#00D4FF;transform:translateY(-2px)}
+/* Dashboard */
+.db{width:100%;min-height:100vh;background:#0A0F1C;color:#F0F2F5;font-family:'Sora',sans-serif}
+
+/* Dashboard header */
+.db-hdr{position:sticky;top:0;z-index:80;background:rgba(10,15,28,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.db-hdr-inner{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.db-hdr-left{display:flex;align-items:center;gap:14px}
+.db-hdr-logo{display:flex;align-items:center;gap:8px}
+.db-hdr-logo-sq{width:30px;height:30px;background:linear-gradient(135deg,#00D4FF,#FFB547);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:800}
+.db-hdr-logo-t{font-size:17px;font-weight:700;color:#F0F2F5;letter-spacing:-0.3px}
+.db-hdr-logo-t .hi{color:#00D4FF}
+.db-hdr-stu{display:flex;align-items:center;gap:8px;padding:4px 12px;background:rgba(255,255,255,0.04);border-radius:8px;font-size:12px;color:#94A3B8}
+.db-hdr-flag{font-size:16px}
+.db-hdr-right{display:flex;align-items:center;gap:12px}
+.db-hdr-btn{padding:7px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:#94A3B8;font-family:'Sora',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.db-hdr-btn:hover{border-color:rgba(0,212,255,0.3);color:#F0F2F5}
+.db-hdr-edit{width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#94A3B8;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all 0.2s}
+.db-hdr-edit:hover{border-color:rgba(0,212,255,0.3);color:#F0F2F5}
+@media(max-width:768px){.db-hdr-inner{flex-wrap:wrap;gap:10px;padding:12px 16px}.db-hdr-right{display:none}}
+
+/* Tab navigation */
+.db-tabs-wrap{background:rgba(15,22,41,0.6);border-bottom:1px solid rgba(255,255,255,0.06)}
+.db-tabs{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.db-tabs::-webkit-scrollbar{display:none}
+.db-tab{padding:14px 20px;font-size:13px;font-weight:600;color:#64748B;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:'Sora',sans-serif;letter-spacing:0.3px}
+.db-tab:hover{color:#94A3B8}
+.db-tab.on{color:#00D4FF;border-bottom-color:#00D4FF}
+@media(max-width:768px){.db-tabs{padding:0 16px}.db-tab{padding:12px 16px;font-size:12px}}
+
+/* Feature buttons row */
+.db-feats{max-width:1200px;margin:0 auto;padding:20px 32px 4px;display:flex;gap:10px;flex-wrap:wrap}
+.db-feat{padding:10px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(15,22,41,0.5);color:#94A3B8;font-family:'Sora',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px}
+.db-feat:hover{border-color:rgba(0,212,255,0.25);color:#F0F2F5;background:rgba(0,212,255,0.04)}
+.db-feat-icon{font-size:15px}
+@media(max-width:768px){.db-feats{padding:14px 16px 4px;gap:8px}.db-feat{padding:8px 14px;font-size:12px}}
+
+/* Dashboard content area */
+.db-content{max-width:1200px;margin:0 auto;padding:28px 32px 80px}
+@media(max-width:768px){.db-content{padding:20px 16px 80px}}
+.db-content-head{font-size:28px;font-weight:700;color:#F0F2F5;margin-bottom:6px;letter-spacing:-0.5px}
+@media(max-width:768px){.db-content-head{font-size:22px}}
+.db-content-sub{font-size:14px;color:#94A3B8;margin-bottom:32px;line-height:1.5}
+
+/* Match cards */
+.db-matches{display:flex;flex-direction:column;gap:16px}
+.db-match{background:#0F1629;border:1.5px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;transition:all 0.3s;animation:dbCardIn 0.5s ease-out both}
+.db-match:hover{border-color:rgba(0,212,255,0.2);box-shadow:0 8px 36px rgba(0,212,255,0.06)}
+@keyframes dbCardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.db-match:nth-child(2){animation-delay:0.08s}.db-match:nth-child(3){animation-delay:0.16s}.db-match:nth-child(4){animation-delay:0.24s}.db-match:nth-child(5){animation-delay:0.32s}.db-match:nth-child(6){animation-delay:0.40s}.db-match:nth-child(7){animation-delay:0.48s}.db-match:nth-child(8){animation-delay:0.56s}
+
+/* Match card top section */
+.db-m-top{padding:20px 24px 16px;display:flex;gap:20px;align-items:flex-start}
+@media(max-width:768px){.db-m-top{flex-direction:column;padding:16px;gap:12px}}
+.db-m-info{flex:1;min-width:0}
+.db-m-uni{font-size:11px;font-weight:600;color:#00D4FF;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.db-m-name{font-size:18px;font-weight:700;color:#F0F2F5;margin-bottom:8px;line-height:1.3}
+.db-m-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px;color:#94A3B8;margin-bottom:10px}
+.db-m-meta-sep{color:#374151}
+.db-m-tags{display:flex;flex-wrap:wrap;gap:6px}
+.db-m-tag{font-size:11px;padding:3px 10px;border-radius:6px;font-weight:500}
+.db-m-tag.fee{background:rgba(255,181,71,0.12);color:#FFB547}
+.db-m-tag.city{background:rgba(0,212,255,0.08);color:#00D4FF}
+.db-m-tag.dur{background:rgba(168,85,247,0.12);color:#A855F7}
+.db-m-tag.fnd{background:rgba(52,211,153,0.12);color:#34D399}
+
+/* Readiness circle */
+.db-m-ready{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.db-m-circle{width:72px;height:72px;position:relative}
+.db-m-circle svg{width:72px;height:72px;transform:rotate(-90deg)}
+.db-m-circle-bg{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:5}
+.db-m-circle-fg{fill:none;stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset 1s ease-out}
+.db-m-circle-fg.green{stroke:#34D399}.db-m-circle-fg.amber{stroke:#FFB547}.db-m-circle-fg.red{stroke:#F87171}
+.db-m-circle-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px;font-weight:700;color:#F0F2F5}
+.db-m-ready-label{font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+
+/* Eligibility badge */
+.db-m-elig{margin:0 24px;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px}
+@media(max-width:768px){.db-m-elig{margin:0 16px}}
+.db-m-elig.direct{background:rgba(52,211,153,0.08);color:#34D399;border:1px solid rgba(52,211,153,0.15)}
+.db-m-elig.cond{background:rgba(255,181,71,0.08);color:#FFB547;border:1px solid rgba(255,181,71,0.15)}
+.db-m-elig.below{background:rgba(248,113,113,0.08);color:#F87171;border:1px solid rgba(248,113,113,0.15)}
+.db-m-elig.unk{background:rgba(148,163,184,0.08);color:#94A3B8;border:1px solid rgba(148,163,184,0.1)}
+
+/* Expandable panel tabs */
+.db-m-tabs{display:flex;border-top:1px solid rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.04);margin-top:12px}
+.db-m-tab{flex:1;padding:10px;text-align:center;font-size:11px;font-weight:600;color:#64748B;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;background:none;border:none;border-bottom:2px solid transparent;font-family:'Sora',sans-serif;text-transform:uppercase}
+.db-m-tab:hover{color:#94A3B8}
+.db-m-tab.on{color:#00D4FF;border-bottom-color:#00D4FF}
+
+/* Panel content */
+.db-m-panel{padding:16px 24px 20px}
+@media(max-width:768px){.db-m-panel{padding:14px 16px 16px}}
+.db-m-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:768px){.db-m-stats{grid-template-columns:repeat(2,1fr)}}
+.db-m-stat{text-align:center;padding:8px}
+.db-m-stat-val{font-size:22px;font-weight:700;color:#F0F2F5;margin-bottom:4px}
+.db-m-stat-val.teal{color:#00D4FF}.db-m-stat-val.green{color:#34D399}.db-m-stat-val.amber{color:#FFB547}
+.db-m-stat-label{font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Students Like Me panel */
+.db-m-slm{background:rgba(52,211,153,0.04);border:1px solid rgba(52,211,153,0.1);border-radius:12px;padding:16px}
+.db-m-slm-head{font-size:11px;font-weight:700;color:#34D399;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.db-m-slm-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.db-m-slm-stat{text-align:center}
+.db-m-slm-val{font-size:18px;font-weight:700;color:#34D399}
+.db-m-slm-lab{font-size:9px;color:#6EE7B7;text-transform:uppercase;letter-spacing:0.5px}
+.db-m-slm-note{font-size:12px;color:#6EE7B7;line-height:1.5;font-style:italic}
+
+/* Total Cost panel */
+.db-m-cost{background:rgba(255,181,71,0.04);border:1px solid rgba(255,181,71,0.1);border-radius:12px;padding:16px}
+.db-m-cost-head{font-size:11px;font-weight:700;color:#FFB547;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.db-m-cost-rows{display:flex;flex-direction:column;gap:3px}
+.db-m-cost-row{display:flex;justify-content:space-between;font-size:12px;color:#CBD5E1;padding:3px 0}
+.db-m-cost-row.sub{padding-left:12px;color:#94A3B8;font-size:11px}
+.db-m-cost-div{border-top:1px dashed rgba(255,181,71,0.15);margin:5px 0}
+.db-m-cost-total{font-weight:700;font-size:14px;color:#FFB547}
+.db-m-cost-schol{margin-top:10px;padding:8px 12px;background:rgba(52,211,153,0.06);border-radius:8px;font-size:11px;color:#34D399;display:flex;align-items:center;gap:6px}
+
+/* Action row */
+.db-m-actions{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,0.04);padding:0}
+.db-m-action{flex:1;min-width:0;padding:12px;text-align:center;font-size:11px;font-weight:600;color:#64748B;cursor:pointer;transition:all 0.2s;background:none;border:none;border-right:1px solid rgba(255,255,255,0.04);font-family:'Sora',sans-serif}
+.db-m-action:last-child{border-right:none}
+.db-m-action:hover{color:#00D4FF;background:rgba(0,212,255,0.03)}
+@media(max-width:768px){.db-m-actions{flex-direction:column}.db-m-action{border-right:none;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left;padding:12px 16px}.db-m-action:last-child{border-bottom:none}}
+
+/* Floating chat button */
+.db-chat-fab{position:fixed;bottom:24px;right:24px;z-index:90;padding:14px 24px;border-radius:50px;border:none;background:linear-gradient(135deg,#00D4FF,#0096B4);color:#fff;font-family:'Sora',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s;box-shadow:0 8px 32px rgba(0,212,255,0.3);display:flex;align-items:center;gap:8px;animation:fabPulse 3s ease-in-out infinite}
+.db-chat-fab:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(0,212,255,0.4)}
+@keyframes fabPulse{0%,100%{box-shadow:0 8px 32px rgba(0,212,255,0.3)}50%{box-shadow:0 8px 32px rgba(0,212,255,0.15)}}
+@media(max-width:768px){.db-chat-fab{bottom:16px;right:16px;padding:12px 18px;font-size:13px}}
+
+/* Placeholder tab content */
+.db-placeholder-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;text-align:center;padding:40px}
+.db-placeholder-tab-icon{font-size:48px;margin-bottom:16px}
+.db-placeholder-tab-title{font-size:22px;font-weight:700;color:#F0F2F5;margin-bottom:8px}
+.db-placeholder-tab-sub{font-size:14px;color:#64748B;line-height:1.6;max-width:400px}
 </style>
 </head>
 <body>
@@ -883,6 +1010,323 @@ const QUAL_HINTS = {
 
 const COUNTRY_EMOJIS = {"Nigeria":"🇳🇬","India":"🇮🇳","China":"🇨🇳","Pakistan":"🇵🇰","Bangladesh":"🇧🇩","Ghana":"🇬🇭","Saudi Arabia":"🇸🇦","Vietnam":"🇻🇳","Kenya":"🇰🇪","Turkey":"🇹🇷"};
 
+// --- Readiness score calculation ---
+function calcReadiness(prog, profile) {
+  let ieltsScore = 50, qualScore = 60, budgetScore = 50, timeScore = 60;
+
+  // IELTS (35%)
+  if (profile.englishType === 'native') { ieltsScore = 100; }
+  else if (profile.englishType === 'ielts' || profile.englishType === 'toefl') {
+    const s = parseFloat(profile.englishScore) || 0;
+    const req = prog.ielts || 6.5;
+    if (profile.englishType === 'toefl') {
+      // rough TOEFL→IELTS: 79=6.5, 94=7.0
+      const equiv = s >= 94 ? 7.0 : s >= 79 ? 6.5 : s >= 60 ? 6.0 : 5.5;
+      if (equiv >= req) ieltsScore = 100;
+      else if (equiv >= req - 0.5) ieltsScore = 60;
+      else ieltsScore = 20;
+    } else {
+      if (s >= req) ieltsScore = 100;
+      else if (s >= req - 0.5) ieltsScore = 60;
+      else ieltsScore = 20;
+    }
+  } else if (profile.englishType === 'planning') { ieltsScore = 50; }
+
+  // Qualifications (30%)
+  if (prog.foundation) qualScore = 90;
+  else if (profile.qualifications) {
+    const q = profile.qualifications.toLowerCase();
+    // Simple heuristic: look for strong indicators
+    if (q.includes('a-level') || q.includes('a level') || q.includes('cbse') || q.includes('gaokao') || q.includes('waec')) qualScore = 70;
+    if (q.includes('aaa') || q.includes('a*') || q.includes('90%') || q.includes('95%')) qualScore = 100;
+    else if (q.includes('aab') || q.includes('abb') || q.includes('80%') || q.includes('85%')) qualScore = 80;
+    else if (q.includes('bbb') || q.includes('bbc') || q.includes('bcc') || q.includes('70%') || q.includes('75%')) qualScore = 60;
+    else if (q.includes('ccc') || q.includes('ccd') || q.includes('ddd') || q.includes('60%')) qualScore = 40;
+  }
+
+  // Budget (20%)
+  const tc = getTotalCost(prog, profile.country);
+  const annualCost = tc.annual;
+  const budgetMap = {"Under £15k/year": 15000, "£15-25k": 20000, "£25-35k": 30000, "£35k+": 40000,
+    "Under £20k/year": 20000, "£20-30k": 25000, "£30-40k": 35000, "£40k+": 45000};
+  const bv = budgetMap[profile.budget] || 25000;
+  if (bv >= annualCost) budgetScore = 100;
+  else if (bv >= annualCost * 0.8) budgetScore = 70;
+  else budgetScore = 30;
+
+  // Timeline (15%)
+  const tl = profile.timeline || '';
+  if (tl.includes('2027') || tl.includes('exploring')) timeScore = 100;
+  else if (tl.includes('September 2026')) timeScore = 80;
+  else if (tl.includes('January 2027')) timeScore = 90;
+  else timeScore = 60;
+
+  const total = Math.round(ieltsScore * 0.35 + qualScore * 0.30 + budgetScore * 0.20 + timeScore * 0.15);
+  return { total, ielts: ieltsScore, quals: qualScore, budget: budgetScore, timeline: timeScore };
+}
+
+// --- Match scoring for ranking ---
+function matchScore(prog, profile) {
+  const readiness = calcReadiness(prog, profile);
+  let score = readiness.total;
+
+  // Boost for priorities
+  const pri = Array.isArray(profile.priorities) ? profile.priorities : [];
+  if (pri.includes('Strong career outcomes') && prog.empRate >= 90) score += 8;
+  if (pri.includes('University reputation') && prog.qsRank <= 120) score += 8;
+  if (pri.includes('Lower total cost')) {
+    const tc = getTotalCost(prog, profile.country);
+    if (tc.annual < 25000) score += 8;
+  }
+  if (pri.includes('Scholarships available') && prog.scholarshipVal > 0) score += 5;
+
+  // Boost for living preference
+  const living = profile.living || '';
+  const bigCities = ['London','Manchester','Birmingham','Glasgow','Leeds'];
+  const smallCities = ['Sheffield','Exeter','Nottingham','Newcastle','Coventry','Leicester','Salford','Brighton'];
+  if (living.includes('Big city') && bigCities.includes(prog.city)) score += 5;
+  if (living.includes('Smaller city') && smallCities.includes(prog.city)) score += 5;
+
+  // Boost for higher salary
+  score += Math.min(10, Math.round(prog.salary / 3000));
+
+  return score;
+}
+
+function Dashboard({ profile, onChat, onBack, onEditProfile }) {
+  const [activeTab, setActiveTab] = useState('matches');
+  const [cardTabs, setCardTabs] = useState({});
+
+  const tabs = [
+    { id: 'matches', label: 'My Matches' },
+    { id: 'valuemap', label: 'Value Map' },
+    { id: 'ready', label: 'Am I Ready?' },
+    { id: 'aftergrad', label: 'After Graduation' },
+    { id: 'dates', label: 'Key Dates' }
+  ];
+
+  // Filter and rank programmes
+  const subjectMap = {"Business & Management": "Business", "Computer Science & IT": "Computing"};
+  const subKey = subjectMap[profile.subject] || '';
+  const matched = PROGRAMMES
+    .filter(p => !p.foundation && p.subject === subKey)
+    .map(p => ({ ...p, score: matchScore(p, profile), readiness: calcReadiness(p, profile) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8);
+
+  // Include foundation programmes if IELTS/quals are low
+  const needFoundation = profile.englishType === 'ielts' && parseFloat(profile.englishScore) < 6.0;
+  const foundationProgs = needFoundation ? PROGRAMMES
+    .filter(p => p.foundation && p.subject === subKey)
+    .map(p => ({ ...p, score: matchScore(p, profile), readiness: calcReadiness(p, profile) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2) : [];
+
+  const allMatches = [...matched, ...foundationProgs];
+
+  const getCardTab = (id) => cardTabs[id] || 'outcomes';
+  const setCardTab = (id, tab) => setCardTabs(prev => ({ ...prev, [id]: tab }));
+
+  const getEligBadge = (prog) => {
+    if (profile.englishType === 'native') return { cls: 'direct', icon: '✓', label: 'Direct entry — native speaker' };
+    if (profile.englishType === 'planning' || !profile.englishScore) return { cls: 'unk', icon: '?', label: 'IELTS score needed to assess' };
+    const s = parseFloat(profile.englishScore) || 0;
+    const req = prog.ielts || 6.5;
+    let equiv = s;
+    if (profile.englishType === 'toefl') equiv = s >= 94 ? 7.0 : s >= 79 ? 6.5 : s >= 60 ? 6.0 : 5.5;
+    if (equiv >= req) return { cls: 'direct', icon: '✓', label: 'Direct entry' };
+    if (equiv >= req - 0.5) return { cls: 'cond', icon: '⚠', label: 'Conditional — may need pre-sessional English' };
+    return { cls: 'below', icon: '✗', label: prog.foundation ? 'Foundation year pathway' : 'Below requirement — foundation year recommended' };
+  };
+
+  const fmt = n => '£' + n.toLocaleString('en-GB');
+
+  const renderMatches = () => (
+    <div>
+      <div className="db-content-head">Programmes matched to your profile</div>
+      <div className="db-content-sub">Ranked by predicted outcomes for students like you.</div>
+      <div className="db-matches">
+        {allMatches.map((p, idx) => {
+          const tc = getTotalCost(p, profile.country);
+          const oc = getOutcome(profile.country, p.qsRank);
+          const elig = getEligBadge(p);
+          const ct = getCardTab(p.id);
+          const r = p.readiness;
+          const circ = 2 * Math.PI * 28;
+          const offset = circ - (r.total / 100) * circ;
+          const rColor = r.total >= 80 ? 'green' : r.total >= 50 ? 'amber' : 'red';
+
+          return (
+            <div className="db-match" key={p.id} style={{animationDelay: (idx * 0.08) + 's'}}>
+              <div className="db-m-top">
+                <div className="db-m-info">
+                  <div className="db-m-uni">{p.uni}</div>
+                  <div className="db-m-name">{p.name}</div>
+                  <div className="db-m-meta">
+                    <span>{p.city}</span>
+                    <span className="db-m-meta-sep">•</span>
+                    <span>{p.duration} years</span>
+                    <span className="db-m-meta-sep">•</span>
+                    <span>QS #{p.qsRank}</span>
+                  </div>
+                  <div className="db-m-tags">
+                    <span className="db-m-tag fee">{fmt(p.fee)}/yr</span>
+                    <span className="db-m-tag city">{p.city}</span>
+                    <span className="db-m-tag dur">{p.duration} yrs</span>
+                    {p.foundation && <span className="db-m-tag fnd">Foundation year</span>}
+                  </div>
+                </div>
+                <div className="db-m-ready">
+                  <div className="db-m-circle">
+                    <svg viewBox="0 0 72 72">
+                      <circle className="db-m-circle-bg" cx="36" cy="36" r="28" />
+                      <circle className={"db-m-circle-fg " + rColor} cx="36" cy="36" r="28"
+                        strokeDasharray={circ} strokeDashoffset={offset} />
+                    </svg>
+                    <div className="db-m-circle-val">{r.total}%</div>
+                  </div>
+                  <div className="db-m-ready-label">Readiness</div>
+                </div>
+              </div>
+
+              <div className={"db-m-elig " + elig.cls}>
+                <span>{elig.icon}</span>
+                <span>{elig.label}</span>
+              </div>
+
+              <div className="db-m-tabs">
+                <button className={"db-m-tab" + (ct === 'outcomes' ? ' on' : '')} onClick={() => setCardTab(p.id, 'outcomes')}>Outcomes</button>
+                <button className={"db-m-tab" + (ct === 'slm' ? ' on' : '')} onClick={() => setCardTab(p.id, 'slm')}>Students Like Me</button>
+                <button className={"db-m-tab" + (ct === 'cost' ? ' on' : '')} onClick={() => setCardTab(p.id, 'cost')}>Total Cost</button>
+              </div>
+
+              {ct === 'outcomes' && (
+                <div className="db-m-panel">
+                  <div className="db-m-stats">
+                    <div className="db-m-stat"><div className="db-m-stat-val green">{p.empRate}%</div><div className="db-m-stat-label">Employment</div></div>
+                    <div className="db-m-stat"><div className="db-m-stat-val teal">{p.highSkill}%</div><div className="db-m-stat-label">Graduate-level</div></div>
+                    <div className="db-m-stat"><div className="db-m-stat-val amber">{fmt(p.salary)}</div><div className="db-m-stat-label">Median salary</div></div>
+                    <div className="db-m-stat"><div className="db-m-stat-val">{p.satisfaction}%</div><div className="db-m-stat-label">Satisfaction</div></div>
+                  </div>
+                </div>
+              )}
+
+              {ct === 'slm' && (
+                <div className="db-m-panel">
+                  <div className="db-m-slm">
+                    <div className="db-m-slm-head">🌍 Students from {profile.country}</div>
+                    <div className="db-m-slm-stats">
+                      <div className="db-m-slm-stat"><div className="db-m-slm-val">{oc.empRate}%</div><div className="db-m-slm-lab">Employed</div></div>
+                      <div className="db-m-slm-stat"><div className="db-m-slm-val">{fmt(oc.salary)}</div><div className="db-m-slm-lab">Salary</div></div>
+                      <div className="db-m-slm-stat"><div className="db-m-slm-val">{oc.highSkill}%</div><div className="db-m-slm-lab">Graduate jobs</div></div>
+                    </div>
+                    <div className="db-m-slm-note">{oc.note}</div>
+                  </div>
+                </div>
+              )}
+
+              {ct === 'cost' && (
+                <div className="db-m-panel">
+                  <div className="db-m-cost">
+                    <div className="db-m-cost-head">💰 Full cost breakdown ({p.duration} years)</div>
+                    <div className="db-m-cost-rows">
+                      <div className="db-m-cost-row"><span>Tuition fees ({p.duration} yrs)</span><span>{fmt(p.fee * p.duration)}</span></div>
+                      <div className="db-m-cost-row"><span>Living costs ({p.duration} yrs)</span><span>{fmt(p.livingCost * p.duration)}</span></div>
+                      <div className="db-m-cost-row sub"><span>IHS ({p.duration} yrs)</span><span>{fmt(tc.ihs * p.duration)}</span></div>
+                      <div className="db-m-cost-row sub"><span>Student visa</span><span>{fmt(tc.visa)}</span></div>
+                      <div className="db-m-cost-row sub"><span>Flights (return)</span><span>{fmt(tc.flight)}</span></div>
+                      <div className="db-m-cost-div"></div>
+                      <div className="db-m-cost-row db-m-cost-total"><span>Total before funding</span><span>{fmt(tc.totalBefore)}</span></div>
+                      {p.scholarshipVal > 0 && <>
+                        <div className="db-m-cost-row" style={{color:'#34D399'}}><span>Scholarship ({p.duration} yrs)</span><span>-{fmt(p.scholarshipVal * p.duration)}</span></div>
+                        <div className="db-m-cost-div"></div>
+                        <div className="db-m-cost-row db-m-cost-total"><span>Net total cost</span><span>{fmt(tc.total)}</span></div>
+                      </>}
+                    </div>
+                    {p.scholarshipVal > 0 && (
+                      <div className="db-m-cost-schol">💎 {p.scholarship}</div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className="db-m-actions">
+                <button className="db-m-action" onClick={() => onChat && onChat('Tell me more about ' + p.name + ' at ' + p.uni)}>Ask PathfinderAI about this →</button>
+                <button className="db-m-action">Experience this university →</button>
+                <button className="db-m-action">Start my application →</button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  const renderPlaceholder = (icon, title, sub) => (
+    <div className="db-placeholder-tab">
+      <div className="db-placeholder-tab-icon">{icon}</div>
+      <div className="db-placeholder-tab-title">{title}</div>
+      <div className="db-placeholder-tab-sub">{sub}</div>
+    </div>
+  );
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'matches': return renderMatches();
+      case 'valuemap': return renderPlaceholder('📊', 'Value Map', 'Every programme mapped by what it costs versus what it delivers. Coming soon.');
+      case 'ready': return renderPlaceholder('✅', 'Am I Ready?', 'Your readiness for each programme — what you need to do, and what\'s already sorted. Coming soon.');
+      case 'aftergrad': return renderPlaceholder('🚀', 'After Graduation', 'What happens after you graduate — Graduate Route visa, first roles, salary progression. Coming soon.');
+      case 'dates': return renderPlaceholder('📅', 'Key Dates', 'Every deadline that matters — UCAS, scholarships, visa, accommodation. Coming soon.');
+      default: return null;
+    }
+  };
+
+  return (
+    <div className="db">
+      <div className="db-hdr">
+        <div className="db-hdr-inner">
+          <div className="db-hdr-left">
+            <div className="db-hdr-logo">
+              <div className="db-hdr-logo-sq">P</div>
+              <div className="db-hdr-logo-t">Pathfinder<span className="hi">AI</span></div>
+            </div>
+            <div className="db-hdr-stu">
+              <span className="db-hdr-flag">{COUNTRY_EMOJIS[profile.country] || '🌍'}</span>
+              <span>{profile.country} · {profile.subject}</span>
+            </div>
+          </div>
+          <div className="db-hdr-right">
+            <button className="db-hdr-btn" onClick={onBack}>← Home</button>
+            <button className="db-hdr-edit" title="Edit profile" onClick={onEditProfile}>✎</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="db-tabs-wrap">
+        <div className="db-tabs">
+          {tabs.map(t => (
+            <button key={t.id} className={"db-tab" + (activeTab === t.id ? ' on' : '')} onClick={() => setActiveTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="db-feats">
+        <button className="db-feat"><span className="db-feat-icon">📝</span> Apply with AI</button>
+        <button className="db-feat"><span className="db-feat-icon">💷</span> Financial Plan</button>
+        <button className="db-feat"><span className="db-feat-icon">🏛️</span> Experience a University</button>
+      </div>
+
+      <div className="db-content">
+        {renderTabContent()}
+      </div>
+
+      <button className="db-chat-fab" onClick={() => onChat && onChat()}>
+        💬 Chat with PathfinderAI
+      </button>
+    </div>
+  );
+}
+
 function ProfileBuilder({ onComplete, onBack }) {
   const [step, setStep] = useState(1);
   const [slideKey, setSlideKey] = useState(0);
@@ -1160,17 +1604,25 @@ function App() {
     />
   );
 
-  // Dashboard placeholder
+  // Dashboard
   if (currentView === 'dashboard') return (
-    <div className="db-placeholder">
-      <div className="db-inner">
-        <div className="db-logo"><div className="pb-logo-sq">P</div><span style={{fontSize:'22px',fontWeight:700,color:'#fff'}}>Pathfinder<span className="hi">AI</span></span></div>
-        <div className="db-emoji">🎓</div>
-        <div className="db-heading">Dashboard coming soon</div>
-        <div className="db-sub">We've captured your profile — {profile.country}, {profile.subject}.<br/>Your personalised predicted outcomes will appear here.</div>
-        <button className="db-home" onClick={restart}>← Back to homepage</button>
-      </div>
-    </div>
+    <Dashboard
+      profile={profile}
+      onChat={(msg) => {
+        if (msg) {
+          // Launch chat with a specific question
+          const history = [{role:'user', content: msg, parsed:{text: msg, programmes:[]}}];
+          setMsgs(history);
+          setCurrentView('chat');
+          callAI([{role:'user', content: msg}], profile);
+        } else {
+          // General chat — auto-introduce
+          launch(profile);
+        }
+      }}
+      onBack={restart}
+      onEditProfile={() => setCurrentView('profile')}
+    />
   );
 
   // Chat view
@@ -1178,7 +1630,7 @@ function App() {
     <div className="app"><div className="chat">
       <div className="ch-head">
         <div className="ch-left">
-          <button className="ch-back" onClick={restart}>← Home</button>
+          <button className="ch-back" onClick={() => profile.country ? setCurrentView('dashboard') : restart()}>← {profile.country ? 'Dashboard' : 'Home'}</button>
           <div className="ch-logo">P</div>
           <div className="ch-title">Pathfinder<span className="logo-hi">AI</span></div>
         </div>
@@ -1191,7 +1643,7 @@ function App() {
             <div className="bubble">
               {m.parsed && m.parsed.text && m.parsed.text.split('\n').map((line, j) => <span key={j}>{line}<br/></span>)}
               {m.parsed && m.parsed.programmes && m.parsed.programmes.length > 0 && (
-                <div className="pcards">{m.parsed.programmes.map(pid => <ProgrammeCard key={pid} progId={pid} country={profile.country} ielts={profile.ielts} />)}</div>
+                <div className="pcards">{m.parsed.programmes.map(pid => <ProgrammeCard key={pid} progId={pid} country={profile.country} ielts={profile.englishScore || profile.ielts} />)}</div>
               )}
             </div>
           </div>
