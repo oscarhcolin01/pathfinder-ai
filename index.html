@@ -471,13 +471,13 @@ function ValueMap() {
 }
 
 function Homepage({ onStart }) {
-  const [hpCountry, setHpCountry] = useState('Nigeria');
-  const [hpSubject, setHpSubject] = useState('Computer Science');
+  const [hpCountry, setHpCountry] = useState('');
+  const [hpSubject, setHpSubject] = useState('');
   const [showNav, setShowNav] = useState(false);
   const act1Ref = useRef(null);
 
-  const d = (HP_STATS[hpCountry] || HP_DEFAULT)[hpSubject] || HP_DEFAULT[hpSubject];
   const bothSelected = hpCountry && hpSubject;
+  const d = bothSelected ? ((HP_STATS[hpCountry] || HP_DEFAULT)[hpSubject] || HP_DEFAULT[hpSubject]) : { emp: 85, salary: '£24,000', premium: '3.0x', grad: 60 };
 
   // Sticky nav on scroll
   useEffect(() => {
@@ -511,10 +511,12 @@ function Homepage({ onStart }) {
         <div className="hp-inline">
           <span>I'm from</span>
           <select className="hp-inline-sel" value={hpCountry} onChange={e => setHpCountry(e.target.value)}>
+            <option value="" disabled>your country</option>
             {HP_COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
           <span>and I want to study</span>
           <select className="hp-inline-sel" value={hpSubject} onChange={e => setHpSubject(e.target.value)}>
+            <option value="" disabled>a subject</option>
             <option value="Computer Science">Computer Science</option>
             <option value="Business">Business</option>
           </select>
@@ -526,7 +528,7 @@ function Homepage({ onStart }) {
       {/* Act 2: The Data Story */}
       <div className="hp-act2">
         <ScrollAnim>
-          <div className="hp-act2-head">Students from {hpCountry} who studied {hpSubject} in the UK</div>
+          <div className="hp-act2-head">{bothSelected ? 'Students from ' + hpCountry + ' who studied ' + hpSubject + ' in the UK' : 'UK international graduates — average outcomes'}</div>
         </ScrollAnim>
         <div className="hp-stats">
           <ScrollAnim delay={1}>
