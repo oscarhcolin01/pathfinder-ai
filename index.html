@@ -307,7 +307,7 @@ function App() {
   if (stage === 'onboarding') return (
     <div className="app"><div className="onboarding"><div className="ob-card">
       <div className="logo-row"><div className="logo-sq">P</div><div className="logo-t">Pathfinder<span className="logo-hi">AI</span></div></div>
-      <div className="ob-badge">WORKS FOR YOU, NOT THE UNIVERSITY</div>
+      <div className="ob-badge">POWERED BY OUTCOME DATA</div>
       <div className="ob-sub">Honest, outcome-led guidance to find the right UK programme. We show you what actually happens to students like you — real graduate data, true total costs, no hidden agendas.</div>
       <div className="fg"><label className="fl">Where are you from?</label><select className="fs" value={profile.country} onChange={e => setProfile(p=>({...p,country:e.target.value}))}><option value="">Select your country</option>{COUNTRY_LIST.map(c => <option key={c} value={c}>{c}</option>)}</select></div>
       <div className="fg"><label className="fl">What do you want to study?</label><select className="fs" value={profile.subject} onChange={e => setProfile(p=>({...p,subject:e.target.value}))}><option value="">Select subject area</option><option value="Business & Management">Business & Management</option><option value="Computer Science & IT">Computer Science & IT</option><option value="Not sure yet">Not sure yet</option></select></div>
