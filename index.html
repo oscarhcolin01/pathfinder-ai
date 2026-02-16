@@ -165,16 +165,36 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 @media(max-width:768px){.hp-act3{padding:64px 20px;min-height:auto}}
 .hp-act3-head{font-size:36px;font-weight:700;color:#F0F2F5;margin-bottom:56px;letter-spacing:-0.5px;line-height:1.15}
 @media(max-width:768px){.hp-act3-head{font-size:24px;margin-bottom:36px}}
-.hp-vmap{position:relative;width:100%;max-width:800px;height:400px;margin:0 auto 48px;border-radius:20px;background:#0F1629;border:1px solid rgba(255,255,255,0.06);overflow:hidden}
-@media(max-width:768px){.hp-vmap{height:300px}}
+.hp-vmap{position:relative;width:100%;max-width:800px;height:420px;margin:0 auto 48px;border-radius:20px;background:#0F1629;border:1px solid rgba(255,255,255,0.06);overflow:hidden}
+.hp-vmap::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(52,211,153,0.04) 0%,transparent 50%,rgba(248,113,113,0.03) 100%);pointer-events:none}
+.hp-vmap-axis{position:absolute;top:8%;left:8%;width:84%;height:84%;border-left:1px dashed rgba(255,255,255,0.06);border-bottom:1px dashed rgba(255,255,255,0.06);pointer-events:none}
+.hp-vmap-axis-x{position:absolute;bottom:4%;left:50%;transform:translateX(-50%);font-size:10px;color:#475569;letter-spacing:1px;text-transform:uppercase}
+.hp-vmap-axis-y{position:absolute;top:50%;left:2%;transform:translateY(-50%) rotate(-90deg);font-size:10px;color:#475569;letter-spacing:1px;text-transform:uppercase;transform-origin:center}
+@media(max-width:768px){.hp-vmap{height:320px}}
 .hp-vmap-label{position:absolute;font-size:11px;color:#64748B;font-weight:500;letter-spacing:0.5px}
 .hp-vmap-label.tl{top:16px;left:20px}.hp-vmap-label.br{bottom:16px;right:20px}
 .hp-vmap-zone{position:absolute;top:10%;left:5%;width:45%;height:45%;background:radial-gradient(ellipse,rgba(52,211,153,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
-.hp-vmap-bubble{position:absolute;padding:10px 14px;border-radius:12px;font-size:11px;font-weight:600;text-align:center;line-height:1.4;transition:transform 0.3s}
-.hp-vmap-bubble:hover{transform:scale(1.08)}
-.hp-vmap-bubble.good{background:rgba(52,211,153,0.12);color:#34D399;border:1px solid rgba(52,211,153,0.2)}
-.hp-vmap-bubble.avg{background:rgba(255,181,71,0.1);color:#FFB547;border:1px solid rgba(255,181,71,0.2)}
-.hp-vmap-bubble.poor{background:rgba(248,113,113,0.1);color:#F87171;border:1px solid rgba(248,113,113,0.2)}
+.hp-vmap-bubble{position:absolute;padding:10px 14px;border-radius:12px;font-size:11px;font-weight:600;text-align:center;line-height:1.4;opacity:0;transform:scale(0.7) translateY(10px)}
+.hp-vmap-bubble:hover{transform:scale(1.1)!important}
+.hp-vmap-bubble.good{background:rgba(52,211,153,0.15);color:#34D399;border:1px solid rgba(52,211,153,0.25);box-shadow:0 0 24px rgba(52,211,153,0.08)}
+.hp-vmap-bubble.avg{background:rgba(255,181,71,0.12);color:#FFB547;border:1px solid rgba(255,181,71,0.22);box-shadow:0 0 24px rgba(255,181,71,0.06)}
+.hp-vmap-bubble.poor{background:rgba(248,113,113,0.12);color:#F87171;border:1px solid rgba(248,113,113,0.22);box-shadow:0 0 24px rgba(248,113,113,0.06)}
+.hp-vmap-bubble .bname{font-size:12px;font-weight:700;margin-bottom:2px}
+.hp-vmap-bubble .bdet{font-size:10px;opacity:0.8;font-weight:500;white-space:nowrap}
+@keyframes vmapPop{0%{opacity:0;transform:scale(0.7) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+/* Bubbles animate only when parent ScrollAnim becomes visible */
+.hp-visible .hp-vmap-bubble{animation:vmapPop 0.6s ease-out forwards}
+.hp-visible .hp-vmap-bubble:nth-child(4){animation-delay:0.08s}
+.hp-visible .hp-vmap-bubble:nth-child(5){animation-delay:0.16s}
+.hp-visible .hp-vmap-bubble:nth-child(6){animation-delay:0.24s}
+.hp-visible .hp-vmap-bubble:nth-child(7){animation-delay:0.32s}
+.hp-visible .hp-vmap-bubble:nth-child(8){animation-delay:0.40s}
+.hp-visible .hp-vmap-bubble:nth-child(9){animation-delay:0.48s}
+.hp-visible .hp-vmap-bubble:nth-child(10){animation-delay:0.56s}
+.hp-visible .hp-vmap-bubble:nth-child(11){animation-delay:0.64s}
+.hp-visible .hp-vmap-bubble:nth-child(12){animation-delay:0.72s}
+.hp-visible .hp-vmap-bubble:nth-child(13){animation-delay:0.80s}
+@media(max-width:768px){.hp-vmap-bubble{padding:7px 10px;border-radius:9px}.hp-vmap-bubble .bname{font-size:10px}.hp-vmap-bubble .bdet{font-size:9px}}
 .hp-act3-big{font-size:22px;font-weight:600;color:#F0F2F5;margin-bottom:16px;line-height:1.3}
 @media(max-width:768px){.hp-act3-big{font-size:17px}}
 .hp-act3-sub{font-size:16px;color:#94A3B8;line-height:1.6}
@@ -513,20 +533,23 @@ function Homepage({ onStart }) {
         </ScrollAnim>
         <ScrollAnim>
           <div className="hp-vmap">
-            <div className="hp-vmap-label tl">Stronger outcomes, lower cost</div>
-            <div className="hp-vmap-label br">Weaker outcomes, higher cost</div>
+            <div className="hp-vmap-label tl">✦ Best value</div>
+            <div className="hp-vmap-label br">Worst value ✦</div>
             <div className="hp-vmap-zone"></div>
-            {/* Illustrative bubbles */}
-            <div className="hp-vmap-bubble good" style={{top:'15%',left:'10%'}}>Sheffield<br/>£21k · 90%</div>
-            <div className="hp-vmap-bubble good" style={{top:'20%',left:'28%'}}>Nottingham<br/>£22k · 90%</div>
-            <div className="hp-vmap-bubble good" style={{top:'10%',left:'48%'}}>Glasgow<br/>£25k · 91%</div>
-            <div className="hp-vmap-bubble avg" style={{top:'25%',left:'65%'}}>Leeds<br/>£27k · 90%</div>
-            <div className="hp-vmap-bubble avg" style={{top:'12%',left:'78%'}}>Manchester<br/>£29k · 92%</div>
-            <div className="hp-vmap-bubble good" style={{top:'50%',left:'8%'}}>Coventry<br/>£17k · 85%</div>
-            <div className="hp-vmap-bubble good" style={{top:'45%',left:'25%'}}>DMU<br/>£16k · 84%</div>
-            <div className="hp-vmap-bubble avg" style={{top:'55%',left:'50%'}}>Sussex<br/>£20k · 87%</div>
-            <div className="hp-vmap-bubble poor" style={{top:'65%',left:'72%'}}>Exeter<br/>£24k · 89%</div>
-            <div className="hp-vmap-bubble avg" style={{top:'38%',left:'42%'}}>Newcastle<br/>£24k · 91%</div>
+            <div className="hp-vmap-axis"></div>
+            <div className="hp-vmap-axis-x">Total cost →</div>
+            <div className="hp-vmap-axis-y">Employment →</div>
+            {/* Illustrative bubbles — diagonal: good=upper-left, poor=lower-right */}
+            <div className="hp-vmap-bubble good" style={{top:'10%',left:'6%'}}><div className="bname">Aston</div><div className="bdet">£54k total · 94% employed</div></div>
+            <div className="hp-vmap-bubble good" style={{top:'14%',left:'24%'}}><div className="bname">Coventry</div><div className="bdet">£51k total · 90% employed</div></div>
+            <div className="hp-vmap-bubble good" style={{top:'22%',left:'44%'}}><div className="bname">Nottingham Trent</div><div className="bdet">£57k total · 91% employed</div></div>
+            <div className="hp-vmap-bubble good" style={{top:'8%',left:'60%'}}><div className="bname">Glasgow</div><div className="bdet">£62k total · 93% employed</div></div>
+            <div className="hp-vmap-bubble avg" style={{top:'38%',left:'16%'}}><div className="bname">DMU</div><div className="bdet">£48k total · 84% employed</div></div>
+            <div className="hp-vmap-bubble avg" style={{top:'42%',left:'52%'}}><div className="bname">Sussex</div><div className="bdet">£67k total · 87% employed</div></div>
+            <div className="hp-vmap-bubble avg" style={{top:'35%',left:'72%'}}><div className="bname">Leeds</div><div className="bdet">£73k total · 90% employed</div></div>
+            <div className="hp-vmap-bubble avg" style={{top:'58%',left:'38%'}}><div className="bname">Liverpool</div><div className="bdet">£60k total · 82% employed</div></div>
+            <div className="hp-vmap-bubble poor" style={{top:'62%',left:'62%'}}><div className="bname">London Met</div><div className="bdet">£76k total · 72% employed</div></div>
+            <div className="hp-vmap-bubble poor" style={{top:'72%',left:'78%'}}><div className="bname">Regent's</div><div className="bdet">£102k total · 68% employed</div></div>
           </div>
         </ScrollAnim>
         <ScrollAnim>
