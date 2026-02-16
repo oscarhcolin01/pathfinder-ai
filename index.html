@@ -109,82 +109,135 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .footer a{color:var(--teal);text-decoration:none}
 .err-box{margin:8px 0;padding:12px 16px;background:var(--red-bg);border:1px solid #FECACA;border-radius:10px;color:var(--red);font-size:12px}
 
-/* Homepage */
-.hp{width:100%;min-height:100vh;background:var(--bg);overflow-x:hidden}
-.hp-nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1200px;margin:0 auto}
-.hp-nav-logo{display:flex;align-items:center;gap:10px}
-.hp-nav-sq{width:34px;height:34px;background:linear-gradient(135deg,var(--teal),var(--amber));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:800}
-.hp-nav-t{font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.5px}
-.hp-nav-t .hi{color:var(--teal)}
+/* Homepage v2.1 — Dark Cinematic */
+.hp{width:100%;min-height:100vh;background:#0A0F1C;overflow-x:hidden;color:#F0F2F5}
 
-.hp-hero{background:linear-gradient(160deg,var(--navy) 0%,#0F2942 50%,var(--navy-mid) 100%);padding:80px 32px 100px;text-align:center;position:relative;overflow:hidden}
-.hp-hero::before{content:'';position:absolute;top:-30%;right:-15%;width:60%;height:160%;background:radial-gradient(ellipse,rgba(0,180,216,0.06) 0%,transparent 60%);pointer-events:none}
-.hp-hero::after{content:'';position:absolute;bottom:-20%;left:-10%;width:50%;height:100%;background:radial-gradient(ellipse,rgba(244,169,64,0.04) 0%,transparent 60%);pointer-events:none}
-.hp-hero-inner{max-width:780px;margin:0 auto;position:relative;z-index:1}
-.hp-h1{font-size:42px;font-weight:800;color:#fff;line-height:1.2;letter-spacing:-1px;margin-bottom:20px}
-@media(max-width:768px){.hp-h1{font-size:28px}}
-.hp-h1-em{color:var(--teal)}
-.hp-sub{font-size:17px;color:rgba(255,255,255,0.55);line-height:1.7;max-width:620px;margin:0 auto 36px}
-@media(max-width:768px){.hp-sub{font-size:14.5px}}
-.hp-cta{display:inline-block;padding:16px 36px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.3s;text-decoration:none}
-.hp-cta:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,180,216,0.3)}
-.hp-cta-sec{display:inline-block;margin-top:16px;font-size:14px;color:rgba(255,255,255,0.4);cursor:pointer;transition:color 0.2s;background:none;border:none;font-family:'Sora',sans-serif}
-.hp-cta-sec:hover{color:var(--teal)}
+/* Scroll animations */
+.hp-anim{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease-out,transform 0.7s ease-out}
+.hp-anim.hp-visible{opacity:1;transform:translateY(0)}
+.hp-anim-delay-1{transition-delay:0.1s}.hp-anim-delay-2{transition-delay:0.2s}.hp-anim-delay-3{transition-delay:0.3s}.hp-anim-delay-4{transition-delay:0.4s}
 
-.hp-section{max-width:1100px;margin:0 auto;padding:80px 32px}
-@media(max-width:768px){.hp-section{padding:56px 20px}}
-.hp-section-title{font-size:28px;font-weight:700;color:var(--navy);text-align:center;margin-bottom:12px;letter-spacing:-0.5px}
-@media(max-width:768px){.hp-section-title{font-size:22px}}
-.hp-section-sub{font-size:15px;color:var(--text-light);text-align:center;margin-bottom:48px;max-width:550px;margin-left:auto;margin-right:auto;line-height:1.6}
+/* Sticky nav */
+.hp-snav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 32px;background:rgba(10,15,28,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;max-width:100%;opacity:0;transform:translateY(-100%);transition:opacity 0.35s,transform 0.35s;pointer-events:none}
+.hp-snav.hp-snav-show{opacity:1;transform:translateY(0);pointer-events:all}
+.hp-snav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;width:100%}
+.hp-snav-logo{display:flex;align-items:center;gap:9px}
+.hp-snav-sq{width:30px;height:30px;background:linear-gradient(135deg,#00D4FF,#FFB547);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:800}
+.hp-snav-t{font-size:17px;font-weight:700;color:#F0F2F5;letter-spacing:-0.3px}
+.hp-snav-t .hi{color:#00D4FF}
+.hp-snav-links{display:flex;align-items:center;gap:20px}
+.hp-snav-link{font-size:13px;color:#94A3B8;background:none;border:none;font-family:'Sora',sans-serif;cursor:pointer;transition:color 0.2s}
+.hp-snav-link:hover{color:#00D4FF}
 
-.hp-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-@media(max-width:768px){.hp-steps{grid-template-columns:1fr;gap:24px}}
-.hp-step{text-align:center;padding:32px 24px}
-.hp-step-num{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;background:rgba(0,180,216,0.08);color:var(--teal);font-size:20px;font-weight:700;margin-bottom:18px}
-.hp-step-title{font-size:17px;font-weight:600;color:var(--navy);margin-bottom:8px}
-.hp-step-desc{font-size:13.5px;color:var(--text-light);line-height:1.65}
+/* Act 1: The Hook */
+.hp-act1{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 32px;background:linear-gradient(170deg,#0A0F1C 0%,#0B1A2E 40%,#0F1629 100%);position:relative;overflow:hidden}
+.hp-act1::before{content:'';position:absolute;top:30%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,212,255,0.04) 0%,transparent 70%);pointer-events:none}
+.hp-hook{font-size:64px;font-weight:700;color:#F0F2F5;line-height:1.05;letter-spacing:-2px;margin-bottom:48px;text-shadow:0 0 80px rgba(0,212,255,0.08)}
+@media(max-width:768px){.hp-hook{font-size:36px;letter-spacing:-1px;margin-bottom:32px}}
+.hp-inline{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:20px;color:#94A3B8;margin-bottom:36px}
+@media(max-width:768px){.hp-inline{font-size:16px;gap:8px}}
+.hp-inline-sel{background:transparent;border:none;border-bottom:2px solid rgba(0,212,255,0.3);color:#00D4FF;font-family:'Sora',sans-serif;font-size:20px;font-weight:600;padding:4px 2px;outline:none;cursor:pointer;transition:border-color 0.2s;-webkit-appearance:none;appearance:none}
+@media(max-width:768px){.hp-inline-sel{font-size:16px}}
+.hp-inline-sel:hover,.hp-inline-sel:focus{border-color:#00D4FF}
+.hp-inline-sel option{background:#0A0F1C;color:#F0F2F5;font-size:15px}
+.hp-go{padding:16px 40px;border-radius:12px;border:none;background:linear-gradient(135deg,#00D4FF,#0096B4);color:#fff;font-family:'Sora',sans-serif;font-size:17px;font-weight:600;cursor:pointer;transition:all 0.3s;opacity:0;transform:translateY(8px);pointer-events:none}
+.hp-go.hp-go-show{opacity:1;transform:translateY(0);pointer-events:all}
+.hp-go:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,212,255,0.3)}
+.hp-powered{font-size:13px;color:#64748B;margin-top:40px}
 
-.hp-diffs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-@media(max-width:768px){.hp-diffs{grid-template-columns:1fr;gap:18px}}
-.hp-diff{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;transition:all 0.25s}
-.hp-diff:hover{border-color:var(--teal);box-shadow:0 8px 28px rgba(0,180,216,0.06)}
-.hp-diff-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
-.hp-diff-icon.teal{background:rgba(0,180,216,0.08)}
-.hp-diff-icon.amber{background:rgba(244,169,64,0.08)}
-.hp-diff-icon.green{background:rgba(5,150,105,0.08)}
-.hp-diff-title{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:8px}
-.hp-diff-desc{font-size:13px;color:var(--text-light);line-height:1.65}
+/* Act 2: Data Story */
+.hp-act2{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 32px;background:#0F1629;text-align:center;position:relative}
+@media(max-width:768px){.hp-act2{padding:64px 20px;min-height:auto}}
+.hp-act2-head{font-size:32px;font-weight:600;color:#F0F2F5;margin-bottom:56px;line-height:1.2;letter-spacing:-0.5px}
+@media(max-width:768px){.hp-act2-head{font-size:22px;margin-bottom:36px}}
+.hp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:900px;margin:0 auto 48px}
+@media(max-width:768px){.hp-stats{grid-template-columns:repeat(2,1fr);gap:20px}}
+.hp-stat{padding:24px 16px}
+.hp-stat-val{font-size:48px;font-weight:700;line-height:1;margin-bottom:10px;text-shadow:0 0 40px currentColor}
+@media(max-width:768px){.hp-stat-val{font-size:32px}}
+.hp-stat-val.teal{color:#00D4FF}.hp-stat-val.green{color:#34D399}.hp-stat-val.amber{color:#FFB547}
+.hp-stat-lab{font-size:14px;color:#94A3B8;line-height:1.5}
+@media(max-width:768px){.hp-stat-lab{font-size:12px}}
+.hp-act2-note{font-size:14px;color:#64748B;max-width:600px;margin:0 auto;line-height:1.6}
 
-.hp-proof-bg{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.hp-quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-@media(max-width:768px){.hp-quotes{grid-template-columns:1fr;gap:18px}}
-.hp-quote{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative}
-.hp-quote-text{font-size:13.5px;color:var(--text);line-height:1.7;margin-bottom:16px;font-style:italic}
-.hp-quote-who{font-size:12px;font-weight:600;color:var(--navy)}
-.hp-quote-from{font-size:11px;color:var(--text-muted)}
-.hp-quote-disc{text-align:center;font-size:11px;color:var(--text-muted);margin-top:24px;font-style:italic}
+/* Act 3: The Stakes */
+.hp-act3{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 32px;background:#0A0F1C;text-align:center}
+@media(max-width:768px){.hp-act3{padding:64px 20px;min-height:auto}}
+.hp-act3-head{font-size:36px;font-weight:700;color:#F0F2F5;margin-bottom:56px;letter-spacing:-0.5px;line-height:1.15}
+@media(max-width:768px){.hp-act3-head{font-size:24px;margin-bottom:36px}}
+.hp-vmap{position:relative;width:100%;max-width:800px;height:400px;margin:0 auto 48px;border-radius:20px;background:#0F1629;border:1px solid rgba(255,255,255,0.06);overflow:hidden}
+@media(max-width:768px){.hp-vmap{height:300px}}
+.hp-vmap-label{position:absolute;font-size:11px;color:#64748B;font-weight:500;letter-spacing:0.5px}
+.hp-vmap-label.tl{top:16px;left:20px}.hp-vmap-label.br{bottom:16px;right:20px}
+.hp-vmap-zone{position:absolute;top:10%;left:5%;width:45%;height:45%;background:radial-gradient(ellipse,rgba(52,211,153,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hp-vmap-bubble{position:absolute;padding:10px 14px;border-radius:12px;font-size:11px;font-weight:600;text-align:center;line-height:1.4;transition:transform 0.3s}
+.hp-vmap-bubble:hover{transform:scale(1.08)}
+.hp-vmap-bubble.good{background:rgba(52,211,153,0.12);color:#34D399;border:1px solid rgba(52,211,153,0.2)}
+.hp-vmap-bubble.avg{background:rgba(255,181,71,0.1);color:#FFB547;border:1px solid rgba(255,181,71,0.2)}
+.hp-vmap-bubble.poor{background:rgba(248,113,113,0.1);color:#F87171;border:1px solid rgba(248,113,113,0.2)}
+.hp-act3-big{font-size:22px;font-weight:600;color:#F0F2F5;margin-bottom:16px;line-height:1.3}
+@media(max-width:768px){.hp-act3-big{font-size:17px}}
+.hp-act3-sub{font-size:16px;color:#94A3B8;line-height:1.6}
+@media(max-width:768px){.hp-act3-sub{font-size:14px}}
 
-.hp-teaser{background:var(--navy);border-radius:20px;padding:40px 36px;text-align:center;color:#fff}
-@media(max-width:768px){.hp-teaser{padding:28px 20px;border-radius:16px}}
-.hp-teaser-title{font-size:18px;font-weight:600;margin-bottom:24px;color:rgba(255,255,255,0.9)}
-.hp-teaser-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:28px;flex-wrap:wrap}
-.hp-teaser-sel{padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#fff;font-family:'Sora',sans-serif;font-size:13px;outline:none;cursor:pointer}
-.hp-teaser-sel option{background:var(--navy);color:#fff}
-.hp-teaser-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:480px;margin:0 auto 28px}
-@media(max-width:500px){.hp-teaser-stats{gap:12px}}
-.hp-teaser-stat-val{font-size:28px;font-weight:700;color:var(--teal)}
-@media(max-width:500px){.hp-teaser-stat-val{font-size:22px}}
-.hp-teaser-stat-lab{font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px}
-.hp-teaser-cta{display:inline-block;padding:12px 28px;border-radius:11px;border:1px solid var(--teal);background:transparent;color:var(--teal);font-family:'Sora',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;transition:all 0.2s}
-.hp-teaser-cta:hover{background:var(--teal);color:#fff}
+/* Act 4: The Platform */
+.hp-act4{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 32px;background:#0F1629;text-align:center}
+@media(max-width:768px){.hp-act4{padding:64px 20px;min-height:auto}}
+.hp-act4-head{font-size:36px;font-weight:700;color:#F0F2F5;margin-bottom:64px;letter-spacing:-0.5px}
+@media(max-width:768px){.hp-act4-head{font-size:24px;margin-bottom:40px}}
+.hp-journey{display:flex;align-items:flex-start;gap:0;max-width:1000px;margin:0 auto;position:relative}
+@media(max-width:768px){.hp-journey{flex-direction:column;gap:0;align-items:stretch}}
+.hp-phase{flex:1;text-align:center;position:relative;padding:0 12px}
+@media(max-width:768px){.hp-phase{display:flex;align-items:flex-start;gap:16px;text-align:left;padding:0 0 32px}}
+.hp-phase-dot{width:16px;height:16px;border-radius:50%;background:#00D4FF;margin:0 auto 12px;position:relative;z-index:2;box-shadow:0 0 20px rgba(0,212,255,0.3)}
+@media(max-width:768px){.hp-phase-dot{margin:4px 0 0;flex-shrink:0}}
+.hp-phase.dim .hp-phase-dot{background:#64748B;box-shadow:none}
+.hp-phase-line{position:absolute;top:8px;left:calc(50% + 8px);right:calc(-50% + 8px);height:2px;background:rgba(0,212,255,0.15);z-index:1}
+@media(max-width:768px){.hp-phase-line{display:none}}
+.hp-phase:last-child .hp-phase-line{display:none}
+.hp-phase-content{position:relative}
+@media(max-width:768px){.hp-phase-content{flex:1}}
+.hp-phase-name{font-size:14px;font-weight:600;color:#F0F2F5;margin-bottom:6px}
+.hp-phase.dim .hp-phase-name{color:#64748B}
+.hp-phase-desc{font-size:12px;color:#94A3B8;line-height:1.5}
+.hp-phase.dim .hp-phase-desc{color:#4A5568}
+.hp-phase-badge{display:inline-block;font-size:10px;color:#64748B;border:1px solid rgba(255,255,255,0.06);border-radius:4px;padding:2px 6px;margin-top:6px;font-weight:500}
 
-.hp-footer{background:var(--navy);padding:40px 32px;text-align:center}
-.hp-footer-inner{max-width:1100px;margin:0 auto}
-.hp-footer-brand{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:8px}
-.hp-footer-note{font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:16px;line-height:1.5}
-.hp-footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-.hp-footer-link{font-size:12px;color:rgba(255,255,255,0.4);cursor:pointer;background:none;border:none;font-family:'Sora',sans-serif;transition:color 0.2s}
-.hp-footer-link:hover{color:var(--teal)}
+/* Act 5: Social Proof */
+.hp-act5{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 32px;background:#0A0F1C;text-align:center}
+@media(max-width:768px){.hp-act5{padding:64px 20px;min-height:auto}}
+.hp-act5-head{font-size:32px;font-weight:600;color:#F0F2F5;margin-bottom:56px;letter-spacing:-0.5px}
+@media(max-width:768px){.hp-act5-head{font-size:22px;margin-bottom:36px}}
+.hp-data-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto 56px;width:100%}
+@media(max-width:768px){.hp-data-cards{grid-template-columns:1fr;gap:16px}}
+.hp-data-card{background:#151C2F;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px 24px;transition:border-color 0.3s,box-shadow 0.3s}
+.hp-data-card:hover{border-color:rgba(0,212,255,0.3);box-shadow:0 0 30px rgba(0,212,255,0.06)}
+.hp-data-val{font-size:40px;font-weight:700;margin-bottom:8px;line-height:1}
+@media(max-width:768px){.hp-data-val{font-size:32px}}
+.hp-data-val.teal{color:#00D4FF}.hp-data-val.amber{color:#FFB547}.hp-data-val.green{color:#34D399}
+.hp-data-lab{font-size:14px;color:#94A3B8;line-height:1.5}
+.hp-quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto 24px;width:100%}
+@media(max-width:768px){.hp-quotes{grid-template-columns:1fr;gap:14px}}
+.hp-quote{background:#151C2F;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:24px;text-align:left}
+.hp-quote-text{font-size:14px;color:#94A3B8;line-height:1.7;margin-bottom:14px;font-style:italic}
+.hp-quote-who{font-size:12px;color:#64748B}
+.hp-disc{font-size:11px;color:#4A5568;font-style:italic}
+
+/* Act 6: Final CTA */
+.hp-act6{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 32px;background:linear-gradient(170deg,#0F1629 0%,#0A0F1C 100%);position:relative}
+.hp-act6::before{content:'';position:absolute;top:40%;left:50%;width:500px;height:500px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,212,255,0.05) 0%,transparent 70%);pointer-events:none}
+.hp-act6-head{font-size:48px;font-weight:700;color:#F0F2F5;letter-spacing:-1px;margin-bottom:36px;position:relative;z-index:1}
+@media(max-width:768px){.hp-act6-head{font-size:30px}}
+.hp-act6-btn{padding:18px 48px;border-radius:14px;border:none;background:linear-gradient(135deg,#00D4FF,#0096B4);color:#fff;font-family:'Sora',sans-serif;font-size:18px;font-weight:600;cursor:pointer;transition:all 0.3s;position:relative;z-index:1;box-shadow:0 0 40px rgba(0,212,255,0.15)}
+.hp-act6-btn:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(0,212,255,0.3)}
+.hp-act6-muted{font-size:14px;color:#64748B;margin-top:24px;position:relative;z-index:1}
+.hp-act6-parent{font-size:14px;color:#94A3B8;margin-top:12px;position:relative;z-index:1;cursor:pointer;background:none;border:none;font-family:'Sora',sans-serif;transition:color 0.2s}
+.hp-act6-parent:hover{color:#00D4FF}
+
+/* Footer */
+.hp-footer{background:#0A0F1C;border-top:1px solid rgba(255,255,255,0.06);padding:40px 32px;text-align:center}
+.hp-footer-brand{font-size:13px;color:#4A5568;margin-bottom:6px}
+.hp-footer-note{font-size:11px;color:#374151;line-height:1.5}
 </style>
 </head>
 <body>
@@ -328,170 +381,279 @@ function ProgrammeCard({ progId, country, ielts }) {
   );
 }
 
-// Teaser stats by country/subject for the homepage
-const TEASER_STATS = {
-  "Nigeria": { "Business": { empRate: 84, salary: 22, gradLevel: 58 }, "Computing": { empRate: 87, salary: 25, gradLevel: 64 } },
-  "India": { "Business": { empRate: 87, salary: 25, gradLevel: 64 }, "Computing": { empRate: 91, salary: 28, gradLevel: 72 } },
-  "China": { "Business": { empRate: 81, salary: 23, gradLevel: 60 }, "Computing": { empRate: 85, salary: 26, gradLevel: 68 } },
-  "Pakistan": { "Business": { empRate: 83, salary: 21, gradLevel: 56 }, "Computing": { empRate: 87, salary: 24, gradLevel: 63 } },
-  "Bangladesh": { "Business": { empRate: 80, salary: 20, gradLevel: 50 }, "Computing": { empRate: 84, salary: 23, gradLevel: 58 } },
-  "Ghana": { "Business": { empRate: 82, salary: 21, gradLevel: 54 }, "Computing": { empRate: 86, salary: 24, gradLevel: 62 } },
-  "Kenya": { "Business": { empRate: 83, salary: 22, gradLevel: 57 }, "Computing": { empRate: 87, salary: 25, gradLevel: 64 } },
+// Homepage data — country/subject stats for Act 2
+const HP_STATS = {
+  "Nigeria": { "Business": { emp: 84, salary: "£22,000", premium: "2.8x", grad: 58 }, "Computer Science": { emp: 87, salary: "£25,000", premium: "3.2x", grad: 64 } },
+  "India": { "Business": { emp: 87, salary: "£25,000", premium: "3.5x", grad: 64 }, "Computer Science": { emp: 91, salary: "£28,000", premium: "3.1x", grad: 72 } },
+  "China": { "Business": { emp: 81, salary: "£23,000", premium: "2.2x", grad: 60 }, "Computer Science": { emp: 85, salary: "£26,000", premium: "2.5x", grad: 68 } },
+  "Pakistan": { "Business": { emp: 83, salary: "£21,500", premium: "3.8x", grad: 56 }, "Computer Science": { emp: 87, salary: "£24,000", premium: "4.2x", grad: 63 } },
+  "Bangladesh": { "Business": { emp: 80, salary: "£20,000", premium: "4.5x", grad: 50 }, "Computer Science": { emp: 84, salary: "£23,000", premium: "5.1x", grad: 58 } },
+  "Ghana": { "Business": { emp: 82, salary: "£21,000", premium: "3.0x", grad: 54 }, "Computer Science": { emp: 86, salary: "£24,000", premium: "3.4x", grad: 62 } },
+  "Kenya": { "Business": { emp: 83, salary: "£22,000", premium: "3.2x", grad: 57 }, "Computer Science": { emp: 87, salary: "£25,000", premium: "3.6x", grad: 64 } },
+  "Saudi Arabia": { "Business": { emp: 79, salary: "£22,000", premium: "1.4x", grad: 52 }, "Computer Science": { emp: 83, salary: "£25,000", premium: "1.6x", grad: 60 } },
+  "Vietnam": { "Business": { emp: 81, salary: "£21,000", premium: "4.8x", grad: 53 }, "Computer Science": { emp: 85, salary: "£24,000", premium: "5.5x", grad: 61 } },
+  "Turkey": { "Business": { emp: 82, salary: "£22,000", premium: "2.6x", grad: 55 }, "Computer Science": { emp: 86, salary: "£25,000", premium: "2.9x", grad: 63 } },
 };
-const DEFAULT_TEASER = { "Business": { empRate: 83, salary: 22, gradLevel: 58 }, "Computing": { empRate: 87, salary: 25, gradLevel: 66 } };
+const HP_DEFAULT = { "Business": { emp: 83, salary: "£22,000", premium: "3.0x", grad: 58 }, "Computer Science": { emp: 87, salary: "£25,000", premium: "3.2x", grad: 66 } };
+const HP_COUNTRIES = ["Nigeria","India","China","Pakistan","Bangladesh","Ghana","Saudi Arabia","Vietnam","Kenya","Turkey"];
 
-function Homepage({ onStart, onScrollHow }) {
-  const [teaserCountry, setTeaserCountry] = useState('Nigeria');
-  const [teaserSubject, setTeaserSubject] = useState('Business');
-  const howRef = useRef(null);
+// Scroll animation hook
+function useScrollAnim() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { el.classList.add('hp-visible'); obs.unobserve(el); }
+    }, { threshold: 0.15 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}
 
-  const tData = (TEASER_STATS[teaserCountry] || DEFAULT_TEASER)[teaserSubject] || DEFAULT_TEASER[teaserSubject];
+function ScrollAnim({ children, className, delay }) {
+  const ref = useScrollAnim();
+  return <div ref={ref} className={"hp-anim" + (delay ? " hp-anim-delay-" + delay : "") + (className ? " " + className : "")}>{children}</div>;
+}
 
-  const scrollToHow = () => {
-    if (howRef.current) howRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
+function Homepage({ onStart }) {
+  const [hpCountry, setHpCountry] = useState('Nigeria');
+  const [hpSubject, setHpSubject] = useState('Computer Science');
+  const [showNav, setShowNav] = useState(false);
+  const act1Ref = useRef(null);
+
+  const d = (HP_STATS[hpCountry] || HP_DEFAULT)[hpSubject] || HP_DEFAULT[hpSubject];
+  const bothSelected = hpCountry && hpSubject;
+
+  // Sticky nav on scroll
+  useEffect(() => {
+    const handler = () => {
+      if (act1Ref.current) {
+        setShowNav(window.scrollY > act1Ref.current.offsetHeight - 80);
+      }
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
 
   return (
     <div className="hp">
-      {/* Hero */}
-      <div className="hp-hero">
-        <div className="hp-nav">
-          <div className="hp-nav-logo">
-            <div className="hp-nav-sq">P</div>
-            <div className="hp-nav-t">Pathfinder<span className="hi">AI</span></div>
+      {/* Sticky nav */}
+      <div className={"hp-snav" + (showNav ? " hp-snav-show" : "")}>
+        <div className="hp-snav-inner">
+          <div className="hp-snav-logo">
+            <div className="hp-snav-sq">P</div>
+            <div className="hp-snav-t">Pathfinder<span className="hi">AI</span></div>
           </div>
-        </div>
-        <div className="hp-hero-inner">
-          <h1 className="hp-h1">See where your UK degree<br/><span className="hp-h1-em">actually leads.</span></h1>
-          <p className="hp-sub">PathfinderAI predicts your graduate outcomes, calculates your true total cost, and guides you to the programme that fits your life — powered by data from 230,000 student journeys across 180 countries.</p>
-          <button className="hp-cta" onClick={onStart}>See my predicted outcomes</button>
-          <br/>
-          <button className="hp-cta-sec" onClick={scrollToHow}>How does this work? &#8595;</button>
-        </div>
-      </div>
-
-      {/* How It Works */}
-      <div className="hp-section" ref={howRef}>
-        <div className="hp-section-title">How it works</div>
-        <p className="hp-section-sub">Three steps to guidance that actually puts you first.</p>
-        <div className="hp-steps">
-          <div className="hp-step">
-            <div className="hp-step-num">1</div>
-            <div className="hp-step-title">We learn your story</div>
-            <div className="hp-step-desc">5 minutes about your background, ambitions, and budget. Not just grades — the full picture of who you are and what you need.</div>
-          </div>
-          <div className="hp-step">
-            <div className="hp-step-num">2</div>
-            <div className="hp-step-title">We predict your outcome</div>
-            <div className="hp-step-desc">Using data from 230,000 real student journeys, we show what typically happens to students like you — employment, salary, career paths — at every university.</div>
-          </div>
-          <div className="hp-step">
-            <div className="hp-step-num">3</div>
-            <div className="hp-step-title">You decide with clarity</div>
-            <div className="hp-step-desc">Compare programmes on what matters: predicted outcomes, true total cost, and how ready you are right now. No rankings hype. No hidden fees.</div>
+          <div className="hp-snav-links">
+            <button className="hp-snav-link" onClick={onStart}>Get started</button>
           </div>
         </div>
       </div>
 
-      {/* Differentiators */}
-      <div className="hp-section" style={{paddingTop: 0}}>
-        <div className="hp-section-title">What makes this different</div>
-        <p className="hp-section-sub">Built on what students actually need to know.</p>
-        <div className="hp-diffs">
-          <div className="hp-diff">
-            <div className="hp-diff-icon teal">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00B4D8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <div className="hp-diff-title">Predicted Outcomes</div>
-            <div className="hp-diff-desc">Not averages. YOUR predicted employment rate, salary, and career path — based on students from your country studying your subject at each university tier. Data nobody else has.</div>
-          </div>
-          <div className="hp-diff">
-            <div className="hp-diff-icon amber">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4A940" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-            <div className="hp-diff-title">True Total Investment</div>
-            <div className="hp-diff-desc">Tuition is 60% of the real cost. We calculate visa fees, health surcharge, flights, living costs, and realistic scholarship chances. See the full number before you commit.</div>
-          </div>
-          <div className="hp-diff">
-            <div className="hp-diff-icon green">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
-            <div className="hp-diff-title">Readiness Score</div>
-            <div className="hp-diff-desc">Know exactly where you stand. IELTS gap, qualification match, financial requirements, document checklist, key deadlines — and precisely what to do next to get ready.</div>
-          </div>
+      {/* Act 1: The Hook */}
+      <div className="hp-act1" ref={act1Ref}>
+        <h1 className="hp-hook">What could your life<br/>look like?</h1>
+        <div className="hp-inline">
+          <span>I'm from</span>
+          <select className="hp-inline-sel" value={hpCountry} onChange={e => setHpCountry(e.target.value)}>
+            {HP_COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+          <span>and I want to study</span>
+          <select className="hp-inline-sel" value={hpSubject} onChange={e => setHpSubject(e.target.value)}>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Business">Business</option>
+          </select>
         </div>
+        <button className={"hp-go" + (bothSelected ? " hp-go-show" : "")} onClick={onStart}>Show me &#8594;</button>
+        <div className="hp-powered">Powered by data from 230,000 student journeys</div>
       </div>
 
-      {/* Social Proof */}
-      <div className="hp-proof-bg">
-        <div className="hp-section">
-          <div className="hp-section-title">What students discovered</div>
-          <p className="hp-section-sub">Real insights that changed real decisions.</p>
-          <div className="hp-quotes">
+      {/* Act 2: The Data Story */}
+      <div className="hp-act2">
+        <ScrollAnim>
+          <div className="hp-act2-head">Students from {hpCountry} who studied {hpSubject} in the UK</div>
+        </ScrollAnim>
+        <div className="hp-stats">
+          <ScrollAnim delay={1}>
+            <div className="hp-stat">
+              <div className="hp-stat-val teal">{d.emp}%</div>
+              <div className="hp-stat-lab">found employment within 15 months</div>
+            </div>
+          </ScrollAnim>
+          <ScrollAnim delay={2}>
+            <div className="hp-stat">
+              <div className="hp-stat-val green">{d.salary}</div>
+              <div className="hp-stat-lab">median starting salary</div>
+            </div>
+          </ScrollAnim>
+          <ScrollAnim delay={3}>
+            <div className="hp-stat">
+              <div className="hp-stat-val amber">{d.premium}</div>
+              <div className="hp-stat-lab">salary premium vs home country average</div>
+            </div>
+          </ScrollAnim>
+          <ScrollAnim delay={4}>
+            <div className="hp-stat">
+              <div className="hp-stat-val teal">{d.grad}%</div>
+              <div className="hp-stat-lab">in graduate-level professional roles</div>
+            </div>
+          </ScrollAnim>
+        </div>
+        <ScrollAnim>
+          <div className="hp-act2-note">Based on graduate outcome data across all UK university tiers. Your individual prediction depends on where you go.</div>
+        </ScrollAnim>
+      </div>
+
+      {/* Act 3: The Stakes */}
+      <div className="hp-act3">
+        <ScrollAnim>
+          <div className="hp-act3-head">But not all universities deliver<br/>the same outcome.</div>
+        </ScrollAnim>
+        <ScrollAnim>
+          <div className="hp-vmap">
+            <div className="hp-vmap-label tl">Stronger outcomes, lower cost</div>
+            <div className="hp-vmap-label br">Weaker outcomes, higher cost</div>
+            <div className="hp-vmap-zone"></div>
+            {/* Illustrative bubbles */}
+            <div className="hp-vmap-bubble good" style={{top:'15%',left:'10%'}}>Sheffield<br/>£21k · 90%</div>
+            <div className="hp-vmap-bubble good" style={{top:'20%',left:'28%'}}>Nottingham<br/>£22k · 90%</div>
+            <div className="hp-vmap-bubble good" style={{top:'10%',left:'48%'}}>Glasgow<br/>£25k · 91%</div>
+            <div className="hp-vmap-bubble avg" style={{top:'25%',left:'65%'}}>Leeds<br/>£27k · 90%</div>
+            <div className="hp-vmap-bubble avg" style={{top:'12%',left:'78%'}}>Manchester<br/>£29k · 92%</div>
+            <div className="hp-vmap-bubble good" style={{top:'50%',left:'8%'}}>Coventry<br/>£17k · 85%</div>
+            <div className="hp-vmap-bubble good" style={{top:'45%',left:'25%'}}>DMU<br/>£16k · 84%</div>
+            <div className="hp-vmap-bubble avg" style={{top:'55%',left:'50%'}}>Sussex<br/>£20k · 87%</div>
+            <div className="hp-vmap-bubble poor" style={{top:'65%',left:'72%'}}>Exeter<br/>£24k · 89%</div>
+            <div className="hp-vmap-bubble avg" style={{top:'38%',left:'42%'}}>Newcastle<br/>£24k · 91%</div>
+          </div>
+        </ScrollAnim>
+        <ScrollAnim>
+          <div className="hp-act3-big">The difference between the right choice and the wrong one? Up to £50,000 and a career.</div>
+        </ScrollAnim>
+        <ScrollAnim>
+          <div className="hp-act3-sub">PathfinderAI shows you where the value is — before you commit.</div>
+        </ScrollAnim>
+      </div>
+
+      {/* Act 4: The Platform */}
+      <div className="hp-act4">
+        <ScrollAnim>
+          <div className="hp-act4-head">With you from first question to first job</div>
+        </ScrollAnim>
+        <ScrollAnim>
+          <div className="hp-journey">
+            <div className="hp-phase">
+              <div className="hp-phase-dot"></div>
+              <div className="hp-phase-line"></div>
+              <div className="hp-phase-content">
+                <div className="hp-phase-name">Dream</div>
+                <div className="hp-phase-desc">See what's possible. Real outcomes from real students who started where you are.</div>
+              </div>
+            </div>
+            <div className="hp-phase">
+              <div className="hp-phase-dot"></div>
+              <div className="hp-phase-line"></div>
+              <div className="hp-phase-content">
+                <div className="hp-phase-name">Plan</div>
+                <div className="hp-phase-desc">AI-powered matching. Predicted outcomes, true costs, readiness scores.</div>
+              </div>
+            </div>
+            <div className="hp-phase">
+              <div className="hp-phase-dot"></div>
+              <div className="hp-phase-line"></div>
+              <div className="hp-phase-content">
+                <div className="hp-phase-name">Prepare</div>
+                <div className="hp-phase-desc">Application tracking, document prep, visa guidance, IELTS planning — one place for everything.</div>
+              </div>
+            </div>
+            <div className="hp-phase dim">
+              <div className="hp-phase-dot"></div>
+              <div className="hp-phase-line"></div>
+              <div className="hp-phase-content">
+                <div className="hp-phase-name">Arrive</div>
+                <div className="hp-phase-desc">City survival guides, student connections, first-week support.</div>
+                <div className="hp-phase-badge">Coming soon</div>
+              </div>
+            </div>
+            <div className="hp-phase dim">
+              <div className="hp-phase-dot"></div>
+              <div className="hp-phase-content">
+                <div className="hp-phase-name">Thrive</div>
+                <div className="hp-phase-desc">Career tracking, alumni network, your journey powers guidance for the next generation.</div>
+                <div className="hp-phase-badge">Coming soon</div>
+              </div>
+            </div>
+          </div>
+        </ScrollAnim>
+      </div>
+
+      {/* Act 5: Social Proof */}
+      <div className="hp-act5">
+        <ScrollAnim>
+          <div className="hp-act5-head">The numbers behind the guidance</div>
+        </ScrollAnim>
+        <div className="hp-data-cards">
+          <ScrollAnim delay={1}>
+            <div className="hp-data-card">
+              <div className="hp-data-val teal">230,000</div>
+              <div className="hp-data-lab">student journeys analysed across 180 countries</div>
+            </div>
+          </ScrollAnim>
+          <ScrollAnim delay={2}>
+            <div className="hp-data-card">
+              <div className="hp-data-val amber">£12,400</div>
+              <div className="hp-data-lab">average hidden costs students discover they didn't know about</div>
+            </div>
+          </ScrollAnim>
+          <ScrollAnim delay={3}>
+            <div className="hp-data-card">
+              <div className="hp-data-val green">47%</div>
+              <div className="hp-data-lab">of students we assessed could get equivalent outcomes for less money</div>
+            </div>
+          </ScrollAnim>
+        </div>
+        <div className="hp-quotes">
+          <ScrollAnim delay={1}>
             <div className="hp-quote">
-              <div className="hp-quote-text">"PathfinderAI predicted I'd have a 91% employment rate from Sheffield with the scholarship — vs 93% from Manchester for £35k more. The choice was obvious."</div>
-              <div className="hp-quote-who">Adebayo</div>
-              <div className="hp-quote-from">Nigeria</div>
+              <div className="hp-quote-text">"My family almost committed £140,000 before we saw the real numbers."</div>
+              <div className="hp-quote-who">Parent, Lagos</div>
             </div>
+          </ScrollAnim>
+          <ScrollAnim delay={2}>
             <div className="hp-quote">
-              <div className="hp-quote-text">"I had no idea the total cost was £45,000 more than the tuition price. Seeing the real number changed everything about how my family planned."</div>
-              <div className="hp-quote-who">Priya</div>
-              <div className="hp-quote-from">India</div>
+              <div className="hp-quote-text">"I was 0.5 below the IELTS requirement. Nobody told me until PathfinderAI."</div>
+              <div className="hp-quote-who">Student, Karachi</div>
             </div>
+          </ScrollAnim>
+          <ScrollAnim delay={3}>
             <div className="hp-quote">
-              <div className="hp-quote-text">"PathfinderAI showed me my IELTS was 0.5 below direct entry and recommended a foundation year at a top-100 university. No agent ever suggested that."</div>
-              <div className="hp-quote-who">Chen Wei</div>
-              <div className="hp-quote-from">China</div>
+              <div className="hp-quote-text">"The foundation year recommendation saved my application. My agent never mentioned it."</div>
+              <div className="hp-quote-who">Student, Shenzhen</div>
             </div>
-          </div>
-          <div className="hp-quote-disc">Sample testimonials for demonstration purposes</div>
+          </ScrollAnim>
         </div>
+        <div className="hp-disc">Sample quotes for demonstration. Platform in prototype.</div>
       </div>
 
-      {/* Country Teaser */}
-      <div className="hp-section">
-        <div className="hp-teaser">
-          <div className="hp-teaser-title">What happens to students from {teaserCountry} in the UK?</div>
-          <div className="hp-teaser-controls">
-            <span style={{fontSize:'13px',color:'rgba(255,255,255,0.5)'}}>Students from</span>
-            <select className="hp-teaser-sel" value={teaserCountry} onChange={e => setTeaserCountry(e.target.value)}>
-              {['Nigeria','India','China','Pakistan','Bangladesh','Ghana','Kenya'].map(c =>
-                <option key={c} value={c}>{c}</option>
-              )}
-            </select>
-            <span style={{fontSize:'13px',color:'rgba(255,255,255,0.5)'}}>studying</span>
-            <select className="hp-teaser-sel" value={teaserSubject} onChange={e => setTeaserSubject(e.target.value)}>
-              <option value="Business">Business</option>
-              <option value="Computing">Computing</option>
-            </select>
-          </div>
-          <div className="hp-teaser-stats">
-            <div>
-              <div className="hp-teaser-stat-val">{tData.empRate}%</div>
-              <div className="hp-teaser-stat-lab">Employment rate</div>
-            </div>
-            <div>
-              <div className="hp-teaser-stat-val">£{tData.salary}k</div>
-              <div className="hp-teaser-stat-lab">Median salary</div>
-            </div>
-            <div>
-              <div className="hp-teaser-stat-val">{tData.gradLevel}%</div>
-              <div className="hp-teaser-stat-lab">Graduate-level jobs</div>
-            </div>
-          </div>
-          <button className="hp-teaser-cta" onClick={onStart}>See my predicted outcomes →</button>
-        </div>
+      {/* Act 6: Final CTA */}
+      <div className="hp-act6">
+        <ScrollAnim>
+          <div className="hp-act6-head">See your predicted future</div>
+        </ScrollAnim>
+        <ScrollAnim>
+          <button className="hp-act6-btn" onClick={onStart}>Start now — it takes 5 minutes</button>
+        </ScrollAnim>
+        <ScrollAnim>
+          <div className="hp-act6-muted">Free. No account needed to explore.</div>
+        </ScrollAnim>
       </div>
 
       {/* Footer */}
       <div className="hp-footer">
-        <div className="hp-footer-inner">
-          <div className="hp-footer-brand">PathfinderAI — a Hyphen Education Group prototype</div>
-          <div className="hp-footer-note">Outcome data modelled from HESA Graduate Outcomes</div>
-          <div className="hp-footer-links">
-            <button className="hp-footer-link" onClick={scrollToHow}>How it works</button>
-          </div>
-        </div>
+        <div className="hp-footer-brand">PathfinderAI — a Hyphen Education Group prototype</div>
+        <div className="hp-footer-note">Outcome data modelled from HESA Graduate Outcomes</div>
       </div>
     </div>
   );
