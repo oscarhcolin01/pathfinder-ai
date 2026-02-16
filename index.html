@@ -174,26 +174,14 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .hp-vmap-label{position:absolute;font-size:11px;color:#64748B;font-weight:500;letter-spacing:0.5px}
 .hp-vmap-label.tl{top:16px;left:20px}.hp-vmap-label.br{bottom:16px;right:20px}
 .hp-vmap-zone{position:absolute;top:10%;left:5%;width:45%;height:45%;background:radial-gradient(ellipse,rgba(52,211,153,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
-.hp-vmap-bubble{position:absolute;padding:10px 14px;border-radius:12px;font-size:11px;font-weight:600;text-align:center;line-height:1.4;opacity:0;transform:scale(0.7) translateY(10px)}
-.hp-vmap-bubble:hover{transform:scale(1.1)!important}
+.hp-vmap-bubble{position:absolute;padding:10px 14px;border-radius:12px;font-size:11px;font-weight:600;text-align:center;line-height:1.4;opacity:0;transform:scale(0.75) translateY(8px);transition:opacity 0.5s ease-out,transform 0.5s ease-out}
+.hp-vmap-bubble.hp-bv{opacity:1;transform:scale(1) translateY(0)}
+.hp-vmap-bubble.hp-bv:hover{transform:scale(1.08)}
 .hp-vmap-bubble.good{background:rgba(52,211,153,0.15);color:#34D399;border:1px solid rgba(52,211,153,0.25);box-shadow:0 0 24px rgba(52,211,153,0.08)}
 .hp-vmap-bubble.avg{background:rgba(255,181,71,0.12);color:#FFB547;border:1px solid rgba(255,181,71,0.22);box-shadow:0 0 24px rgba(255,181,71,0.06)}
 .hp-vmap-bubble.poor{background:rgba(248,113,113,0.12);color:#F87171;border:1px solid rgba(248,113,113,0.22);box-shadow:0 0 24px rgba(248,113,113,0.06)}
 .hp-vmap-bubble .bname{font-size:12px;font-weight:700;margin-bottom:2px}
 .hp-vmap-bubble .bdet{font-size:10px;opacity:0.8;font-weight:500;white-space:nowrap}
-@keyframes vmapPop{0%{opacity:0;transform:scale(0.7) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
-/* Bubbles animate only when parent ScrollAnim becomes visible */
-.hp-visible .hp-vmap-bubble{animation:vmapPop 0.6s ease-out forwards}
-.hp-visible .hp-vmap-bubble:nth-child(4){animation-delay:0.08s}
-.hp-visible .hp-vmap-bubble:nth-child(5){animation-delay:0.16s}
-.hp-visible .hp-vmap-bubble:nth-child(6){animation-delay:0.24s}
-.hp-visible .hp-vmap-bubble:nth-child(7){animation-delay:0.32s}
-.hp-visible .hp-vmap-bubble:nth-child(8){animation-delay:0.40s}
-.hp-visible .hp-vmap-bubble:nth-child(9){animation-delay:0.48s}
-.hp-visible .hp-vmap-bubble:nth-child(10){animation-delay:0.56s}
-.hp-visible .hp-vmap-bubble:nth-child(11){animation-delay:0.64s}
-.hp-visible .hp-vmap-bubble:nth-child(12){animation-delay:0.72s}
-.hp-visible .hp-vmap-bubble:nth-child(13){animation-delay:0.80s}
 @media(max-width:768px){.hp-vmap-bubble{padding:7px 10px;border-radius:9px}.hp-vmap-bubble .bname{font-size:10px}.hp-vmap-bubble .bdet{font-size:9px}}
 .hp-act3-big{font-size:22px;font-weight:600;color:#F0F2F5;margin-bottom:16px;line-height:1.3}
 @media(max-width:768px){.hp-act3-big{font-size:17px}}
@@ -437,6 +425,51 @@ function ScrollAnim({ children, className, delay }) {
   return <div ref={ref} className={"hp-anim" + (delay ? " hp-anim-delay-" + delay : "") + (className ? " " + className : "")}>{children}</div>;
 }
 
+const VMAP_BUBBLES = [
+  { name:'Aston',             cost:'£54k', emp:'94%', tier:'good', top:'10%', left:'6%' },
+  { name:'Coventry',          cost:'£51k', emp:'90%', tier:'good', top:'14%', left:'24%' },
+  { name:'Nottingham Trent',  cost:'£57k', emp:'91%', tier:'good', top:'22%', left:'44%' },
+  { name:'Glasgow',           cost:'£62k', emp:'93%', tier:'good', top:'8%',  left:'60%' },
+  { name:'DMU',               cost:'£48k', emp:'84%', tier:'avg',  top:'38%', left:'16%' },
+  { name:'Sussex',            cost:'£67k', emp:'87%', tier:'avg',  top:'42%', left:'52%' },
+  { name:'Leeds',             cost:'£73k', emp:'90%', tier:'avg',  top:'35%', left:'72%' },
+  { name:'Liverpool',         cost:'£60k', emp:'82%', tier:'avg',  top:'58%', left:'38%' },
+  { name:'London Met',        cost:'£76k', emp:'72%', tier:'poor', top:'62%', left:'62%' },
+  { name:"Regent's",         cost:'£102k',emp:'68%', tier:'poor', top:'72%', left:'78%' },
+];
+
+function ValueMap() {
+  const vmRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = vmRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setVisible(true); obs.unobserve(el); }
+    }, { threshold: 0.2 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <div className="hp-vmap" ref={vmRef}>
+      <div className="hp-vmap-label tl">✦ Best value</div>
+      <div className="hp-vmap-label br">Worst value ✦</div>
+      <div className="hp-vmap-zone"></div>
+      <div className="hp-vmap-axis"></div>
+      <div className="hp-vmap-axis-x">Total cost →</div>
+      <div className="hp-vmap-axis-y">Employment →</div>
+      {VMAP_BUBBLES.map((b, i) => (
+        <div key={i}
+          className={"hp-vmap-bubble " + b.tier + (visible ? " hp-bv" : "")}
+          style={{ top: b.top, left: b.left, transitionDelay: visible ? (i * 0.08) + 's' : '0s' }}>
+          <div className="bname">{b.name}</div>
+          <div className="bdet">{b.cost} total · {b.emp} employed</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function Homepage({ onStart }) {
   const [hpCountry, setHpCountry] = useState('Nigeria');
   const [hpSubject, setHpSubject] = useState('Computer Science');
@@ -531,27 +564,7 @@ function Homepage({ onStart }) {
         <ScrollAnim>
           <div className="hp-act3-head">But not all universities deliver<br/>the same outcome.</div>
         </ScrollAnim>
-        <ScrollAnim>
-          <div className="hp-vmap">
-            <div className="hp-vmap-label tl">✦ Best value</div>
-            <div className="hp-vmap-label br">Worst value ✦</div>
-            <div className="hp-vmap-zone"></div>
-            <div className="hp-vmap-axis"></div>
-            <div className="hp-vmap-axis-x">Total cost →</div>
-            <div className="hp-vmap-axis-y">Employment →</div>
-            {/* Illustrative bubbles — diagonal: good=upper-left, poor=lower-right */}
-            <div className="hp-vmap-bubble good" style={{top:'10%',left:'6%'}}><div className="bname">Aston</div><div className="bdet">£54k total · 94% employed</div></div>
-            <div className="hp-vmap-bubble good" style={{top:'14%',left:'24%'}}><div className="bname">Coventry</div><div className="bdet">£51k total · 90% employed</div></div>
-            <div className="hp-vmap-bubble good" style={{top:'22%',left:'44%'}}><div className="bname">Nottingham Trent</div><div className="bdet">£57k total · 91% employed</div></div>
-            <div className="hp-vmap-bubble good" style={{top:'8%',left:'60%'}}><div className="bname">Glasgow</div><div className="bdet">£62k total · 93% employed</div></div>
-            <div className="hp-vmap-bubble avg" style={{top:'38%',left:'16%'}}><div className="bname">DMU</div><div className="bdet">£48k total · 84% employed</div></div>
-            <div className="hp-vmap-bubble avg" style={{top:'42%',left:'52%'}}><div className="bname">Sussex</div><div className="bdet">£67k total · 87% employed</div></div>
-            <div className="hp-vmap-bubble avg" style={{top:'35%',left:'72%'}}><div className="bname">Leeds</div><div className="bdet">£73k total · 90% employed</div></div>
-            <div className="hp-vmap-bubble avg" style={{top:'58%',left:'38%'}}><div className="bname">Liverpool</div><div className="bdet">£60k total · 82% employed</div></div>
-            <div className="hp-vmap-bubble poor" style={{top:'62%',left:'62%'}}><div className="bname">London Met</div><div className="bdet">£76k total · 72% employed</div></div>
-            <div className="hp-vmap-bubble poor" style={{top:'72%',left:'78%'}}><div className="bname">Regent's</div><div className="bdet">£102k total · 68% employed</div></div>
-          </div>
-        </ScrollAnim>
+        <ValueMap />
         <ScrollAnim>
           <div className="hp-act3-big">The difference between the right choice and the wrong one? Up to £50,000 and a career.</div>
         </ScrollAnim>
