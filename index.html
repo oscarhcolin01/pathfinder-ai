@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PathfinderAI — Find Your UK University Programme</title>
+<title>PathfinderAI — Where in the world will you thrive?</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300B4D8'/><text x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-family='sans-serif' font-weight='800' font-size='18' fill='white'>P</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
@@ -587,6 +587,93 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 @keyframes spin{to{transform:rotate(360deg)}}
 .ps-generating-text{font-size:16px;color:#94A3B8;text-align:center}
 .ps-generating-sub{font-size:13px;color:#64748B;text-align:center}
+
+/* Destination Cards Grid (Homepage Act 3) */
+.hp-dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1100px;margin:0 auto 48px;width:100%;padding:0 16px}
+@media(max-width:1024px){.hp-dest-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.hp-dest-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+@media(max-width:480px){.hp-dest-grid{grid-template-columns:1fr}}
+.hp-dest-card{background:#151C2F;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px 20px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden}
+.hp-dest-card:hover{border-color:rgba(0,212,255,0.3);box-shadow:0 0 30px rgba(0,212,255,0.06);transform:translateY(-2px)}
+.hp-dest-card.uk-card{border-color:rgba(0,212,255,0.2);background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(255,181,71,0.03))}
+.hp-dest-card.uk-card:hover{border-color:rgba(0,212,255,0.4);box-shadow:0 0 36px rgba(0,212,255,0.1)}
+.hp-dest-flag{font-size:32px;margin-bottom:10px}
+.hp-dest-name{font-size:16px;font-weight:700;color:#F0F2F5;margin-bottom:6px}
+.hp-dest-summary{font-size:12px;color:#94A3B8;line-height:1.5;margin-bottom:14px;min-height:36px}
+.hp-dest-meta{display:flex;flex-direction:column;gap:6px}
+.hp-dest-meta-row{display:flex;align-items:center;gap:6px;font-size:11px}
+.hp-dest-meta-label{color:#64748B;font-weight:500}
+.hp-dest-meta-val{color:#CBD5E1;font-weight:600}
+.hp-dest-badge{position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;padding:4px 8px;border-radius:6px;letter-spacing:0.3px;text-transform:uppercase}
+.hp-dest-badge.full{background:rgba(0,212,255,0.12);color:#00D4FF}
+.hp-dest-badge.nurture{background:rgba(52,211,153,0.12);color:#34D399}
+.hp-dest-badge.preview{background:rgba(255,255,255,0.04);color:#64748B}
+
+/* Destination Detail Modal */
+.dest-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;animation:modalFadeIn 0.3s ease}
+@keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
+.dest-modal{background:#0F1629;border:1px solid rgba(255,255,255,0.08);border-radius:20px;max-width:720px;width:100%;max-height:85vh;overflow-y:auto;position:relative;animation:modalSlideIn 0.3s ease;scrollbar-width:thin;scrollbar-color:#1E2844 transparent}
+@keyframes modalSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.dest-modal::-webkit-scrollbar{width:6px}
+.dest-modal::-webkit-scrollbar-track{background:transparent}
+.dest-modal::-webkit-scrollbar-thumb{background:#1E2844;border-radius:3px}
+.dest-modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);background:rgba(10,15,28,0.8);color:#94A3B8;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:10}
+.dest-modal-close:hover{border-color:rgba(0,212,255,0.3);color:#F0F2F5}
+.dest-modal-header{padding:32px 32px 24px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dest-modal-flag{font-size:48px;margin-bottom:8px}
+.dest-modal-name{font-size:28px;font-weight:700;color:#F0F2F5;margin-bottom:4px}
+.dest-modal-summary{font-size:14px;color:#94A3B8;line-height:1.5}
+
+/* Key Facts Grid */
+.dest-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:24px 32px}
+@media(max-width:600px){.dest-facts{grid-template-columns:repeat(2,1fr)}}
+.dest-fact{background:#151C2F;border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:16px;text-align:center}
+.dest-fact-icon{font-size:20px;margin-bottom:6px}
+.dest-fact-label{font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:4px}
+.dest-fact-val{font-size:14px;color:#F0F2F5;font-weight:600;line-height:1.3}
+
+/* Strengths & Considerations */
+.dest-sc{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 32px 24px}
+@media(max-width:600px){.dest-sc{grid-template-columns:1fr}}
+.dest-sc-col h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px}
+.dest-sc-col.strengths h3{color:#34D399}
+.dest-sc-col.considerations h3{color:#FFB547}
+.dest-sc-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#CBD5E1;line-height:1.5;margin-bottom:8px}
+.dest-sc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.dest-sc-col.strengths .dest-sc-dot{background:#34D399}
+.dest-sc-col.considerations .dest-sc-dot{background:#FFB547}
+
+/* Hyphen/Nurture Presence Box */
+.dest-nurture{margin:0 32px 24px;padding:20px;border-radius:14px;background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.15)}
+.dest-nurture-head{font-size:12px;font-weight:700;color:#34D399;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.dest-nurture-text{font-size:13px;color:#6EE7B7;line-height:1.6}
+
+/* Register Interest */
+.dest-register{padding:0 32px 32px;text-align:center}
+.dest-register-head{font-size:16px;font-weight:600;color:#F0F2F5;margin-bottom:6px}
+.dest-register-sub{font-size:13px;color:#64748B;margin-bottom:16px}
+.dest-register-form{display:flex;gap:10px;max-width:420px;margin:0 auto}
+.dest-register-input{flex:1;padding:12px 16px;border-radius:10px;background:#151C2F;border:1.5px solid rgba(255,255,255,0.08);color:#F0F2F5;font-family:'Sora',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s}
+.dest-register-input:focus{border-color:#00D4FF}
+.dest-register-input::placeholder{color:#475569}
+.dest-register-btn{padding:12px 24px;border-radius:10px;border:none;background:linear-gradient(135deg,#00D4FF,#0096B4);color:#fff;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.dest-register-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,212,255,0.25)}
+.dest-register-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+.dest-register-ok{font-size:14px;color:#34D399;font-weight:600}
+.dest-register-explore{display:inline-block;margin-top:16px;font-size:13px;color:#00D4FF;background:none;border:none;font-family:'Sora',sans-serif;cursor:pointer;transition:opacity 0.2s}
+.dest-register-explore:hover{opacity:0.8}
+
+/* Act 2 global personalised stats */
+.hp-act2-global-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:900px;margin:0 auto 48px;width:100%;padding:0 16px}
+@media(max-width:768px){.hp-act2-global-stats{grid-template-columns:repeat(2,1fr);gap:16px}}
+.hp-global-stat{padding:24px 16px;background:#151C2F;border:1px solid rgba(255,255,255,0.06);border-radius:14px;text-align:center;transition:border-color 0.3s}
+.hp-global-stat:hover{border-color:rgba(0,212,255,0.2)}
+.hp-global-stat-val{font-size:36px;font-weight:700;line-height:1;margin-bottom:8px;color:#00D4FF}
+@media(max-width:768px){.hp-global-stat-val{font-size:28px}}
+.hp-global-stat-val.green{color:#34D399}
+.hp-global-stat-val.amber{color:#FFB547}
+.hp-global-stat-lab{font-size:13px;color:#94A3B8;line-height:1.4}
+@media(max-width:768px){.hp-global-stat-lab{font-size:11px}}
 </style>
 </head>
 <body>
@@ -748,6 +835,37 @@ const HP_STATS = {
 const HP_DEFAULT = { "Business": { emp: 83, salary: "£22,000", premium: "3.0x", grad: 58 }, "Computer Science": { emp: 87, salary: "£25,000", premium: "3.2x", grad: 66 } };
 const HP_COUNTRIES = ["Nigeria","India","China","Pakistan","Bangladesh","Ghana","Saudi Arabia","Vietnam","Kenya","Turkey"];
 
+// Global destination data (12 countries)
+const DESTINATIONS = [
+  { id:"uk", name:"United Kingdom", flag:"🇬🇧", status:"full", region:"Europe", summary:"World-renowned degrees. 2-year post-study work visa. Strong career outcomes.", typicalDuration:"3 years (undergraduate)", costRange:{min:65000,max:140000,currency:"GBP",label:"£65k–£140k total"}, workVisa:{name:"Graduate Route",duration:"2 years",description:"Open work visa, no sponsorship needed. Can work in any role."}, longTermPath:"Skilled Worker visa → Settlement after 5 years", language:"English", teachingLanguage:"English", averageSalary:{amount:27000,currency:"GBP"}, strengths:["World-class universities","English-taught","2-year work visa","3-year degrees (faster)","Large international communities"], considerations:["High cost of living","Competitive job market","Post-Brexit immigration changes"], topSubjects:["Business","Computer Science","Engineering","Law","Medicine"], intlStudents:680000, hyphenPresence:"INTO university partnerships across the UK. PathfinderAI full guidance available." },
+  { id:"canada", name:"Canada", flag:"🇨🇦", status:"preview", region:"North America", summary:"Affordable quality education. 3-year work permit. Clear path to permanent residency.", typicalDuration:"4 years (undergraduate)", costRange:{min:60000,max:120000,currency:"CAD",label:"CA$60k–$120k total"}, workVisa:{name:"Post-Graduation Work Permit",duration:"Up to 3 years",description:"Open work permit for duration matching your study programme."}, longTermPath:"Express Entry → Permanent Residency (Canadian Experience Class)", language:"English / French", teachingLanguage:"English (most programmes)", averageSalary:{amount:55000,currency:"CAD"}, strengths:["Path to permanent residency","3-year work permit","Multicultural society","Lower tuition than US/UK","Safe and welcoming"], considerations:["4-year degrees (longer)","Cold winters","Housing costs rising in major cities","Recent PGWP policy changes"], topSubjects:["Computer Science","Business","Engineering","Health Sciences"], intlStudents:550000, hyphenPresence:null },
+  { id:"australia", name:"Australia", flag:"🇦🇺", status:"preview", region:"Oceania", summary:"High quality of life. Strong graduate outcomes. Post-study work visa up to 4 years.", typicalDuration:"3 years (undergraduate)", costRange:{min:70000,max:150000,currency:"AUD",label:"AU$70k–$150k total"}, workVisa:{name:"Temporary Graduate Visa (485)",duration:"2-4 years",description:"Duration depends on qualification level and field of study."}, longTermPath:"Skilled Migration → Permanent Residency", language:"English", teachingLanguage:"English", averageSalary:{amount:65000,currency:"AUD"}, strengths:["Excellent quality of life","Strong economy","Post-study work visa","3-year degrees","Proximity to Asia"], considerations:["Expensive (especially Sydney/Melbourne)","Distance from Europe/Africa","Recent visa policy tightening"], topSubjects:["Business","Engineering","IT","Health Sciences","Hospitality"], intlStudents:620000, hyphenPresence:null },
+  { id:"usa", name:"United States", flag:"🇺🇸", status:"preview", region:"North America", summary:"Prestigious institutions. Highest earning potential. Complex visa process.", typicalDuration:"4 years (undergraduate)", costRange:{min:120000,max:300000,currency:"USD",label:"$120k–$300k total"}, workVisa:{name:"OPT",duration:"1 year (3 years STEM)",description:"Optional Practical Training. STEM graduates get 3-year extension."}, longTermPath:"H-1B visa (lottery-based) → Green Card (employer-sponsored, years-long process)", language:"English", teachingLanguage:"English", averageSalary:{amount:75000,currency:"USD"}, strengths:["Highest global prestige","Highest salaries","STEM OPT extension","Campus culture","Research opportunities"], considerations:["Extremely expensive","H-1B lottery for long-term stay","Complex application process","4-year degrees","Healthcare costs"], topSubjects:["Computer Science","Engineering","Business","Sciences","Liberal Arts"], intlStudents:950000, hyphenPresence:null },
+  { id:"germany", name:"Germany", flag:"🇩🇪", status:"preview", region:"Europe", summary:"Near-free tuition at public universities. Strong engineering and tech economy.", typicalDuration:"3-4 years (undergraduate)", costRange:{min:25000,max:50000,currency:"EUR",label:"€25k–€50k total"}, workVisa:{name:"Job Seeker Visa",duration:"18 months",description:"18-month visa to find employment after graduation."}, longTermPath:"EU Blue Card → Settlement after 21-33 months", language:"German (some English programmes)", teachingLanguage:"German (undergraduate mostly), English (growing number of programmes)", averageSalary:{amount:45000,currency:"EUR"}, strengths:["Near-free tuition","Strong economy","Excellent engineering","EU Blue Card pathway","Central European location"], considerations:["German language usually required for UG","Limited English-taught UG programmes","Bureaucratic processes","Finding accommodation is difficult"], topSubjects:["Engineering","Computer Science","Natural Sciences","Business (Masters)"], intlStudents:370000, hyphenPresence:null },
+  { id:"uae", name:"United Arab Emirates", flag:"🇦🇪", status:"preview", region:"Middle East", summary:"Fast-growing education hub. Tax-free salaries. Gateway between East and West.", typicalDuration:"4 years (undergraduate)", costRange:{min:40000,max:120000,currency:"USD",label:"$40k–$120k total"}, workVisa:{name:"Job Seeker Visa",duration:"Up to 1 year",description:"Graduate visa allows job search. Many employers sponsor directly."}, longTermPath:"Employment visa → Golden Visa (10-year) for high-skilled professionals", language:"Arabic / English", teachingLanguage:"English (most international programmes)", averageSalary:{amount:55000,currency:"USD"}, strengths:["Tax-free income","Growing economy","Branch campuses of top global universities","Safe","Strategic location","Large African and South Asian communities"], considerations:["Hot climate","Social restrictions","Employment tied to visa sponsor","Cost of living in Dubai is high"], topSubjects:["Business","Engineering","Hospitality","IT","Architecture"], intlStudents:200000, hyphenPresence:null },
+  { id:"malaysia", name:"Malaysia", flag:"🇲🇾", status:"preview", region:"Southeast Asia", summary:"UK and Australian degrees at 40% of the cost. Multicultural. Gateway to ASEAN economy.", typicalDuration:"3 years (undergraduate)", costRange:{min:15000,max:45000,currency:"USD",label:"$15k–$45k total"}, workVisa:{name:"Employment Pass",duration:"Varies",description:"Graduates can apply for employment with Malaysian employers."}, longTermPath:"Employment Pass renewals. Malaysia My Second Home programme.", language:"Malay / English", teachingLanguage:"English (international programmes)", averageSalary:{amount:12000,currency:"USD"}, strengths:["Very affordable","UK/Australian degrees via branch campuses and TNE","English widely spoken","Multicultural","Gateway to ASEAN","Halal-friendly"], considerations:["Lower graduate salaries locally","Less global brand recognition","Humid tropical climate"], topSubjects:["Business","Engineering","IT","Hospitality"], intlStudents:130000, hyphenPresence:"Nurture delivers UK degree programmes through transnational education partnerships in Malaysia." },
+  { id:"singapore", name:"Singapore", flag:"🇸🇬", status:"preview", region:"Southeast Asia", summary:"World-class universities. Asia's financial and tech hub. Highly competitive.", typicalDuration:"3-4 years (undergraduate)", costRange:{min:50000,max:100000,currency:"SGD",label:"SG$50k–$100k total"}, workVisa:{name:"Long Term Visit Pass",duration:"1 year",description:"Allows job search for up to 1 year after graduation from eligible institutions."}, longTermPath:"Employment Pass → Permanent Residency", language:"English / Mandarin / Malay / Tamil", teachingLanguage:"English", averageSalary:{amount:45000,currency:"SGD"}, strengths:["NUS and NTU are top-15 globally","Asia's financial hub","English-speaking","Safe and efficient","Gateway to Asian markets"], considerations:["Very competitive admission","Expensive city","Small country","Bond requirements for some scholarships"], topSubjects:["Computer Science","Business","Engineering","Finance"], intlStudents:75000, hyphenPresence:null },
+  { id:"japan", name:"Japan", flag:"🇯🇵", status:"preview", region:"East Asia", summary:"World-class technology. Affordable tuition. Growing English-taught programmes. Unique cultural experience.", typicalDuration:"4 years (undergraduate)", costRange:{min:25000,max:60000,currency:"USD",label:"$25k–$60k total"}, workVisa:{name:"Designated Activities Visa",duration:"Up to 1 year",description:"Job-seeking visa after graduation. Many companies recruit directly from universities."}, longTermPath:"Work visa → Permanent Residency after 10 years (or 1-3 years for Highly Skilled Professionals)", language:"Japanese", teachingLanguage:"Japanese (traditional) / English (MEXT and G30 programmes)", averageSalary:{amount:3500000,currency:"JPY"}, strengths:["Affordable tuition (especially public universities)","MEXT scholarships (fully funded)","World-leading technology and innovation","Safe","Unique cultural experience"], considerations:["Japanese language needed for most programmes and jobs","Limited English-taught UG options","Hierarchical work culture","Ageing economy"], topSubjects:["Engineering","Technology","Sciences","Japanese Studies","Business"], intlStudents:280000, hyphenPresence:null },
+  { id:"south_korea", name:"South Korea", flag:"🇰🇷", status:"preview", region:"East Asia", summary:"Rising education hub. Generous scholarships. K-culture appeal. Growing English-taught options.", typicalDuration:"4 years (undergraduate)", costRange:{min:20000,max:50000,currency:"USD",label:"$20k–$50k total"}, workVisa:{name:"D-10 Job Seeker Visa",duration:"Up to 2 years",description:"Allows graduates to seek employment in South Korea."}, longTermPath:"E-7 Work Visa → F-2 Residency → F-5 Permanent Residency", language:"Korean", teachingLanguage:"Korean / English (growing number of programmes)", averageSalary:{amount:35000000,currency:"KRW"}, strengths:["Affordable","KGSP government scholarships","World-leading in tech (Samsung, LG, Hyundai)","K-culture appeal","Safe"], considerations:["Korean language important for employment","Competitive job market","Intense academic culture","Limited English-taught UG"], topSubjects:["Engineering","IT","Business","Korean Studies","Design"], intlStudents:180000, hyphenPresence:null },
+  { id:"thailand", name:"Thailand", flag:"🇹🇭", status:"preview", region:"Southeast Asia", summary:"Affordable living. Growing international programmes. Gateway to ASEAN. UK degrees available through TNE partnerships.", typicalDuration:"4 years (undergraduate)", costRange:{min:10000,max:35000,currency:"USD",label:"$10k–$35k total"}, workVisa:{name:"Non-Immigrant B Visa",duration:"1 year (renewable)",description:"Work permit required alongside visa. Employers typically arrange both."}, longTermPath:"Work permit renewals. Thailand Privilege (long-term residency) programme.", language:"Thai", teachingLanguage:"Thai / English (international programmes)", averageSalary:{amount:15000,currency:"USD"}, strengths:["Very affordable cost of living","UK degree programmes available via TNE","Warm climate","Welcoming culture","Growing economy","Strategic ASEAN location"], considerations:["Lower graduate salaries","Thai language useful for employment","Less global brand recognition","Hot and humid climate"], topSubjects:["Business","Hospitality & Tourism","IT","International Relations"], intlStudents:35000, hyphenPresence:"Nurture delivers UK degree programmes through transnational education partnerships in Thailand. Students can earn a full UK degree at a fraction of the cost while living in Southeast Asia." },
+  { id:"indonesia", name:"Indonesia", flag:"🇮🇩", status:"preview", region:"Southeast Asia", summary:"Largest economy in Southeast Asia. Rapidly growing higher education sector. UK degrees through TNE. Extremely affordable.", typicalDuration:"4 years (undergraduate)", costRange:{min:8000,max:30000,currency:"USD",label:"$8k–$30k total"}, workVisa:{name:"KITAS (Limited Stay Permit)",duration:"1-2 years",description:"Employer-sponsored work permit. Growing demand for graduates in tech and business."}, longTermPath:"KITAS renewals → KITAP (Permanent Stay Permit) after continuous residency", language:"Bahasa Indonesia", teachingLanguage:"Indonesian / English (international programmes)", averageSalary:{amount:8000,currency:"USD"}, strengths:["Extremely affordable","Largest ASEAN economy (270M+ population)","UK degree programmes via TNE","Young, dynamic economy","Growing startup ecosystem (Gojek, Tokopedia, Bukalapak)"], considerations:["Lower graduate salaries","Bahasa Indonesia important for employment","Infrastructure varies by city","Bureaucratic visa processes"], topSubjects:["Business","IT","Engineering","Natural Resources","Tourism"], intlStudents:45000, hyphenPresence:"Nurture delivers UK degree programmes through transnational education partnerships in Indonesia. Access quality UK education in one of the world's fastest-growing economies." }
+];
+
+// Country-specific global study abroad stats (for Act 2)
+const GLOBAL_COUNTRY_STATS = {
+  "Nigeria": { abroad: "95,000+", salaryPremium: "2.8×", topDests: "UK, Canada, US" },
+  "India": { abroad: "770,000+", salaryPremium: "3.2×", topDests: "US, UK, Canada" },
+  "China": { abroad: "700,000+", salaryPremium: "2.3×", topDests: "US, UK, Australia" },
+  "Pakistan": { abroad: "65,000+", salaryPremium: "3.8×", topDests: "UK, Australia, Canada" },
+  "Bangladesh": { abroad: "55,000+", salaryPremium: "4.5×", topDests: "UK, Canada, Australia" },
+  "Ghana": { abroad: "25,000+", salaryPremium: "3.0×", topDests: "UK, US, Canada" },
+  "Saudi Arabia": { abroad: "90,000+", salaryPremium: "1.5×", topDests: "US, UK, Australia" },
+  "Vietnam": { abroad: "130,000+", salaryPremium: "4.8×", topDests: "Japan, US, Australia" },
+  "Kenya": { abroad: "35,000+", salaryPremium: "3.2×", topDests: "UK, US, Australia" },
+  "Turkey": { abroad: "45,000+", salaryPremium: "2.6×", topDests: "Germany, UK, US" },
+};
+const GLOBAL_DEFAULT_STATS = { abroad: "6M+", salaryPremium: "3.0×", topDests: "US, UK, Australia" };
+
 // Scroll animation hook
 function useScrollAnim() {
   const ref = useRef(null);
@@ -876,15 +994,111 @@ function ValueMap({ country, subject }) {
   );
 }
 
+function DestinationModal({ dest, onClose, onExploreUK }) {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  if (!dest) return null;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email.trim()) setSubmitted(true);
+  };
+
+  return (
+    <div className="dest-modal-overlay" onClick={onClose}>
+      <div className="dest-modal" onClick={e => e.stopPropagation()}>
+        <button className="dest-modal-close" onClick={onClose}>✕</button>
+
+        <div className="dest-modal-header">
+          <div className="dest-modal-flag">{dest.flag}</div>
+          <div className="dest-modal-name">{dest.name}</div>
+          <div className="dest-modal-summary">{dest.summary}</div>
+        </div>
+
+        <div className="dest-facts">
+          <div className="dest-fact">
+            <div className="dest-fact-icon">📚</div>
+            <div className="dest-fact-label">Duration</div>
+            <div className="dest-fact-val">{dest.typicalDuration}</div>
+          </div>
+          <div className="dest-fact">
+            <div className="dest-fact-icon">💰</div>
+            <div className="dest-fact-label">Total Cost</div>
+            <div className="dest-fact-val">{dest.costRange.label}</div>
+          </div>
+          <div className="dest-fact">
+            <div className="dest-fact-icon">🛂</div>
+            <div className="dest-fact-label">Post-Study Work</div>
+            <div className="dest-fact-val">{dest.workVisa.name} ({dest.workVisa.duration})</div>
+          </div>
+          <div className="dest-fact">
+            <div className="dest-fact-icon">🏠</div>
+            <div className="dest-fact-label">Long-term Path</div>
+            <div className="dest-fact-val" style={{fontSize:'12px'}}>{dest.longTermPath}</div>
+          </div>
+          <div className="dest-fact">
+            <div className="dest-fact-icon">🗣️</div>
+            <div className="dest-fact-label">Teaching Language</div>
+            <div className="dest-fact-val">{dest.teachingLanguage}</div>
+          </div>
+          <div className="dest-fact">
+            <div className="dest-fact-icon">🌍</div>
+            <div className="dest-fact-label">Intl Students</div>
+            <div className="dest-fact-val">{dest.intlStudents.toLocaleString()}+</div>
+          </div>
+        </div>
+
+        <div className="dest-sc">
+          <div className="dest-sc-col strengths">
+            <h3>Strengths</h3>
+            {dest.strengths.map((s, i) => (
+              <div key={i} className="dest-sc-item"><div className="dest-sc-dot"></div><span>{s}</span></div>
+            ))}
+          </div>
+          <div className="dest-sc-col considerations">
+            <h3>Considerations</h3>
+            {dest.considerations.map((c, i) => (
+              <div key={i} className="dest-sc-item"><div className="dest-sc-dot"></div><span>{c}</span></div>
+            ))}
+          </div>
+        </div>
+
+        {dest.hyphenPresence && (
+          <div className="dest-nurture">
+            <div className="dest-nurture-head"><span>🎓</span> UK Degrees Available Here</div>
+            <div className="dest-nurture-text">{dest.hyphenPresence}</div>
+          </div>
+        )}
+
+        <div className="dest-register">
+          <div className="dest-register-head">Full PathfinderAI guidance for {dest.name} is coming soon.</div>
+          <div className="dest-register-sub">Register your interest — we'll notify you when {dest.name} launches.</div>
+          {submitted ? (
+            <div className="dest-register-ok">✓ Registered! We'll be in touch.</div>
+          ) : (
+            <form className="dest-register-form" onSubmit={handleSubmit}>
+              <input className="dest-register-input" type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
+              <button className="dest-register-btn" type="submit">Register</button>
+            </form>
+          )}
+          <button className="dest-register-explore" onClick={() => { onClose(); onExploreUK(); }}>In the meantime, explore our full UK guidance →</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Homepage({ onStart, profile, onNavigate }) {
   const hasProfile = !!(profile && profile.country);
   const [hpCountry, setHpCountry] = useState('');
   const [hpSubject, setHpSubject] = useState('');
   const [showNav, setShowNav] = useState(false);
+  const [modalDest, setModalDest] = useState(null);
   const act1Ref = useRef(null);
 
   const bothSelected = hpCountry && hpSubject;
   const d = bothSelected ? ((HP_STATS[hpCountry] || HP_DEFAULT)[hpSubject] || HP_DEFAULT[hpSubject]) : { emp: 85, salary: '£24,000', premium: '3.0x', grad: 60 };
+  const gStats = GLOBAL_COUNTRY_STATS[hpCountry] || GLOBAL_DEFAULT_STATS;
 
   // Check if PS draft exists
   const hasPsDraft = (() => {
@@ -901,6 +1115,15 @@ function Homepage({ onStart, profile, onNavigate }) {
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
+
+  const handleDestClick = (dest) => {
+    if (dest.id === 'uk') {
+      if (hasProfile) onNavigate('dashboard');
+      else onStart();
+    } else {
+      setModalDest(dest);
+    }
+  };
 
   return (
     <div className="hp">
@@ -927,9 +1150,9 @@ function Homepage({ onStart, profile, onNavigate }) {
         </div>
       </div>
 
-      {/* Act 1: The Hook */}
+      {/* Act 1: The Hook — Global */}
       <div className="hp-act1" ref={act1Ref}>
-        <h1 className="hp-hook">What could your life<br/>look like?</h1>
+        <h1 className="hp-hook">Where in the world<br/>will you thrive?</h1>
         <div className="hp-inline">
           <span>I'm from</span>
           <select className="hp-inline-sel" value={hpCountry} onChange={e => setHpCountry(e.target.value)}>
@@ -943,50 +1166,84 @@ function Homepage({ onStart, profile, onNavigate }) {
             <option value="Business">Business</option>
           </select>
         </div>
-        <button className={"hp-go" + (bothSelected ? " hp-go-show" : "")} onClick={hasProfile ? () => onNavigate('dashboard') : onStart}>Show me &#8594;</button>
-        <div className="hp-powered">Powered by data from 230,000 student journeys</div>
+        <button className={"hp-go" + (bothSelected ? " hp-go-show" : "")} onClick={hasProfile ? () => onNavigate('dashboard') : onStart}>Show me my options →</button>
+        <div className="hp-powered">Powered by data from 230,000 student journeys across 180 countries</div>
       </div>
 
-      {/* Act 2: The Data Story */}
+      {/* Act 2: Global Data Story */}
       <div className="hp-act2">
         <ScrollAnim>
-          <div className="hp-act2-head">{bothSelected ? 'Students from ' + hpCountry + ' who studied ' + hpSubject + ' in the UK' : 'UK international graduates — average outcomes'}</div>
+          <div className="hp-act2-head">{hpCountry ? 'Students from ' + hpCountry + ' who studied abroad' : 'International students who studied abroad'}</div>
         </ScrollAnim>
-        <div className="hp-stats">
+        <div className="hp-act2-global-stats">
           <ScrollAnim delay={1}>
-            <div className="hp-stat">
-              <div className="hp-stat-val teal">{d.emp}%</div>
-              <div className="hp-stat-lab">found employment within 15 months</div>
+            <div className="hp-global-stat">
+              <div className="hp-global-stat-val">{gStats.abroad}</div>
+              <div className="hp-global-stat-lab">{hpCountry ? 'students studying abroad last year' : 'students study abroad each year'}</div>
             </div>
           </ScrollAnim>
           <ScrollAnim delay={2}>
-            <div className="hp-stat">
-              <div className="hp-stat-val green">{d.salary}</div>
-              <div className="hp-stat-lab">median starting salary</div>
+            <div className="hp-global-stat">
+              <div className="hp-global-stat-val green">{gStats.salaryPremium}</div>
+              <div className="hp-global-stat-lab">average salary premium vs staying home</div>
             </div>
           </ScrollAnim>
           <ScrollAnim delay={3}>
-            <div className="hp-stat">
-              <div className="hp-stat-val amber">{d.premium}</div>
-              <div className="hp-stat-lab">salary premium vs home country average</div>
+            <div className="hp-global-stat">
+              <div className="hp-global-stat-val amber">{gStats.topDests}</div>
+              <div className="hp-global-stat-lab">top destination countries</div>
             </div>
           </ScrollAnim>
           <ScrollAnim delay={4}>
-            <div className="hp-stat">
-              <div className="hp-stat-val teal">{d.grad}%</div>
-              <div className="hp-stat-lab">in graduate-level professional roles</div>
+            <div className="hp-global-stat">
+              <div className="hp-global-stat-val">12</div>
+              <div className="hp-global-stat-lab">destinations compared. One platform.</div>
             </div>
           </ScrollAnim>
         </div>
         <ScrollAnim>
-          <div className="hp-act2-note">Based on graduate outcome data across all UK university tiers. Your individual prediction depends on where you go.</div>
+          <div className="hp-act2-note">Based on international education mobility data and graduate outcome statistics across 180 countries.</div>
         </ScrollAnim>
       </div>
 
-      {/* Act 3: The Stakes */}
-      <div className="hp-act3">
+      {/* Act 3: Destination Cards Grid */}
+      <div className="hp-act3" style={{paddingTop:'80px',paddingBottom:'80px'}}>
         <ScrollAnim>
-          <div className="hp-act3-head">But not all universities deliver<br/>the same outcome.</div>
+          <div className="hp-act3-head">{hpSubject ? 'Where could ' + hpSubject + ' take you?' : 'Where could your degree take you?'}</div>
+        </ScrollAnim>
+        <div className="hp-dest-grid">
+          {DESTINATIONS.map((dest, i) => (
+            <ScrollAnim key={dest.id} delay={Math.min(i % 4 + 1, 4)}>
+              <div className={"hp-dest-card" + (dest.id === 'uk' ? ' uk-card' : '')} onClick={() => handleDestClick(dest)}>
+                {dest.id === 'uk' && <div className="hp-dest-badge full">Full guidance</div>}
+                {dest.hyphenPresence && dest.id !== 'uk' && <div className="hp-dest-badge nurture">UK degrees available here</div>}
+                {!dest.hyphenPresence && dest.id !== 'uk' && <div className="hp-dest-badge preview">Preview</div>}
+                <div className="hp-dest-flag">{dest.flag}</div>
+                <div className="hp-dest-name">{dest.name}</div>
+                <div className="hp-dest-summary">{dest.summary}</div>
+                <div className="hp-dest-meta">
+                  <div className="hp-dest-meta-row">
+                    <span className="hp-dest-meta-label">Cost:</span>
+                    <span className="hp-dest-meta-val">{dest.costRange.label}</span>
+                  </div>
+                  <div className="hp-dest-meta-row">
+                    <span className="hp-dest-meta-label">Work visa:</span>
+                    <span className="hp-dest-meta-val">{dest.workVisa.duration}</span>
+                  </div>
+                </div>
+              </div>
+            </ScrollAnim>
+          ))}
+        </div>
+      </div>
+
+      {/* Act 4: UK Deep Dive Preview */}
+      <div className="hp-act3" style={{paddingTop:'60px',paddingBottom:'60px',background:'#0F1629'}}>
+        <ScrollAnim>
+          <div className="hp-act3-head">The United Kingdom — in depth</div>
+        </ScrollAnim>
+        <ScrollAnim>
+          <div style={{fontSize:'16px',color:'#94A3B8',maxWidth:'600px',margin:'0 auto 36px',lineHeight:'1.6',textAlign:'center'}}>30 programmes compared. True costs calculated. AI-powered guidance.</div>
         </ScrollAnim>
         <ScrollAnim>
           <div className="hp-act3-sel">
@@ -1006,14 +1263,17 @@ function Homepage({ onStart, profile, onNavigate }) {
         <ValueMap country={hpCountry} subject={hpSubject} />
         <div className="hp-vmap-note">Salary data reflects 15 months post-graduation (HESA Graduate Outcomes). Total cost includes tuition, living, visa, and health surcharge.</div>
         <ScrollAnim>
-          <div className="hp-act3-big">The difference between the right choice and the wrong one? Up to £50,000 and a career.</div>
-        </ScrollAnim>
-        <ScrollAnim>
-          <div className="hp-act3-sub">PathfinderAI shows you where the value is — before you commit.</div>
+          <div style={{marginTop:'36px',textAlign:'center'}}>
+            <button style={{padding:'14px 36px',borderRadius:'12px',border:'none',background:'linear-gradient(135deg,#00D4FF,#0096B4)',color:'#fff',fontFamily:"'Sora',sans-serif",fontSize:'15px',fontWeight:'600',cursor:'pointer',transition:'all 0.3s'}} onClick={hasProfile ? () => onNavigate('dashboard') : onStart}
+              onMouseOver={e => { e.target.style.transform='translateY(-2px)'; e.target.style.boxShadow='0 12px 36px rgba(0,212,255,0.25)'; }}
+              onMouseOut={e => { e.target.style.transform=''; e.target.style.boxShadow=''; }}>
+              Explore UK programmes →
+            </button>
+          </div>
         </ScrollAnim>
       </div>
 
-      {/* Act 4: The Platform */}
+      {/* Act 5: The Platform */}
       <div className="hp-act4">
         <ScrollAnim>
           <div className="hp-act4-head">With you from first question to first job</div>
@@ -1025,7 +1285,7 @@ function Homepage({ onStart, profile, onNavigate }) {
               <div className="hp-phase-line"></div>
               <div className="hp-phase-content">
                 <div className="hp-phase-name">Dream</div>
-                <div className="hp-phase-desc">See what's possible. Real outcomes from real students who started where you are.</div>
+                <div className="hp-phase-desc">See what's possible — in any country.</div>
               </div>
             </div>
             <div className="hp-phase">
@@ -1033,7 +1293,7 @@ function Homepage({ onStart, profile, onNavigate }) {
               <div className="hp-phase-line"></div>
               <div className="hp-phase-content">
                 <div className="hp-phase-name">Plan</div>
-                <div className="hp-phase-desc">AI-powered matching. Predicted outcomes, true costs, readiness scores.</div>
+                <div className="hp-phase-desc">AI-powered matching on outcomes, true costs, and readiness.</div>
               </div>
             </div>
             <div className="hp-phase">
@@ -1041,7 +1301,7 @@ function Homepage({ onStart, profile, onNavigate }) {
               <div className="hp-phase-line"></div>
               <div className="hp-phase-content">
                 <div className="hp-phase-name">Prepare</div>
-                <div className="hp-phase-desc">Application tracking, document prep, visa guidance, IELTS planning — one place for everything.</div>
+                <div className="hp-phase-desc">Get application-ready. Plan the finances. Experience it first.</div>
               </div>
             </div>
             <div className="hp-phase dim">
@@ -1049,7 +1309,7 @@ function Homepage({ onStart, profile, onNavigate }) {
               <div className="hp-phase-line"></div>
               <div className="hp-phase-content">
                 <div className="hp-phase-name">Arrive</div>
-                <div className="hp-phase-desc">City survival guides, student connections, first-week support.</div>
+                <div className="hp-phase-desc">City survival guides and student connections.</div>
                 <div className="hp-phase-badge">Coming soon</div>
               </div>
             </div>
@@ -1057,7 +1317,7 @@ function Homepage({ onStart, profile, onNavigate }) {
               <div className="hp-phase-dot"></div>
               <div className="hp-phase-content">
                 <div className="hp-phase-name">Thrive</div>
-                <div className="hp-phase-desc">Career tracking, alumni network, your journey powers guidance for the next generation.</div>
+                <div className="hp-phase-desc">Career tracking and alumni network.</div>
                 <div className="hp-phase-badge">Coming soon</div>
               </div>
             </div>
@@ -1065,7 +1325,7 @@ function Homepage({ onStart, profile, onNavigate }) {
         </ScrollAnim>
       </div>
 
-      {/* Act 5: Social Proof */}
+      {/* Act 6: Social Proof */}
       <div className="hp-act5">
         <ScrollAnim>
           <div className="hp-act5-head">The numbers behind the guidance</div>
@@ -1113,10 +1373,10 @@ function Homepage({ onStart, profile, onNavigate }) {
         <div className="hp-disc">Sample quotes for demonstration. Platform in prototype.</div>
       </div>
 
-      {/* Act 6: Final CTA */}
+      {/* Act 7: Final CTA */}
       <div className="hp-act6">
         <ScrollAnim>
-          <div className="hp-act6-head">See your predicted future</div>
+          <div className="hp-act6-head">See where you'll thrive</div>
         </ScrollAnim>
         <ScrollAnim>
           <button className="hp-act6-btn" onClick={hasProfile ? () => onNavigate('dashboard') : onStart}>{hasProfile ? 'Go to your dashboard' : 'Start now — it takes 5 minutes'}</button>
@@ -1124,13 +1384,29 @@ function Homepage({ onStart, profile, onNavigate }) {
         <ScrollAnim>
           <div className="hp-act6-muted">Free. No account needed to explore.</div>
         </ScrollAnim>
+        <ScrollAnim>
+          <div style={{fontSize:'14px',color:'#94A3B8',marginTop:'12px'}}>For parents and family → View our parent guide</div>
+        </ScrollAnim>
       </div>
 
       {/* Footer */}
       <div className="hp-footer">
         <div className="hp-footer-brand">PathfinderAI — a Hyphen Education Group prototype</div>
-        <div className="hp-footer-note">Outcome data modelled from HESA Graduate Outcomes</div>
+        <div className="hp-footer-note">Outcome data modelled from HESA Graduate Outcomes and international education statistics</div>
       </div>
+
+      {/* Destination Detail Modal */}
+      {modalDest && (
+        <DestinationModal
+          dest={modalDest}
+          onClose={() => setModalDest(null)}
+          onExploreUK={() => {
+            setModalDest(null);
+            if (hasProfile) onNavigate('dashboard');
+            else onStart();
+          }}
+        />
+      )}
     </div>
   );
 }
