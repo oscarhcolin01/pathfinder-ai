@@ -366,6 +366,11 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .db-feat:hover{border-color:rgba(0,212,255,0.25);color:#F0F2F5;background:rgba(0,212,255,0.04)}
 .db-feat-icon{font-size:15px}
 @media(max-width:768px){.db-feats{padding:14px 16px 4px;gap:8px}.db-feat{padding:8px 14px;font-size:12px}}
+.db-feat{position:relative}
+.db-feat-badge{position:absolute;top:-6px;right:-6px;background:#059669;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;letter-spacing:0.3px;text-transform:uppercase;white-space:nowrap;pointer-events:none;animation:badgePulse 2s ease infinite}
+@keyframes badgePulse{0%,100%{opacity:1}50%{opacity:0.7}}
+.hp-snav-link{position:relative}
+.hp-snav-badge{position:absolute;top:-8px;right:-10px;background:#059669;color:#fff;font-size:8px;font-weight:700;padding:1px 5px;border-radius:6px;letter-spacing:0.3px;text-transform:uppercase;white-space:nowrap;pointer-events:none}
 
 /* Dashboard content area */
 .db-content{max-width:1200px;margin:0 auto;padding:28px 32px 80px}
@@ -480,7 +485,10 @@ body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);-webki
 .ps-hdr-badge{font-size:11px;color:#00D4FF;background:rgba(0,212,255,0.08);padding:4px 10px;border-radius:6px;font-weight:600;letter-spacing:0.3px}
 .ps-hdr-back{background:none;border:1px solid rgba(255,255,255,0.1);color:#94A3B8;padding:7px 16px;border-radius:8px;font-family:'Sora',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s}
 .ps-hdr-back:hover{border-color:rgba(0,212,255,0.3);color:#F0F2F5}
-@media(max-width:768px){.ps-hdr{padding:12px 16px}.ps-hdr-badge{display:none}}
+.ps-hdr-right{display:flex;align-items:center;gap:10px}
+.ps-hdr-fresh{background:none;border:1px solid rgba(248,113,113,0.2);color:#F87171;padding:7px 14px;border-radius:8px;font-family:'Sora',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.ps-hdr-fresh:hover{border-color:rgba(248,113,113,0.4);background:rgba(248,113,113,0.06)}
+@media(max-width:768px){.ps-hdr{padding:12px 16px}.ps-hdr-badge{display:none}.ps-hdr-fresh{padding:5px 10px;font-size:11px}}
 
 /* Stage progress bar */
 .ps-stages{max-width:800px;margin:28px auto 0;padding:0 32px;display:flex;align-items:center;gap:0;width:100%}
@@ -878,6 +886,11 @@ function Homepage({ onStart, profile, onNavigate }) {
   const bothSelected = hpCountry && hpSubject;
   const d = bothSelected ? ((HP_STATS[hpCountry] || HP_DEFAULT)[hpSubject] || HP_DEFAULT[hpSubject]) : { emp: 85, salary: '£24,000', premium: '3.0x', grad: 60 };
 
+  // Check if PS draft exists
+  const hasPsDraft = (() => {
+    try { const s = localStorage.getItem('pf_ps_session'); if (!s) return false; const dd = JSON.parse(s); return !!(dd && dd.draft && dd.draft.length > 50); } catch(e) { return false; }
+  })();
+
   // Sticky nav on scroll
   useEffect(() => {
     const handler = () => {
@@ -901,7 +914,7 @@ function Homepage({ onStart, profile, onNavigate }) {
           <div className="hp-snav-links">
             {hasProfile ? (<>
               <button className="hp-snav-link" onClick={() => onNavigate('dashboard')}>Dashboard</button>
-              <button className="hp-snav-link" onClick={() => onNavigate('apply')}>Apply</button>
+              <button className="hp-snav-link" onClick={() => onNavigate('apply')}>Apply{hasPsDraft && <span className="hp-snav-badge">Draft</span>}</button>
               <button className="hp-snav-link" onClick={() => onNavigate('chat')}>Chat</button>
               <div className="hp-snav-profile" onClick={() => onNavigate('dashboard')}>
                 <span className="hp-snav-flag">{COUNTRY_EMOJIS[profile.country] || '🌍'}</span>
@@ -1226,15 +1239,20 @@ function buildPsSys(profile) {
 }
 
 function PSBuilder({ profile, onBack }) {
-  const [stage, setStage] = useState(1);
-  const [msgs, setMsgs] = useState([]);
+  // Restore saved PS session from localStorage
+  const savedPS = (() => {
+    try { const s = localStorage.getItem('pf_ps_session'); return s ? JSON.parse(s) : null; } catch(e) { return null; }
+  })();
+
+  const [stage, setStage] = useState(savedPS && savedPS.draft ? 3 : savedPS ? savedPS.stage || 1 : 1);
+  const [msgs, setMsgs] = useState(savedPS ? savedPS.msgs || [] : []);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [draft, setDraft] = useState('');
+  const [draft, setDraft] = useState(savedPS ? savedPS.draft || '' : '');
   const [feedback, setFeedback] = useState('');
   const [refineInput, setRefineInput] = useState('');
   const [generating, setGenerating] = useState(false);
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const [questionIndex, setQuestionIndex] = useState(savedPS ? savedPS.questionIndex || 0 : 0);
   const chatEndRef = useRef(null);
 
   const subject = profile.subject || 'your subject';
@@ -1248,11 +1266,19 @@ function PSBuilder({ profile, onBack }) {
     "Is there anything about your background or life experience that has shaped who you are and your ambitions? It could be cultural, personal, or a challenge you've overcome."
   ];
 
+  // Save PS session to localStorage whenever key state changes
+  useEffect(() => {
+    try {
+      const session = { stage, msgs, draft, questionIndex };
+      localStorage.setItem('pf_ps_session', JSON.stringify(session));
+    } catch(e) {}
+  }, [stage, msgs, draft, questionIndex]);
+
   useEffect(() => {
     if (chatEndRef.current) chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
   }, [msgs, loading]);
 
-  // Start with first question
+  // Start with first question — only if no saved session
   useEffect(() => {
     if (msgs.length === 0) {
       setMsgs([{
@@ -1398,6 +1424,16 @@ function PSBuilder({ profile, onBack }) {
 
   const allQuestionsAnswered = questionIndex >= QUESTIONS.length;
 
+  const startFresh = () => {
+    if (!confirm('Start a completely new personal statement? Your current progress will be lost.')) return;
+    try { localStorage.removeItem('pf_ps_session'); } catch(e) {}
+    setStage(1);
+    setMsgs([{ role: 'assistant', content: "👋 Let's build your personal statement together! I'll ask you some questions to understand your story, then craft a draft for you.\n\nLet's start — " + QUESTIONS[0] }]);
+    setDraft('');
+    setFeedback('');
+    setQuestionIndex(0);
+  };
+
   return (
     <div className="ps">
       <div className="ps-hdr">
@@ -1408,7 +1444,10 @@ function PSBuilder({ profile, onBack }) {
           </div>
           <div className="ps-hdr-badge">PERSONAL STATEMENT BUILDER</div>
         </div>
-        <button className="ps-hdr-back" onClick={onBack}>← Back to Dashboard</button>
+        <div className="ps-hdr-right">
+          {savedPS && <button className="ps-hdr-fresh" onClick={startFresh}>Start fresh</button>}
+          <button className="ps-hdr-back" onClick={onBack}>← Back to Dashboard</button>
+        </div>
       </div>
 
       {/* Stage indicators */}
@@ -1567,6 +1606,11 @@ function Dashboard({ profile, onChat, onBack, onEditProfile, onApply }) {
   const [activeTab, setActiveTab] = useState('matches');
   const [cardTabs, setCardTabs] = useState({});
 
+  // Check if a PS draft exists in localStorage
+  const hasPsDraft = (() => {
+    try { const s = localStorage.getItem('pf_ps_session'); if (!s) return false; const d = JSON.parse(s); return !!(d && d.draft && d.draft.length > 50); } catch(e) { return false; }
+  })();
+
   const tabs = [
     { id: 'matches', label: 'My Matches' },
     { id: 'valuemap', label: 'Value Map' },
@@ -1723,7 +1767,7 @@ function Dashboard({ profile, onChat, onBack, onEditProfile, onApply }) {
               <div className="db-m-actions">
                 <button className="db-m-action" onClick={() => onChat && onChat('Tell me more about ' + p.name + ' at ' + p.uni)}>Ask PathfinderAI about this →</button>
                 <button className="db-m-action">Experience this university →</button>
-                <button className="db-m-action" onClick={() => onApply && onApply()}>Start my application →</button>
+                <button className="db-m-action" onClick={() => onApply && onApply()}>{hasPsDraft ? 'Continue my statement →' : 'Start my application →'}</button>
               </div>
             </div>
           );
@@ -1781,7 +1825,7 @@ function Dashboard({ profile, onChat, onBack, onEditProfile, onApply }) {
       </div>
 
       <div className="db-feats">
-        <button className="db-feat" onClick={() => onApply && onApply()}><span className="db-feat-icon">📝</span> Apply with AI</button>
+        <button className="db-feat" onClick={() => onApply && onApply()}><span className="db-feat-icon">📝</span> Apply with AI{hasPsDraft && <span className="db-feat-badge">Draft ready</span>}</button>
         <button className="db-feat"><span className="db-feat-icon">💷</span> Financial Plan</button>
         <button className="db-feat"><span className="db-feat-icon">🏛️</span> Experience a University</button>
       </div>
@@ -2044,7 +2088,7 @@ function App() {
 
   // Full reset — clears localStorage and returns to homepage
   const fullReset = () => {
-    try { localStorage.removeItem('pf_profile'); } catch(e) {}
+    try { localStorage.removeItem('pf_profile'); localStorage.removeItem('pf_ps_session'); } catch(e) {}
     setProfileRaw({});
     setMsgs([]);
     setSelPri([]);
